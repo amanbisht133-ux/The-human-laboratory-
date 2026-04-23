@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MapPin, Mail } from 'lucide-react';
+import { MapPin, Mail, Sparkles } from 'lucide-react';
 import reviewsData from '../data/reviews.json';
 import caliLogo from '../components/images/CALI@2x.png';
 import communityStory from '../components/images/community_collage.jpg';
@@ -836,6 +836,18 @@ export default function CaliLab() {
                                                     </>
                                                 )}
                                             </div>
+
+                                            {/* KIDS BATCH INFO NOTE */}
+                                            {formData.batch === 'Kids Batch' && (
+                                                <div className="md:col-span-2 p-4 bg-brand-orange/10 border border-brand-orange/30 rounded-2xl animate-in fade-in slide-in-from-top-2 duration-300">
+                                                    <div className="flex gap-3 items-center">
+                                                        <Sparkles className="text-brand-orange shrink-0" size={18} />
+                                                        <p className="text-[10px] md:text-xs font-black text-white/90 uppercase tracking-[0.1em] leading-relaxed">
+                                                            Elite Curriculum: Includes <span className="text-brand-orange underline underline-offset-4 decoration-2">Calisthenics + Gymnastics</span> in a single subscription.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            )}
 
                                             {/* DURATION DROPDOWN */}
                                             <div className="space-y-2 relative">
