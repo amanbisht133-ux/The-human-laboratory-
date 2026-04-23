@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { X, Sparkles, Trophy } from 'lucide-react';
 import { useTransitionNavigate } from '../components/Layout';
 import main1Image from '../components/images/main1.png';
 import caliLogo from '../components/images/cali_logo.jpeg';
@@ -5,6 +7,22 @@ import yogaBg from '../components/images/yoga_bg.jpeg';
 
 export default function Home() {
     const navigateWithTransition = useTransitionNavigate();
+    const [showPromo, setShowPromo] = useState(false);
+
+    useEffect(() => {
+        const hasSeenPromo = sessionStorage.getItem('hasSeenKidsPromo');
+        if (!hasSeenPromo) {
+            const timer = setTimeout(() => {
+                setShowPromo(true);
+            }, 2000);
+            return () => clearTimeout(timer);
+        }
+    }, []);
+
+    const closePromo = () => {
+        setShowPromo(false);
+        sessionStorage.setItem('hasSeenKidsPromo', 'true');
+    };
 
     return (
         <>
@@ -54,27 +72,64 @@ export default function Home() {
                 </section>
             </main>
 
-            {/* Quick Stats */}
-            {/* <section className="bg-brand-dark py-12 px-6 border-y border-white/10" data-purpose="brand-stats">
-                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div>
-                        <div className="text-brand-orange text-3xl font-bold">5</div>
-                        <div className="text-xs uppercase tracking-widest text-gray-400 mt-1">Certified Trainers</div>
-                    </div>
-                    <div>
-                        <div className="text-brand-orange text-3xl font-bold">500+</div>
-                        <div className="text-xs uppercase tracking-widest text-gray-400 mt-1">Transformations</div>
-                    </div>
-                    <div>
-                        <div className="text-brand-orange text-3xl font-bold">3</div>
-                        <div className="text-xs uppercase tracking-widest text-gray-400 mt-1">Premium Programs</div>
-                    </div>
-                    <div>
-                        <div className="text-brand-orange text-3xl font-bold">6:30AM-9PM</div>
-                        <div className="text-xs uppercase tracking-widest text-gray-400 mt-1">Daily Batches</div>
+            {/* KIDS BATCH PROMO MODAL */}
+            {showPromo && (
+                <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 animate-in fade-in duration-500">
+                    <div
+                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        onClick={closePromo}
+                    ></div>
+
+                    <div className="relative w-full max-w-lg bg-black/80 backdrop-blur-2xl border border-white/10 p-8 md:p-12 rounded-[2.5rem] shadow-[0_0_50px_rgba(242,110,24,0.3)] overflow-hidden">
+                        {/* Decorative background elements */}
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-brand-orange/20 blur-[60px] rounded-full -mr-16 -mt-16"></div>
+                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-brand-orange/10 blur-[60px] rounded-full -ml-16 -mb-16"></div>
+
+                        <button
+                            onClick={closePromo}
+                            className="absolute top-6 right-6 text-white/40 hover:text-white transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
+
+                        <div className="relative z-10 flex flex-col items-center text-center">
+                            <div className="mb-6 p-4 bg-brand-orange/10 rounded-full border border-brand-orange/20">
+                                <Sparkles className="text-brand-orange animate-pulse" size={40} />
+                            </div>
+
+                            <h2 className="text-3xl md:text-5xl font-black text-white italic leading-tight uppercase tracking-tighter mb-4">
+                                Empower the <br /> <span className="text-brand-orange">Next Generation</span>
+                            </h2>
+
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10 mb-6 group transition-all hover:bg-brand-orange/10">
+                                <Trophy size={16} className="text-brand-orange" />
+                                <span className="text-[10px] md:text-xs font-black text-white uppercase tracking-widest">
+                                    Calisthenics + Gymnastics
+                                </span>
+                            </div>
+
+                            <p className="text-base md:text-lg text-white/80 font-bold leading-relaxed mb-10 px-4">
+                                Build strength, agility, and absolute confidence in your child.
+                                <span className="text-white block mt-2">Get both disciplines in a single, elite subscription.</span>
+                            </p>
+
+                            <button
+                                onClick={() => {
+                                    closePromo();
+                                    navigateWithTransition('/calisthenics-lab#info');
+                                }}
+                                className="group relative w-full py-5 bg-brand-orange text-black font-black text-lg md:text-xl uppercase tracking-widest rounded-2xl overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-2xl"
+                            >
+                                <span className="relative z-10">Secure Their Spot</span>
+                            </button>
+
+                            <p className="mt-6 text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">
+                                Only 12 Slots Per Batch
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </section> */}
+            )}
         </>
     );
 }
