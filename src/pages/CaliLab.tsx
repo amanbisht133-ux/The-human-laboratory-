@@ -353,7 +353,7 @@ export default function CaliLab() {
                                     </svg>
                                 </a>
                                 <a
-                                    href="mailto:thehumanlaboratory@gmail.com"
+                                    href="mailto:Calisthenicslabindia@gmail.com"
                                     className="p-3 bg-white/5 border border-white/10 rounded-full text-white hover:text-brand-orange hover:border-brand-orange transition-all hover:scale-110 shadow-lg"
                                     aria-label="Email"
                                 >
