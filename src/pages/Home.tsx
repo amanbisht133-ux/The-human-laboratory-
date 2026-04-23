@@ -7,13 +7,23 @@ import yogaBg from '../components/images/yoga_bg.jpeg';
 
 export default function Home() {
     const navigateWithTransition = useTransitionNavigate();
-    const [showPromo, setShowPromo] = useState(true);
+    const [showPromo, setShowPromo] = useState(false);
+
+    useEffect(() => {
+        const hasSeenPromo = sessionStorage.getItem('hasSeenKidsPromo');
+        if (!hasSeenPromo) {
+            setShowPromo(true);
+            sessionStorage.setItem('hasSeenKidsPromo', 'true');
+        } else {
+            setShowPromo(false);
+        }
+    }, []);
 
     useEffect(() => {
         if (showPromo) {
             const timer = setTimeout(() => {
                 setShowPromo(false);
-            }, 6000);
+            }, 3000);
             return () => clearTimeout(timer);
         }
     }, [showPromo]);
