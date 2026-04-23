@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MapPin, Mail } from 'lucide-react';
 import yogHero from '../components/images/yog_hero_brochure.png';
 import yogInfo from '../components/images/yog_info_brochure.png';
 
@@ -55,8 +56,8 @@ export default function YogLab() {
 
                 {/* HERO BROCHURE */}
                 <section className="relative w-full flex flex-col items-center pt-24 md:pt-32 pb-4 px-4 bg-white" id="hero">
-                    <div className="max-w-7xl w-full mx-auto relative z-10 animate-reveal">
-                        <div className="shadow-[0_0_50px_rgba(234,88,12,0.1)] rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-orange-100">
+                    <div className="max-w-7xl w-full mx-auto relative z-10 animate-reveal text-center">
+                        <div className="shadow-[0_0_50px_rgba(234,88,12,0.1)] rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-orange-100 mb-10">
                             <img
                                 src={yogHero}
                                 alt="The Yog Lab - Intentional Movement"
@@ -68,8 +69,41 @@ export default function YogLab() {
                             />
                         </div>
 
+                        {/* Social Icons Row */}
+                        <div className="flex items-center justify-center gap-6 md:gap-10 mb-10 overflow-hidden">
+                            <a
+                                href="https://maps.app.goo.gl/695SVZHotKEeK4zJ7"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="p-3 bg-orange-50 border border-orange-100 rounded-full text-orange-600 hover:bg-orange-600 hover:text-white transition-all hover:scale-110 shadow-sm"
+                                aria-label="Google Maps"
+                            >
+                                <MapPin size={24} />
+                            </a>
+                            <a
+                                href="https://www.instagram.com/calisthenics.lab.india?igsh=MWI1YnZ0YWRicmNjaA=="
+                                target="_blank"
+                                rel="noreferrer"
+                                className="p-3 bg-orange-50 border border-orange-100 rounded-full text-orange-600 hover:bg-orange-600 hover:text-white transition-all hover:scale-110 shadow-sm"
+                                aria-label="Instagram"
+                            >
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a
+                                href="mailto:Calisthenicslabindia@gmail.com"
+                                className="p-3 bg-orange-50 border border-orange-100 rounded-full text-orange-600 hover:bg-orange-600 hover:text-white transition-all hover:scale-110 shadow-sm"
+                                aria-label="Email"
+                            >
+                                <Mail size={24} />
+                            </a>
+                        </div>
+
                         {/* Hero CTA Overlay/Button */}
-                        <div className="mt-8 text-center group">
+                        <div className="text-center group">
                             <button
                                 onClick={() => setIsBookingModalOpen(true)}
                                 className="px-12 py-5 bg-orange-600 text-white font-black text-xl md:text-2xl uppercase tracking-widest rounded-full transition-all hover:scale-110 active:scale-95 shadow-xl shadow-orange-600/20 hover:shadow-orange-600/40"
