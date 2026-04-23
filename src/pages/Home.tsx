@@ -13,7 +13,7 @@ export default function Home() {
         if (showPromo) {
             const timer = setTimeout(() => {
                 setShowPromo(false);
-            }, 3000);
+            }, 6000);
             return () => clearTimeout(timer);
         }
     }, [showPromo]);
@@ -120,7 +120,7 @@ export default function Home() {
                             <button
                                 onClick={() => {
                                     closePromo();
-                                    navigateWithTransition('/calisthenics-lab#info');
+                                    navigateWithTransition('/calisthenics-lab', { openBooking: true, selectedBatch: 'Kids Batch' });
                                 }}
                                 className="group relative w-full py-5 bg-brand-orange text-black font-black text-lg md:text-xl uppercase tracking-widest rounded-2xl overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-2xl"
                             >

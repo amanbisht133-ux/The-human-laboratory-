@@ -2,7 +2,7 @@ import { useState, createContext, useContext } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import caliLogo from './images/cali_logo.jpeg';
 
-const TransitionContext = createContext<(path: string) => void>(() => { });
+const TransitionContext = createContext<(path: string, state?: any) => void>(() => { });
 export const useTransitionNavigate = () => useContext(TransitionContext);
 
 export default function Layout() {
@@ -11,11 +11,11 @@ export default function Layout() {
     const [targetPath, setTargetPath] = useState<string | null>(null);
     const [curtainState, setCurtainState] = useState<'idle' | 'active' | 'exit'>('idle');
 
-    const navigateWithTransition = (path: string) => {
+    const navigateWithTransition = (path: string, state?: any) => {
         setTargetPath(path);
         setCurtainState('active');
         setTimeout(() => {
-            navigate(path);
+            navigate(path, { state });
             window.scrollTo(0, 0);
             setTimeout(() => {
                 setCurtainState('exit');

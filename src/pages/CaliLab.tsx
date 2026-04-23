@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { MapPin, Mail } from 'lucide-react';
 import reviewsData from '../data/reviews.json';
 import caliLogo from '../components/images/CALI@2x.png';
 import communityStory from '../components/images/community_collage.jpg';
 
 export default function CaliLab() {
+    const location = useLocation();
     const [isWeekdayOpen, setIsWeekdayOpen] = useState(false);
     const [isWeekendOpen, setIsWeekendOpen] = useState(false);
     const [isAdvantageOpen, setIsAdvantageOpen] = useState(false);
@@ -20,6 +22,16 @@ export default function CaliLab() {
         duration: '',
         timing: ''
     });
+
+    useEffect(() => {
+        if (location.state?.openBooking) {
+            setIsBookingModalOpen(true);
+            if (location.state?.selectedBatch) {
+                setFormData(prev => ({ ...prev, batch: location.state.selectedBatch }));
+            }
+        }
+    }, [location.state]);
+
     const [errors, setErrors] = useState({ name: '', email: '', phone: '', batch: '', duration: '', timing: '' });
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
