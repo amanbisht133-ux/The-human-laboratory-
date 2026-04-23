@@ -380,7 +380,7 @@ export default function CaliLab() {
                         <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
                             <button
                                 onClick={() => setIsAdvantageOpen(!isAdvantageOpen)}
-                                className="w-full flex items-center justify-between px-8 py-6 text-left group"
+                                className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
                             >
                                 <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
                                     <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
@@ -415,7 +415,7 @@ export default function CaliLab() {
                         <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
                             <button
                                 onClick={() => setIsVsGymOpen(!isVsGymOpen)}
-                                className="w-full flex items-center justify-between px-8 py-6 text-left group"
+                                className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
                             >
                                 <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
                                     <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
@@ -441,7 +441,7 @@ export default function CaliLab() {
                         <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
                             <button
                                 onClick={() => setIsWeekdayOpen(!isWeekdayOpen)}
-                                className="w-full flex items-center justify-between px-8 py-6 text-left group"
+                                className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
                             >
                                 <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
                                     <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
@@ -473,7 +473,7 @@ export default function CaliLab() {
                         <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
                             <button
                                 onClick={() => setIsWeekendOpen(!isWeekendOpen)}
-                                className="w-full flex items-center justify-between px-8 py-6 text-left group"
+                                className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
                             >
                                 <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
                                     <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
@@ -541,7 +541,7 @@ export default function CaliLab() {
                             <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
                                 <button
                                     onClick={() => setIsProgramsOpen(!isProgramsOpen)}
-                                    className="w-full flex items-center justify-between px-8 py-6 text-left group"
+                                    className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
                                 >
                                     <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
                                         <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
@@ -575,7 +575,7 @@ export default function CaliLab() {
                             <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
                                 <button
                                     onClick={() => setIsWhyUsOpen(!isWhyUsOpen)}
-                                    className="w-full flex items-center justify-between px-8 py-6 text-left group"
+                                    className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
                                 >
                                     <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
                                         <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
