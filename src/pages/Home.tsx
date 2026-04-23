@@ -7,25 +7,13 @@ import yogaBg from '../components/images/yoga_bg.jpeg';
 
 export default function Home() {
     const navigateWithTransition = useTransitionNavigate();
-    // Initialize state from localStorage with a 1-hour expiration logic
-    const [showPromo, setShowPromo] = useState(() => {
-        const lastSeen = localStorage.getItem('hasSeenKidsPromo');
-        if (!lastSeen) return true;
-
-        const now = Date.now();
-        const ONE_HOUR = 60 * 60 * 1000;
-        // Show if more than an hour has passed
-        return (now - parseInt(lastSeen)) > ONE_HOUR;
-    });
+    const [showPromo, setShowPromo] = useState(true);
 
     useEffect(() => {
         if (showPromo) {
-            // Store current timestamp when shown
-            localStorage.setItem('hasSeenKidsPromo', Date.now().toString());
-
             const timer = setTimeout(() => {
                 setShowPromo(false);
-            }, 3000);
+            }, 6000);
             return () => clearTimeout(timer);
         }
     }, [showPromo]);
@@ -104,7 +92,7 @@ export default function Home() {
 
                         <div className="relative z-10 flex flex-col items-center text-center">
                             <div className="mb-4">
-                                <span className="text-brand-orange font-black text-xs md:text-sm uppercase tracking-[0.4em] drop-shadow-[0_0_10px_rgba(242,110,24,0.5)]">
+                                <span className="text-brand-orange font-black text-lg md:text-xl uppercase tracking-[0.5em] drop-shadow-[0_0_15px_rgba(242,110,24,0.6)]">
                                     Kids Batch
                                 </span>
                             </div>
