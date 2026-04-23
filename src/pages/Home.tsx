@@ -12,10 +12,7 @@ export default function Home() {
     useEffect(() => {
         const hasSeenPromo = sessionStorage.getItem('hasSeenKidsPromo');
         if (!hasSeenPromo) {
-            const timer = setTimeout(() => {
-                setShowPromo(true);
-            }, 2000);
-            return () => clearTimeout(timer);
+            setShowPromo(true);
         }
     }, []);
 
