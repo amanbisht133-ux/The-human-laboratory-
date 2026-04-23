@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { X, Sparkles, Trophy } from 'lucide-react';
 import { useTransitionNavigate } from '../components/Layout';
 import main1Image from '../components/images/main1.png';
@@ -7,18 +7,10 @@ import yogaBg from '../components/images/yoga_bg.jpeg';
 
 export default function Home() {
     const navigateWithTransition = useTransitionNavigate();
-    const [showPromo, setShowPromo] = useState(false);
-
-    useEffect(() => {
-        const hasSeenPromo = sessionStorage.getItem('hasSeenKidsPromo');
-        if (!hasSeenPromo) {
-            setShowPromo(true);
-        }
-    }, []);
+    const [showPromo, setShowPromo] = useState(true);
 
     const closePromo = () => {
         setShowPromo(false);
-        sessionStorage.setItem('hasSeenKidsPromo', 'true');
     };
 
     return (
@@ -71,7 +63,7 @@ export default function Home() {
 
             {/* KIDS BATCH PROMO MODAL */}
             {showPromo && (
-                <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 animate-in fade-in duration-500">
+                <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 transition-opacity duration-500">
                     <div
                         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
                         onClick={closePromo}
