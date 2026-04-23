@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Sparkles, Trophy } from 'lucide-react';
 import { useTransitionNavigate } from '../components/Layout';
 import main1Image from '../components/images/main1.png';
@@ -8,6 +8,15 @@ import yogaBg from '../components/images/yoga_bg.jpeg';
 export default function Home() {
     const navigateWithTransition = useTransitionNavigate();
     const [showPromo, setShowPromo] = useState(true);
+
+    useEffect(() => {
+        if (showPromo) {
+            const timer = setTimeout(() => {
+                setShowPromo(false);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [showPromo]);
 
     const closePromo = () => {
         setShowPromo(false);
