@@ -7,13 +7,21 @@ import yogaBg from '../components/images/yoga_bg.jpeg';
 
 export default function Home() {
     const navigateWithTransition = useTransitionNavigate();
-    // Initialize state directly from storage to avoid mount-cycle race conditions
-    const [showPromo, setShowPromo] = useState(() => !sessionStorage.getItem('hasSeenKidsPromo'));
+    // Initialize state from localStorage with a 1-hour expiration logic
+    const [showPromo, setShowPromo] = useState(() => {
+        const lastSeen = localStorage.getItem('hasSeenKidsPromo');
+        if (!lastSeen) return true;
+
+        const now = Date.now();
+        const ONE_HOUR = 60 * 60 * 1000;
+        // Show if more than an hour has passed
+        return (now - parseInt(lastSeen)) > ONE_HOUR;
+    });
 
     useEffect(() => {
         if (showPromo) {
-            // Once we decide to show it, mark it as seen immediately
-            sessionStorage.setItem('hasSeenKidsPromo', 'true');
+            // Store current timestamp when shown
+            localStorage.setItem('hasSeenKidsPromo', Date.now().toString());
 
             const timer = setTimeout(() => {
                 setShowPromo(false);
