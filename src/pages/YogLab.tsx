@@ -280,7 +280,7 @@ export default function YogLab() {
                                                 <>
                                                     <div className="fixed inset-0 z-[105]" onClick={() => setActiveDropdown(null)}></div>
                                                     <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-white border border-orange-100 rounded-2xl overflow-hidden z-[110] shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
-                                                        {['6:30 AM - 7:30 AM'].map(slot => (
+                                                        {['6:30 AM - 7:30 AM', '7:30 AM - 8:30 AM'].map(slot => (
                                                             <div
                                                                 key={slot}
                                                                 onClick={() => {
