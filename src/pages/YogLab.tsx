@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { MapPin, Mail } from 'lucide-react';
 import yogHero from '../components/images/yog_hero_brochure.png';
-import yogInfo from '../components/images/yog_info_brochure.png';
 
 export default function YogLab() {
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -119,7 +118,7 @@ export default function YogLab() {
                     <div className="max-w-6xl w-full mx-auto relative z-10">
                         <div className="shadow-[0_0_80px_rgba(0,0,0,0.05)] rounded-[2rem] md:rounded-[3.5rem] overflow-hidden border border-orange-50 bg-white">
                             <img
-                                src={yogInfo}
+                                src="/images/yog_info_brochure_v2.jpg"
                                 alt="Yog Lab Plans and Timings"
                                 className="w-full h-auto"
                                 loading="lazy"
