@@ -386,7 +386,7 @@ export default function CaliLab() {
                                     <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
                                     The Calisthenics Advantage
                                 </span>
-                                <div className={`size-10 rounded-full border border-brand-orange flex items-center justify-center transition-all duration-300 ${isAdvantageOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
+                                <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isAdvantageOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
                                     <span className={`material-symbols-outlined text-2xl ${isAdvantageOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
                                 </div>
                             </button>
@@ -421,7 +421,7 @@ export default function CaliLab() {
                                     <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
                                     Calisthenics vs Gym
                                 </span>
-                                <div className={`size-10 rounded-full border border-brand-orange flex items-center justify-center transition-all duration-300 ${isVsGymOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
+                                <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isVsGymOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
                                     <span className={`material-symbols-outlined text-2xl ${isVsGymOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
                                 </div>
                             </button>
@@ -447,7 +447,7 @@ export default function CaliLab() {
                                     <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
                                     The Weekday Operation
                                 </span>
-                                <div className={`size-10 rounded-full border border-brand-orange flex items-center justify-center transition-all duration-300 ${isWeekdayOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
+                                <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isWeekdayOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
                                     <span className={`material-symbols-outlined text-2xl ${isWeekdayOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
                                 </div>
                             </button>
@@ -479,7 +479,7 @@ export default function CaliLab() {
                                     <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
                                     The Weekend Reset
                                 </span>
-                                <div className={`size-10 rounded-full border border-brand-orange flex items-center justify-center transition-all duration-300 ${isWeekendOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
+                                <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isWeekendOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
                                     <span className={`material-symbols-outlined text-2xl ${isWeekendOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
                                 </div>
                             </button>
@@ -547,7 +547,7 @@ export default function CaliLab() {
                                         <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
                                         Training Programs Include
                                     </span>
-                                    <div className={`size-10 rounded-full border border-brand-orange flex items-center justify-center transition-all duration-300 ${isProgramsOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
+                                    <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isProgramsOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
                                         <span className={`material-symbols-outlined text-2xl ${isProgramsOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
                                     </div>
                                 </button>
@@ -581,7 +581,7 @@ export default function CaliLab() {
                                         <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
                                         Why Choose Cali?
                                     </span>
-                                    <div className={`size-10 rounded-full border border-brand-orange flex items-center justify-center transition-all duration-300 ${isWhyUsOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
+                                    <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isWhyUsOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
                                         <span className={`material-symbols-outlined text-2xl ${isWhyUsOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
                                     </div>
                                 </button>
