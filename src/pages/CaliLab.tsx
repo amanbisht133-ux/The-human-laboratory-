@@ -305,8 +305,6 @@ export default function CaliLab() {
 
                     {/* Centered Branding */}
                     <div className="relative z-20 flex flex-col items-center text-center mt-[-12vh]">
-                        {/* Welcome Text */}
-                        <span className="text-white text-base md:text-2xl font-medium uppercase tracking-[0.6em] mb-4 drop-shadow-md opacity-90">Welcome</span>
 
                         {/* CALI Logo */}
                         <div className="mb-2 max-w-[200px] md:max-w-[400px]">
