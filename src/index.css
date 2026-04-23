@@ -298,6 +298,20 @@ body {
   animation: logo-reveal 0.8s ease-in-out 0.4s forwards;
 }
 
+@keyframes progress-shrink {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}
+
+.animate-progress-shrink {
+  animation: progress-shrink 6s linear forwards;
+}
+
 .custom-scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

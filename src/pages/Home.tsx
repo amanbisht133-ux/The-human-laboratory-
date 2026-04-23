@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, Sparkles, Trophy } from 'lucide-react';
+import { X, Sparkles } from 'lucide-react';
 import { useTransitionNavigate } from '../components/Layout';
 import main1Image from '../components/images/main1.png';
 import caliLogo from '../components/images/cali_logo.jpeg';
@@ -70,51 +70,37 @@ export default function Home() {
                 </section>
             </main>
 
-            {/* KIDS BATCH PROMO MODAL */}
+            {/* KIDS BATCH PROMO TOAST */}
             {showPromo && (
-                <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 transition-opacity duration-500">
-                    <div
-                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                        onClick={closePromo}
-                    ></div>
-
-                    <div className="relative w-full max-w-lg bg-black/80 backdrop-blur-2xl border border-white/10 p-8 md:p-12 rounded-[2.5rem] shadow-[0_0_50px_rgba(242,110,24,0.3)] overflow-hidden">
+                <div className="fixed top-24 right-6 z-[200] w-[calc(100%-3rem)] max-w-[320px] animate-reveal">
+                    <div className="relative bg-brand-dark/90 backdrop-blur-2xl border border-white/10 p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden group">
                         {/* Decorative background elements */}
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-brand-orange/20 blur-[60px] rounded-full -mr-16 -mt-16"></div>
-                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-brand-orange/10 blur-[60px] rounded-full -ml-16 -mb-16"></div>
+                        <div className="absolute top-0 right-0 w-20 h-20 bg-brand-orange/20 blur-[40px] rounded-full -mr-10 -mt-10"></div>
 
                         <button
                             onClick={closePromo}
-                            className="absolute top-6 right-6 text-white/40 hover:text-white transition-colors"
+                            className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors p-1"
                         >
-                            <X size={24} />
+                            <X size={16} />
                         </button>
 
-                        <div className="relative z-10 flex flex-col items-center text-center">
-                            <div className="mb-4">
-                                <span className="text-brand-orange font-black text-lg md:text-xl uppercase tracking-[0.5em] drop-shadow-[0_0_15px_rgba(242,110,24,0.6)]">
+                        <div className="relative z-10 flex flex-col gap-3">
+                            <div className="flex items-center gap-2">
+                                <div className="p-1.5 bg-brand-orange/10 rounded-lg border border-brand-orange/20">
+                                    <Sparkles className="text-brand-orange" size={16} />
+                                </div>
+                                <span className="text-brand-orange font-black text-[10px] uppercase tracking-[0.2em]">
                                     Kids Batch
                                 </span>
                             </div>
 
-                            <div className="mb-6 p-4 bg-brand-orange/10 rounded-full border border-brand-orange/20">
-                                <Sparkles className="text-brand-orange animate-pulse" size={40} />
-                            </div>
-
-                            <h2 className="text-3xl md:text-5xl font-black text-white italic leading-tight uppercase tracking-tighter mb-4">
-                                Empower the <br /> <span className="text-brand-orange">Next Generation</span>
+                            <h2 className="text-lg font-black text-white italic uppercase tracking-tighter leading-tight">
+                                Empower the <span className="text-brand-orange">Next Gen</span>
                             </h2>
 
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10 mb-6 group transition-all hover:bg-brand-orange/10">
-                                <Trophy size={16} className="text-brand-orange" />
-                                <span className="text-[10px] md:text-xs font-black text-white uppercase tracking-widest">
-                                    Calisthenics + Gymnastics
-                                </span>
-                            </div>
-
-                            <p className="text-base md:text-lg text-white/80 font-bold leading-relaxed mb-10 px-4">
-                                Build strength, agility, and absolute confidence in your child.
-                                <span className="text-white block mt-2">Get both disciplines in a single, elite subscription.</span>
+                            <p className="text-[11px] text-white/70 font-bold leading-snug">
+                                Calisthenics + Gymnastics <br />
+                                <span className="text-white/40 text-[9px] uppercase tracking-widest mt-1 block">Limited Slots Available</span>
                             </p>
 
                             <button
@@ -122,15 +108,14 @@ export default function Home() {
                                     closePromo();
                                     navigateWithTransition('/calisthenics-lab', { openBooking: true, selectedBatch: 'Kids Batch' });
                                 }}
-                                className="group relative w-full py-5 bg-brand-orange text-black font-black text-lg md:text-xl uppercase tracking-widest rounded-2xl overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-2xl"
+                                className="group relative w-full py-2.5 bg-brand-orange text-black font-black text-[10px] uppercase tracking-widest rounded-xl overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98]"
                             >
-                                <span className="relative z-10">Secure Their Spot</span>
+                                <span className="relative z-10">Secure Spot</span>
                             </button>
-
-                            <p className="mt-6 text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">
-                                Limited Slots Available
-                            </p>
                         </div>
+
+                        {/* Progress Bar */}
+                        <div className="absolute bottom-0 left-0 h-1 bg-brand-orange animate-progress-shrink"></div>
                     </div>
                 </div>
             )}
