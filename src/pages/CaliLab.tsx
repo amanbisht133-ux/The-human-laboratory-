@@ -521,7 +521,7 @@ export default function CaliLab() {
                     <div className="w-full md:w-[85%] mx-auto relative z-10 transition-all">
                         <div className="shadow-[0_0_50px_rgba(242,110,24,0.15)] md:rounded-2xl overflow-hidden border-y-2 md:border-2 border-brand-orange/30">
                             <img
-                                src="/images/cali_trainers_brochure.jpg"
+                                src="/images/cali_trainers_brochure_v2.jpg"
                                 alt="Cali Lab Trainers and Timings"
                                 className="w-full h-auto scale-[1.01] origin-top-left"
                                 loading="lazy"
