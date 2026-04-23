@@ -93,6 +93,12 @@ export default function Home() {
                         </button>
 
                         <div className="relative z-10 flex flex-col items-center text-center">
+                            <div className="mb-4">
+                                <span className="text-brand-orange font-black text-xs md:text-sm uppercase tracking-[0.4em] drop-shadow-[0_0_10px_rgba(242,110,24,0.5)]">
+                                    Kids Batch
+                                </span>
+                            </div>
+
                             <div className="mb-6 p-4 bg-brand-orange/10 rounded-full border border-brand-orange/20">
                                 <Sparkles className="text-brand-orange animate-pulse" size={40} />
                             </div>
@@ -124,7 +130,7 @@ export default function Home() {
                             </button>
 
                             <p className="mt-6 text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">
-                                Only 12 Slots Per Batch
+                                Limited Slots Available
                             </p>
                         </div>
                     </div>
