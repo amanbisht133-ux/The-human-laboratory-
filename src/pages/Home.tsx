@@ -7,20 +7,14 @@ import yogaBg from '../components/images/yoga_bg.jpeg';
 
 export default function Home() {
     const navigateWithTransition = useTransitionNavigate();
-    const [showPromo, setShowPromo] = useState(false);
-
-    useEffect(() => {
-        const hasSeenPromo = sessionStorage.getItem('hasSeenKidsPromo');
-        if (!hasSeenPromo) {
-            setShowPromo(true);
-            sessionStorage.setItem('hasSeenKidsPromo', 'true');
-        } else {
-            setShowPromo(false);
-        }
-    }, []);
+    // Initialize state directly from storage to avoid mount-cycle race conditions
+    const [showPromo, setShowPromo] = useState(() => !sessionStorage.getItem('hasSeenKidsPromo'));
 
     useEffect(() => {
         if (showPromo) {
+            // Once we decide to show it, mark it as seen immediately
+            sessionStorage.setItem('hasSeenKidsPromo', 'true');
+
             const timer = setTimeout(() => {
                 setShowPromo(false);
             }, 3000);
