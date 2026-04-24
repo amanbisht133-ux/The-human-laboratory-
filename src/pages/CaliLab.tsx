@@ -621,7 +621,7 @@ export default function CaliLab() {
 
                 <section className="pt-4 pb-12 bg-black overflow-hidden relative border-t border-white/5">
                     <div className="max-w-7xl mx-auto text-center mb-16 px-6">
-                        <span className="text-brand-orange font-bold uppercase tracking-widest text-[10px] mb-2 block">Athlete Testimonials</span>
+                        <span className="text-brand-orange font-bold uppercase tracking-widest text-[10px] mb-2 block">Clients Testimonials</span>
                         <h2 className="text-4xl md:text-5xl font-black text-white italic uppercase tracking-tighter">Voices of <span className="text-brand-orange">The Lab</span></h2>
                     </div>
 
@@ -724,7 +724,7 @@ export default function CaliLab() {
                             {!isSubmitted ? (
                                 <>
                                     <h2 className="text-3xl md:text-4xl font-black text-white italic tracking-tight mb-2 uppercase">Join the Lab</h2>
-                                    <p className="text-brand-orange font-bold uppercase tracking-widest text-xs mb-8">Few slots avaiable - reserve your spot now</p>
+                                    <p className="text-brand-orange font-bold uppercase tracking-widest text-xs mb-8">Few slots available - reserve your spot now</p>
 
                                     <form onSubmit={handleBookingSubmit} className="space-y-4">
                                         {/* NAME INPUT */}
