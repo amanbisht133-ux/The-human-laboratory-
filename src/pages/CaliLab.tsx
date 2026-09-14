@@ -1,12 +1,88 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MapPin, Mail, Sparkles } from 'lucide-react';
+import { MapPin, Mail, Sparkles } from 'lucide-react/dist/esm/icons';
 import reviewsData from '../data/reviews.json';
 import caliLogo from '../components/images/CALI@2x.png';
 import communityStory from '../components/images/community_collage.jpg';
+import { useSEO } from '../hooks/useSEO';
+import JsonLd from '../components/JsonLd';
+
+const LOCAL_BUSINESS_SCHEMA = {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "Calisthenics Lab India",
+    "description": "Calisthenics and bodyweight strength training academy in Madhapur, HITEC City, Hyderabad. Group coaching batches, one-on-one personal training, and a dedicated kids calisthenics & gymnastics program.",
+    "url": "https://the-human-laboratory.vercel.app/calisthenics-lab",
+    "image": "https://the-human-laboratory.vercel.app/images/cali_trainers_brochure_v2.jpg",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Madhapur, HITEC City, Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+    },
+    "telephone": "+918826762234",
+    "openingHours": "Mo-Fr 06:30-22:00",
+    "priceRange": "₹₹",
+    "sameAs": [
+        "https://www.instagram.com/calisthenics.lab.india"
+    ]
+};
+
+const FAQ_SCHEMA = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Where is Calisthenics Lab India located?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We're based in Madhapur, HITEC City, Hyderabad, Telangana. Find us on Google Maps: https://maps.app.goo.gl/695SVZHotKEeK4zJ7"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What programs does Calisthenics Lab India offer?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Structured weekday group coaching batches (morning and evening), a weekend reset batch, one-on-one personal training, and a dedicated weekend kids program covering calisthenics and gymnastics fundamentals."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is calisthenics suitable for complete beginners?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Coaching is structured by level, starting with foundational bodyweight movements — push-ups, rows, squats, mobility work — before progressing to skills like pull-ups, dips, and handstands."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Calisthenics Lab India offer training for kids?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes — a dedicated weekend program for young learners covering calisthenics and gymnastics fundamentals in a structured, age-appropriate format."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How long does it take to learn a muscle-up or handstand?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most consistent beginners build the base for a first muscle-up in 3–5 months of regular training. Handstand progress varies, but structured progressions typically yield freestanding balance within 4–6 months of dedicated practice."
+            }
+        }
+    ]
+};
 
 export default function CaliLab() {
     const location = useLocation();
+
+    useSEO({
+        title: 'Calisthenics Lab India | Bodyweight Training in Madhapur, Hyderabad',
+        description: 'Calisthenics and bodyweight strength training in Madhapur, HITEC City, Hyderabad. Group coaching, personal training, and kids calisthenics program. All levels welcome.',
+        canonicalPath: '/calisthenics-lab',
+    });
     const [isWeekdayOpen, setIsWeekdayOpen] = useState(false);
     const [isWeekendOpen, setIsWeekendOpen] = useState(false);
     const [isAdvantageOpen, setIsAdvantageOpen] = useState(false);
@@ -14,6 +90,7 @@ export default function CaliLab() {
     const [isProgramsOpen, setIsProgramsOpen] = useState(false);
     const [isWhyUsOpen, setIsWhyUsOpen] = useState(false);
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+    const [openFaq, setOpenFaq] = useState<number | null>(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -171,7 +248,7 @@ export default function CaliLab() {
             `*Duration:* ${formData.duration}\n` +
             (formData.timing ? `*Timing:* ${formData.timing}\n` : '') +
             `*Total Price:* ${price}\n\n` +
-            `_I'm interested in joining the lab. Please provide further details._`
+            `_I'm interested in joining Calisthenics Lab India. Please provide further details._`
         );
 
         const whatsappNumber = "918826762234";
@@ -195,36 +272,8 @@ export default function CaliLab() {
         }, 1500);
     };
     const scrollRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
     const scrollPos = useRef(0);
     const [isPaused, setIsPaused] = useState(false);
-
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
-
-        // Force muted to true (required for mobile autoplay)
-        video.muted = true;
-        video.oncontextmenu = (e) => e.preventDefault();
-
-        const attemptPlay = () => {
-            video.play().catch(err => {
-                console.log("Autoplay prevented, waiting for interaction:", err);
-
-                // Fallback: Play on first touch/click
-                const playOnInteraction = () => {
-                    video.play().then(() => {
-                        window.removeEventListener('click', playOnInteraction);
-                        window.removeEventListener('touchstart', playOnInteraction);
-                    });
-                };
-                window.addEventListener('click', playOnInteraction);
-                window.addEventListener('touchstart', playOnInteraction);
-            });
-        };
-
-        attemptPlay();
-    }, []);
 
     const [isInView, setIsInView] = useState(false);
 
@@ -291,28 +340,23 @@ export default function CaliLab() {
 
     return (
         <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300">
+            <JsonLd id="cali-local-business-schema" schema={LOCAL_BUSINESS_SCHEMA} />
+            <JsonLd id="cali-faq-schema" schema={FAQ_SCHEMA} />
             <div className="relative flex w-full flex-col overflow-x-hidden">
                 {/* HERO SECTION */}
                 <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black px-6 py-12">
-                    {/* Background Video Layer */}
+                    {/* Background Image Layer */}
                     <div className="absolute inset-0 z-0">
-                        <div className="absolute inset-0 bg-black/70 z-10"></div>
-                        <video
-                            ref={videoRef}
-                            className="w-full h-full object-cover brightness-[0.90b] contrast-125 pointer-events-none"
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            webkit-playsinline="true"
-                            disablePictureInPicture
-                            preload="auto"
-                            poster={caliLogo}
-                        >
-                            <source src="/videos/Video.mov" type="video/quicktime" />
-                            <source src="/videos/Video.mov" type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
+                        <img
+                            src="/images/cali_hero_bg.jpg"
+                            alt=""
+                            aria-hidden="true"
+                            className="w-full h-full object-cover blur-[2px] scale-105 brightness-75"
+                            width="1080"
+                            height="1080"
+                            fetchPriority="high"
+                        />
+                        <div className="absolute inset-0 bg-black/50"></div>
                     </div>
 
                     {/* Centered Branding */}
@@ -322,8 +366,11 @@ export default function CaliLab() {
                         <div className="mb-2 max-w-[200px] md:max-w-[400px]">
                             <img
                                 src={caliLogo}
-                                alt="CALI"
+                                alt="Calisthenics Lab India — CALI logo"
                                 className="w-full h-auto drop-shadow-2xl transition-all hover:scale-105"
+                                width="400"
+                                height="400"
+                                fetchPriority="high"
                             />
                         </div>
 
@@ -514,9 +561,9 @@ export default function CaliLab() {
                                 onClick={() => setIsBookingModalOpen(true)}
                                 className="bg-brand-orange/5 border-[4px] border-brand-orange rounded-[3rem] p-8 md:p-12 text-center transition-all hover:bg-brand-orange/10 group shadow-2xl shadow-brand-orange/10 cursor-pointer"
                             >
-                                <h3 className="text-sm md:text-4xl font-black text-white mb-6 underline decoration-brand-orange underline-offset-12">
+                                <h2 className="text-sm md:text-4xl font-black text-white mb-6 underline decoration-brand-orange underline-offset-12">
                                     Experience the Lab – On Us.
-                                </h3>
+                                </h2>
                                 <p className="text-sm md:text-2xl text-white font-bold leading-relaxed max-w-3xl mx-auto px-4">
                                     Book your <span className="text-brand-orange uppercase tracking-wider">Free Demo Session</span> today to feel the energy of our space. If you decide to join the movement, we'll fold the session into your package. If not, it's completely free with no strings attached.
                                 </p>
@@ -534,6 +581,8 @@ export default function CaliLab() {
                                 src="/images/cali_trainers_brochure_v2.jpg"
                                 alt="Cali Lab Trainers and Timings"
                                 className="w-full h-auto scale-[1.01] origin-top-left"
+                                width="1200"
+                                height="800"
                                 loading="lazy"
                             />
                         </div>
@@ -669,7 +718,7 @@ export default function CaliLab() {
                                                 }}
                                             />
                                             <div>
-                                                <h4 className="text-white font-black uppercase text-[10px] md:text-xs tracking-widest">{review.name}</h4>
+                                                <p className="text-white font-black uppercase text-[10px] md:text-xs tracking-widest">{review.name}</p>
                                                 <div className="flex gap-1 mt-1">
                                                     {[...Array(review.stars)].map((_, j) => (
                                                         <span key={j} className="material-symbols-outlined text-[8px] md:text-[10px] text-brand-orange fill-1">star</span>
@@ -695,8 +744,70 @@ export default function CaliLab() {
                                 src={communityStory}
                                 alt="Cali Lab Community"
                                 className="w-full h-auto grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-1000"
+                                width="1200"
+                                height="800"
                                 loading="lazy"
                             />
+                        </div>
+                    </div>
+                </section>
+
+                {/* FAQ SECTION — visible page text for SEO/GEO */}
+                <section className="py-16 px-6 md:px-20 bg-black border-t border-white/5" id="faq" aria-label="Frequently Asked Questions">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-12">
+                            <span className="text-brand-orange font-bold uppercase tracking-widest text-[10px] mb-2 block">Got Questions?</span>
+                            <h2 className="text-3xl md:text-5xl font-black text-white italic uppercase tracking-tighter">
+                                Quick <span className="text-brand-orange">Answers</span>
+                            </h2>
+                        </div>
+
+                        <div className="flex flex-col gap-4">
+                            {[
+                                {
+                                    q: "Where is Calisthenics Lab India located?",
+                                    a: "We're based in Kondapur Hyderabad, Telangana opp. to Kondapur RTO — find us on Google Maps."
+                                },
+                                {
+                                    q: "What programs does Calisthenics Lab India offer?",
+                                    a: "Structured weekday group coaching batches (4 morning + 4 evening slots), a 1.5-hour weekend reset batch, one-on-one personal training, and a dedicated weekend kids program covering calisthenics and gymnastics fundamentals."
+                                },
+                                {
+                                    q: "Is calisthenics suitable for complete beginners?",
+                                    a: "Yes. Coaching is structured by level, starting with foundational bodyweight movements — push-ups, rows, squats, mobility work — before progressing to skills like pull-ups, dips, and handstands. No prior experience needed."
+                                },
+                                {
+                                    q: "How long does it take to learn a muscle-up or handstand?",
+                                    a: "Most consistent beginners build the base for a first muscle-up in 3–5 months. Handstand progress varies, but structured progressions typically yield freestanding balance within 4–6 months of dedicated practice."
+                                },
+                                {
+                                    q: "Does Calisthenics Lab India offer training for kids?",
+                                    a: "Yes — a dedicated weekend program for young learners covering calisthenics and gymnastics fundamentals in a structured, age-appropriate format."
+                                },
+                                {
+                                    q: "How do I join or book a trial session?",
+                                    a: "Hit the Book Now button anywhere on this page to send us your details via WhatsApp. We offer a free demo session — if you decide to join, we fold it into your package."
+                                }
+                            ].map((item, i) => (
+                                <div key={i} className="border border-white/10 rounded-2xl overflow-hidden hover:border-brand-orange/30 transition-all">
+                                    <button
+                                        onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+                                    >
+                                        <h3 className="text-white font-black text-sm md:text-base uppercase tracking-wide">
+                                            {item.q}
+                                        </h3>
+                                        <span className={`material-symbols-outlined text-brand-orange shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}>
+                                            expand_more
+                                        </span>
+                                    </button>
+                                    <div className={`transition-all duration-400 ease-in-out overflow-hidden ${openFaq === i ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                        <p className="text-white/70 font-medium text-sm md:text-base leading-relaxed px-6 pb-5">
+                                            {item.a}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -723,8 +834,7 @@ export default function CaliLab() {
 
                             {!isSubmitted ? (
                                 <>
-                                    <h2 className="text-3xl md:text-4xl font-black text-white italic tracking-tight mb-2 uppercase">Join the Lab</h2>
-                                    <p className="text-brand-orange font-bold uppercase tracking-widest text-xs mb-8">Few slots available - reserve your spot now</p>
+                                    <h2 className="text-3xl md:text-4xl font-black text-white italic tracking-tight mb-2 uppercase">Join the Lab</h2>                                    <p className="text-brand-orange font-bold uppercase tracking-widest text-xs mb-8">Few slots available - reserve your spot now</p>
 
                                     <form onSubmit={handleBookingSubmit} className="space-y-4">
                                         {/* NAME INPUT */}

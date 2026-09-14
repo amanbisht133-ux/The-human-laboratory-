@@ -4,10 +4,17 @@ import { useTransitionNavigate } from '../components/Layout';
 import main1Image from '../components/images/main1.png';
 import caliLogo from '../components/images/cali_logo.jpeg';
 import yogaBg from '../components/images/yoga_bg.jpeg';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Home() {
     const navigateWithTransition = useTransitionNavigate();
     const [showPromo, setShowPromo] = useState(true);
+
+    useSEO({
+        title: 'Calisthenics Lab India | Calisthenics & Yoga Training in Madhapur, Hyderabad',
+        description: 'The Human Laboratory — home of Calisthenics Lab India and The Yog Lab. Bodyweight training, yoga, and kids programs in Madhapur, HITEC City, Hyderabad.',
+        canonicalPath: '/',
+    });
 
     useEffect(() => {
         if (showPromo) {

@@ -1,9 +1,37 @@
 import { useState } from 'react';
 import { MapPin, Mail } from 'lucide-react';
 import yogHero from '../components/images/yog_hero_brochure.png';
+import { useSEO } from '../hooks/useSEO';
+import JsonLd from '../components/JsonLd';
+
+const YOG_LAB_SCHEMA = {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "The Yog Lab",
+    "description": "Yoga and intentional movement studio in Madhapur, HITEC City, Hyderabad. Monday, Wednesday, Friday sessions with structured plans for all levels.",
+    "url": "https://the-human-laboratory.vercel.app/yog-lab",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Madhapur, HITEC City, Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+    },
+    "telephone": "+918826762234",
+    "openingHours": "Mo 06:30-08:30, We 06:30-08:30, Fr 06:30-08:30",
+    "priceRange": "₹₹",
+    "sameAs": [
+        "https://www.instagram.com/calisthenics.lab.india"
+    ]
+};
 
 export default function YogLab() {
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+    useSEO({
+        title: 'The Yog Lab | Yoga Classes in Madhapur, Hyderabad — Mon, Wed, Fri',
+        description: 'Structured yoga and intentional movement classes in Madhapur, HITEC City, Hyderabad. Monday, Wednesday, Friday sessions. Monthly, quarterly, and yearly plans available.',
+        canonicalPath: '/yog-lab',
+    });
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [formData, setFormData] = useState({
         name: '',
@@ -51,6 +79,7 @@ export default function YogLab() {
 
     return (
         <div className="bg-[#fffcf5] font-display text-slate-900 scroll-smooth">
+            <JsonLd id="yog-lab-schema" schema={YOG_LAB_SCHEMA} />
             <div className="relative flex flex-col items-center">
 
                 {/* HERO BROCHURE */}
@@ -61,6 +90,9 @@ export default function YogLab() {
                                 src={yogHero}
                                 alt="The Yog Lab - Intentional Movement"
                                 className="w-full h-auto"
+                                width="1200"
+                                height="900"
+                                fetchPriority="high"
                                 onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     target.src = 'https://ui-avatars.com/api/?name=THE+YOG+LAB&background=ea580c&color=fff&bold=true&size=512';
@@ -121,6 +153,8 @@ export default function YogLab() {
                                 src="/images/yog_info_brochure_v2.jpg"
                                 alt="Yog Lab Plans and Timings"
                                 className="w-full h-auto"
+                                width="1200"
+                                height="900"
                                 loading="lazy"
                                 onError={(e) => {
                                     const target = e.target as HTMLImageElement;
