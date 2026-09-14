@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MapPin, Mail, Sparkles } from 'lucide-react/dist/esm/icons';
+import { MapPin, Mail, Sparkles } from 'lucide-react';
 import reviewsData from '../data/reviews.json';
 import caliLogo from '../components/images/CALI@2x.png';
 import communityStory from '../components/images/community_collage.jpg';
