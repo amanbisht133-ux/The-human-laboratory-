@@ -3,6 +3,7 @@ import { MapPin, Mail } from 'lucide-react';
 import yogHero from '../components/images/yog_hero_brochure.png';
 import { useSEO } from '../hooks/useSEO';
 import JsonLd from '../components/JsonLd';
+import { trackPixelEvent } from '../lib/metaPixel';
 
 const YOG_LAB_SCHEMA = {
     "@context": "https://schema.org",
@@ -56,6 +57,7 @@ export default function YogLab() {
         );
         const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`;
 
+        trackPixelEvent('Lead', { content_name: 'Yog Lab Booking', plan: formData.duration });
         setIsSubmitted(true);
         setTimeout(() => {
             const newWindow = window.open(whatsappUrl, '_blank');

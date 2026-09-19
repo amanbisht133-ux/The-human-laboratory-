@@ -1,6 +1,7 @@
-import { useState, createContext, useContext } from 'react';
+import { useState, useEffect, createContext, useContext, useRef } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import caliLogo from './images/cali_logo.jpeg';
+import { trackPixelEvent } from '../lib/metaPixel';
 
 const TransitionContext = createContext<(path: string, state?: any) => void>(() => { });
 export const useTransitionNavigate = () => useContext(TransitionContext);
@@ -39,6 +40,16 @@ export default function Layout() {
 
     const activeBrandingPath = targetPath || location.pathname;
     const isYogLab = activeBrandingPath === '/yog-lab';
+
+    const isFirstPageView = useRef(true);
+    useEffect(() => {
+        if (isFirstPageView.current) {
+            // Base pixel code in index.html already fires the initial PageView.
+            isFirstPageView.current = false;
+            return;
+        }
+        trackPixelEvent('PageView');
+    }, [location.pathname]);
 
     return (
         <TransitionContext.Provider value={navigateWithTransition}>

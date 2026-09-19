@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MapPin, Mail, Sparkles } from 'lucide-react/dist/esm/icons';
+import { MapPin, Mail, Sparkles } from 'lucide-react';
 import reviewsData from '../data/reviews.json';
 import caliLogo from '../components/images/CALI@2x.png';
 import communityStory from '../components/images/community_collage.jpg';
 import { useSEO } from '../hooks/useSEO';
 import JsonLd from '../components/JsonLd';
+import { trackPixelEvent } from '../lib/metaPixel';
 
 const LOCAL_BUSINESS_SCHEMA = {
     "@context": "https://schema.org",
@@ -254,6 +255,7 @@ export default function CaliLab() {
         const whatsappNumber = "918826762234";
         const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`;
 
+        trackPixelEvent('Lead', { content_name: 'Calisthenics Lab Booking', batch: formData.batch });
         setIsSubmitted(true);
 
         // Redirect after a short delay for visual feedback
