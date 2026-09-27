@@ -13,8 +13,8 @@ const LOCAL_BUSINESS_SCHEMA = {
     "@type": "SportsActivityLocation",
     "name": "Calisthenics Lab India",
     "description": "Calisthenics and bodyweight strength training academy in Madhapur, HITEC City, Hyderabad. Group coaching batches, one-on-one personal training, and a dedicated kids calisthenics & gymnastics program.",
-    "url": "https://the-human-laboratory.vercel.app/calisthenics-lab",
-    "image": "https://the-human-laboratory.vercel.app/images/cali_trainers_brochure_v2.jpg",
+    "url": "https://www.calisthenicslabindia.club/calisthenics-lab",
+    "image": "https://www.calisthenicslabindia.club/images/cali_trainers_brochure_v2.jpg",
     "address": {
         "@type": "PostalAddress",
         "addressLocality": "Madhapur, HITEC City, Hyderabad",

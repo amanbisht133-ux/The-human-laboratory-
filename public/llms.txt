@@ -4,7 +4,7 @@
 
 ## Calisthenics Lab India
 
-- [Calisthenics Lab India](https://the-human-laboratory.vercel.app/calisthenics-lab) — Calisthenics and bodyweight strength training academy in Madhapur, HITEC City, Hyderabad
+- [Calisthenics Lab India](https://www.calisthenicslabindia.club/calisthenics-lab) — Calisthenics and bodyweight strength training academy in Madhapur, HITEC City, Hyderabad
 - Programs: Weekday group coaching batches (4 morning + 4 evening), Weekend Reset batch, Personal Training, Kids Batch
 - Kids program: Weekend calisthenics and gymnastics for young learners
 - All levels welcome — beginners to advanced athletes
@@ -16,12 +16,12 @@
 
 ## The Yog Lab
 
-- [The Yog Lab](https://the-human-laboratory.vercel.app/yog-lab) — Yoga and intentional movement studio co-located with Calisthenics Lab India
+- [The Yog Lab](https://www.calisthenicslabindia.club/yog-lab) — Yoga and intentional movement studio co-located with Calisthenics Lab India
 - Sessions on Monday, Wednesday, and Friday
 - Plans: Monthly, Quarterly, Half-Yearly, Yearly
 - Contact: same as above
 
 ## Site
 
-- [Homepage](https://the-human-laboratory.vercel.app/)
+- [Homepage](https://www.calisthenicslabindia.club/)
 - Built with React + Vite, deployed on Vercel

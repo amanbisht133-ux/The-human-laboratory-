@@ -10,7 +10,7 @@ const YOG_LAB_SCHEMA = {
     "@type": "SportsActivityLocation",
     "name": "The Yog Lab",
     "description": "Yoga and intentional movement studio in Madhapur, HITEC City, Hyderabad. Monday, Wednesday, Friday sessions with structured plans for all levels.",
-    "url": "https://the-human-laboratory.vercel.app/yog-lab",
+    "url": "https://www.calisthenicslabindia.club/yog-lab",
     "address": {
         "@type": "PostalAddress",
         "addressLocality": "Madhapur, HITEC City, Hyderabad",

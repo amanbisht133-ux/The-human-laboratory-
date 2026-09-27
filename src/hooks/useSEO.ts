@@ -37,7 +37,7 @@ export function useSEO({ title, description, canonicalPath }: SEOProps) {
 
     // OG url / canonical
     if (canonicalPath) {
-      const base = 'https://the-human-laboratory.vercel.app';
+      const base = 'https://www.calisthenicslabindia.club';
       const fullUrl = `${base}${canonicalPath}`;
 
       let ogUrl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]');

@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = join(__dirname, '..', 'dist');
-const baseUrl = 'https://the-human-laboratory.vercel.app';
+const baseUrl = 'https://www.calisthenicslabindia.club';
 
 const LOCAL_BUSINESS_SCHEMA = {
     "@context": "https://schema.org",
