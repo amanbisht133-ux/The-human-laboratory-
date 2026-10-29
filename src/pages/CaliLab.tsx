@@ -1,89 +1,121 @@
 import { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
-import { MapPin, Mail, Sparkles } from 'lucide-react';
-import reviewsData from '../data/reviews.json';
-import caliLogo from '../components/images/CALI@2x.png';
-import communityStory from '../components/images/community_collage.jpg';
-import { useSEO } from '../hooks/useSEO';
-import JsonLd from '../components/JsonLd';
+import type { ReactNode } from 'react';
+import { MapPin, Mail, Sparkles, Sun, MoonStar, CalendarDays, Plus, ArrowRight, ChevronDown, Check } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import reviews from '../data/reviews.json';
+import { Link } from 'react-router-dom';
+import caliLogo from '../components/images/CALI@2x.webp';
+import communityStory from '../components/images/community_collage.webp';
+import { usePageMeta } from '../hooks/usePageMeta';
+import { useReveal } from '../hooks/useReveal';
+import FaqList from '../components/FaqList';
+import { homeFaqs } from '../data/faqs';
+import { business } from '../data/business';
+import GoaRetreatPopup from '../components/GoaRetreatPopup';
+import RetreatSpotlight from '../components/RetreatSpotlight';
 import { trackPixelEvent } from '../lib/metaPixel';
+import { PRICING_TIERS, WEEKEND_ONE_HOUR_MONTHLY, WEEKEND_ONE_HOUR_SLOTS, BATCH_TIMINGS, WEEKLY_SCHEDULE, MEMBERSHIP_PLANS } from '../data/programs';
 
-const LOCAL_BUSINESS_SCHEMA = {
-    "@context": "https://schema.org",
-    "@type": "SportsActivityLocation",
-    "name": "Calisthenics Lab India",
-    "description": "Calisthenics and bodyweight strength training academy in Madhapur, HITEC City, Hyderabad. Group coaching batches, one-on-one personal training, and a dedicated kids calisthenics & gymnastics program.",
-    "url": "https://www.calisthenicslabindia.club/calisthenics-lab",
-    "image": "https://www.calisthenicslabindia.club/images/cali_trainers_brochure_v2.jpg",
-    "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Madhapur, HITEC City, Hyderabad",
-        "addressRegion": "Telangana",
-        "addressCountry": "IN"
-    },
-    "telephone": "+918826762234",
-    "openingHours": "Mo-Fr 06:30-22:00",
-    "priceRange": "₹₹",
-    "sameAs": [
-        "https://www.instagram.com/calisthenics.lab.india"
-    ]
-};
+const SKILLS = ['Muscle-Up', 'Handstand', 'Front Lever', 'Human Flag', 'Planche', 'Back Lever', 'Pistol Squat', 'L-Sit'];
 
-const FAQ_SCHEMA = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "Where is Calisthenics Lab India located?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "We're based in Madhapur, HITEC City, Hyderabad, Telangana. Find us on Google Maps: https://maps.app.goo.gl/695SVZHotKEeK4zJ7"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "What programs does Calisthenics Lab India offer?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Structured weekday group coaching batches (morning and evening), a weekend reset batch, one-on-one personal training, and a dedicated weekend kids program covering calisthenics and gymnastics fundamentals."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Is calisthenics suitable for complete beginners?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Coaching is structured by level, starting with foundational bodyweight movements — push-ups, rows, squats, mobility work — before progressing to skills like pull-ups, dips, and handstands."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Does Calisthenics Lab India offer training for kids?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes — a dedicated weekend program for young learners covering calisthenics and gymnastics fundamentals in a structured, age-appropriate format."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "How long does it take to learn a muscle-up or handstand?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Most consistent beginners build the base for a first muscle-up in 3–5 months of regular training. Handstand progress varies, but structured progressions typically yield freestanding balance within 4–6 months of dedicated practice."
-            }
-        }
-    ]
-};
+function SectionHeading({ eyebrow, children }: { eyebrow: string; children: ReactNode }) {
+    return (
+        <div className="text-center mb-12 md:mb-14 reveal">
+            <span className="eyebrow">{eyebrow}</span>
+            <h2 className="mt-4 font-condensed uppercase text-white text-5xl md:text-7xl leading-[0.9] tracking-wide">{children}</h2>
+        </div>
+    );
+}
+
+function Accordion({ index, title, open, onToggle, children }: { index: string; title: string; open: boolean; onToggle: () => void; children: ReactNode }) {
+    return (
+        <div className={`glass rounded-2xl transition-colors duration-300 ${open ? 'edge-ember' : 'hover:bg-white/[0.04]'}`}>
+            <button onClick={onToggle} aria-expanded={open} className="w-full flex items-center gap-4 md:gap-6 px-5 md:px-8 py-5 md:py-6 text-left">
+                <span className="font-condensed text-2xl md:text-3xl ember-text">{index}</span>
+                <span className="flex-1 font-condensed uppercase text-white text-2xl md:text-3xl tracking-wide">{title}</span>
+                <span className={`size-10 shrink-0 rounded-full flex items-center justify-center transition-all duration-300 ${open ? 'ember-bg text-ink rotate-45' : 'border border-white/15 text-brand-orange'}`}>
+                    <Plus size={20} />
+                </span>
+            </button>
+            <div className={`grid transition-[grid-template-rows] duration-500 ease-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                <div className="overflow-hidden">
+                    <div className="px-5 md:px-8 pb-6 md:pb-8">
+                        <div className="hairline mb-6"></div>
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function FeatureCard({ title, desc }: { title: string; desc: string }) {
+    return (
+        <li className="flex flex-col gap-2 p-5 rounded-xl bg-white/[0.03] border border-white/5 hover:border-brand-orange/30 transition-colors">
+            <span className="ember-text font-bold text-xs uppercase tracking-widest">{title}</span>
+            <p className="text-sm text-white/75 leading-relaxed">{desc}</p>
+        </li>
+    );
+}
+
+function CheckList({ items }: { items: string[] }) {
+    return (
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {items.map(item => (
+                <li key={item} className="flex items-center gap-4">
+                    <span className="size-7 shrink-0 rounded-full ember-bg text-ink flex items-center justify-center">
+                        <Check size={15} strokeWidth={3} />
+                    </span>
+                    <span className="text-base md:text-lg text-white font-medium tracking-wide">{item}</span>
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+function getPrice(batch: string, duration: string, timing: string) {
+    if (!batch || !duration) return '';
+    if (batch === 'Weekend' && duration === '1 Month' && WEEKEND_ONE_HOUR_SLOTS.some(slot => timing.endsWith(slot))) {
+        return WEEKEND_ONE_HOUR_MONTHLY;
+    }
+    return PRICING_TIERS[batch][duration];
+}
+
+// White icon disc overlapping an orange label with a notched right edge.
+function BatchBadge({ Icon, label }: { Icon: LucideIcon; label: string }) {
+    return (
+        <div className="flex items-center">
+            <div className="relative z-10 size-14 md:size-16 shrink-0 rounded-full bg-white flex items-center justify-center shadow-lg">
+                <Icon className="text-brand-orange size-8 md:size-9" strokeWidth={1.75} />
+            </div>
+            <div
+                className="-ml-4 ember-bg text-ink font-condensed uppercase text-2xl md:text-3xl tracking-wide pl-7 pr-10 pt-1.5 pb-1 whitespace-nowrap"
+                style={{ clipPath: 'polygon(0 0, 100% 0, calc(100% - 1rem) 50%, 100% 100%, 0 100%)' }}
+            >
+                {label}
+            </div>
+        </div>
+    );
+}
+
+function SlotGroup({ title, times }: { title: string; times: string[] }) {
+    return (
+        <div className="mt-6">
+            <p className="mb-1 text-brand-orange font-bold uppercase tracking-widest text-xs md:text-sm">{title}</p>
+            <ul>
+                {times.map(time => (
+                    <li key={time} className="flex items-center gap-3 py-2.5 border-b border-white/5 last:border-b-0 text-white text-lg md:text-xl font-medium tracking-wide">
+                        <span className="size-1.5 shrink-0 rounded-full ember-bg"></span>
+                        {time}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
 
 export default function CaliLab() {
-    const location = useLocation();
-
-    useSEO({
-        title: 'Calisthenics Lab India | Bodyweight Training in Madhapur, Hyderabad',
-        description: 'Calisthenics and bodyweight strength training in Madhapur, HITEC City, Hyderabad. Group coaching, personal training, and kids calisthenics program. All levels welcome.',
-        canonicalPath: '/calisthenics-lab',
-    });
+    usePageMeta('/');
     const [isWeekdayOpen, setIsWeekdayOpen] = useState(false);
     const [isWeekendOpen, setIsWeekendOpen] = useState(false);
     const [isAdvantageOpen, setIsAdvantageOpen] = useState(false);
@@ -91,7 +123,6 @@ export default function CaliLab() {
     const [isProgramsOpen, setIsProgramsOpen] = useState(false);
     const [isWhyUsOpen, setIsWhyUsOpen] = useState(false);
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -101,95 +132,14 @@ export default function CaliLab() {
         timing: ''
     });
 
-    useEffect(() => {
-        if (location.state?.openBooking) {
-            setIsBookingModalOpen(true);
-            if (location.state?.selectedBatch) {
-                setFormData(prev => ({ ...prev, batch: location.state.selectedBatch }));
-            }
-        }
-    }, [location.state]);
+    useReveal();
 
     const [errors, setErrors] = useState({ name: '', email: '', phone: '', batch: '', duration: '', timing: '' });
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
-    const [reviews, setReviews] = useState(reviewsData);
-
-    useEffect(() => {
-        const fetchReviews = async () => {
-            const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-            const PLACE_ID = "ChIJL3MBiWi7vDsRUAZ_As5DGVU";
-
-
-            if (!API_KEY) return;
-
-            try {
-                // Official Google Places API call
-                const response = await fetch(
-                    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=reviews&key=${API_KEY}`
-                );
-                const data = await response.json();
-
-                if (data.result?.reviews && data.result.reviews.length > 0) {
-                    const formattedReviews = data.result.reviews.map((r: any) => ({
-                        name: r.author_name,
-                        text: r.text,
-                        stars: r.rating,
-                        img: r.profile_photo_url || reviewsData[0].img
-                    }));
-                    setReviews(formattedReviews);
-                }
-            } catch (error) {
-                console.error("Error fetching live reviews:", error);
-            }
-        };
-
-        fetchReviews();
-    }, []);
-
-    const PRICING_TIERS = {
-        'Weekday Batch': {
-            '1 Day': '₹800',
-            '1 Month': '₹7,777',
-            '3 Months': '₹22,222',
-            '6 Months': '₹44,444',
-            '1 Year': '₹77,777'
-        },
-        'Weekend': {
-            '1 Day': '₹800',
-            '1 Month': '₹5,555',
-            '3 Months': '₹15,151',
-            '6 Months': '₹31,313',
-            '1 Year': '₹60,606'
-        },
-        'Kids Batch': {
-            '1 Day': '₹800',
-            '1 Month': '₹5,555',
-            '3 Months': '₹15,151',
-            '6 Months': '₹31,313',
-            '1 Year': '₹60,606'
-        },
-        'Personal Training': {
-            '1 Day': 'Consultation',
-            '1 Month': 'Consultation'
-        }
-    };
-
-    const BATCH_TIMINGS: any = {
-        'Weekday Batch': {
-            'Morning': ['6:30 AM - 7:30 AM', '7:30 AM - 8:30 AM', '8:30 AM - 9:30 AM', '9:30 AM - 10:30 AM'],
-            'Evening': ['6:00 PM - 7:00 PM', '7:00 PM - 8:00 PM', '8:00 PM - 9:00 PM', '9:00 PM - 10:00 PM']
-        },
-        'Weekend': ['8:30 AM - 10:00 AM'],
-        'Kids Batch': {
-            'Morning': ['9:00 AM - 10:00 AM', '10:00 AM - 11:00 AM'],
-            'Evening': ['4:00 PM - 5:00 PM', '5:00 PM - 6:00 PM']
-        }
-    };
-
     const validateForm = () => {
-        let newErrors = { name: '', email: '', phone: '', batch: '', duration: '', timing: '' };
+        const newErrors = { name: '', email: '', phone: '', batch: '', duration: '', timing: '' };
         let isValid = true;
 
         if (!formData.name.trim()) {
@@ -239,7 +189,7 @@ export default function CaliLab() {
         if (!validateForm()) return;
 
         // Craft WhatsApp Message
-        const price = (PRICING_TIERS as any)[formData.batch][formData.duration];
+        const price = getPrice(formData.batch, formData.duration, formData.timing);
         const message = encodeURIComponent(
             `*NEW BOOKING INQUIRY - CALI LAB*\n\n` +
             `*Name:* ${formData.name}\n` +
@@ -341,392 +291,405 @@ export default function CaliLab() {
     };
 
     return (
-        <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300">
-            <JsonLd id="cali-local-business-schema" schema={LOCAL_BUSINESS_SCHEMA} />
-            <JsonLd id="cali-faq-schema" schema={FAQ_SCHEMA} />
+        <div className="bg-ink font-sans text-white">
             <div className="relative flex w-full flex-col overflow-x-hidden">
                 {/* HERO SECTION */}
-                <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black px-6 py-12">
-                    {/* Background Image Layer */}
+                <section className="relative min-h-[calc(100svh-5rem)] flex flex-col items-center justify-center overflow-hidden px-6 py-16">
                     <div className="absolute inset-0 z-0">
                         <img
-                            src="/images/cali_hero_bg.jpg"
-                            alt=""
-                            aria-hidden="true"
-                            className="w-full h-full object-cover blur-[2px] scale-105 brightness-75"
-                            width="1080"
-                            height="1080"
+                            src="/images/cali_hero_bg.webp"
+                            alt="Collage of Calisthenics Lab India community group photos from training sessions in Hyderabad"
+                            className="w-full h-full object-cover scale-105 brightness-[0.55] saturate-[0.85]"
+                            width="1600"
+                            height="1022"
                             fetchPriority="high"
                         />
-                        <div className="absolute inset-0 bg-black/50"></div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink"></div>
+                        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(50% 40% at 50% 45%, rgba(243,131,32,0.22), transparent 70%)' }}></div>
                     </div>
 
-                    {/* Centered Branding */}
-                    <div className="relative z-20 flex flex-col items-center text-center mt-[-4vh]">
+                    <div className="relative z-20 flex flex-col items-center text-center animate-reveal">
+                        <img
+                            src={caliLogo}
+                            alt="Calisthenics Lab India (CALI) logo"
+                            className="w-28 md:w-36 h-auto drop-shadow-[0_10px_40px_rgba(243,131,32,0.35)] mb-5"
+                            width="1054"
+                            height="1460"
+                            fetchPriority="high"
+                        />
 
-                        {/* CALI Logo */}
-                        <div className="mb-2 max-w-[200px] md:max-w-[400px]">
-                            <img
-                                src={caliLogo}
-                                alt="Calisthenics Lab India — CALI logo"
-                                className="w-full h-auto drop-shadow-2xl transition-all hover:scale-105"
-                                width="400"
-                                height="400"
-                                fetchPriority="high"
-                            />
+                        <h1 className="font-condensed uppercase text-white text-2xl sm:text-3xl md:text-4xl tracking-[0.12em] mb-4">
+                            Calisthenics Academy in <span className="ember-text">Kondapur, Hyderabad</span>
+                        </h1>
+
+                        <p className="font-condensed uppercase leading-[0.85] tracking-wide text-6xl sm:text-8xl md:text-[7rem] mb-6">
+                            <span className="block text-white">By The Community</span>
+                            <span className="block ember-text">For The Community</span>
+                        </p>
+
+                        <p className="max-w-2xl text-sm md:text-base text-white/75 leading-relaxed mb-8">
+                            {business.name} is a calisthenics academy in Kondapur, Hyderabad, near HITEC City, Gachibowli and Madhapur.
+                            We coach adults from beginner to advanced in group batches (including weekends), offer{' '}
+                            <Link to="/personal-training" className="text-white underline decoration-brand-orange/60 underline-offset-4 hover:text-brand-orange">personal coaching</Link>, run a{' '}
+                            <Link to="/kids-calisthenics" className="text-white underline decoration-brand-orange/60 underline-offset-4 hover:text-brand-orange">kids calisthenics &amp; gymnastics program</Link> and host yoga at{' '}
+                            <Link to="/yog-lab" className="text-white underline decoration-brand-orange/60 underline-offset-4 hover:text-brand-orange">The Yog Lab</Link>.
+                        </p>
+
+                        <button onClick={() => setIsBookingModalOpen(true)} className="btn-ember px-10 md:px-12 py-4 text-base md:text-lg mb-8">
+                            Book Now <ArrowRight size={20} />
+                        </button>
+
+                        <div className="flex items-center gap-4">
+                            {[
+                                { href: business.googleBusinessProfile, label: 'Google Maps', icon: <MapPin size={20} /> },
+                                {
+                                    href: 'https://www.instagram.com/calisthenics.lab.india?igsh=MWI1YnZ0YWRicmNjaA==',
+                                    label: 'Instagram',
+                                    icon: (
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                        </svg>
+                                    )
+                                },
+                                { href: 'mailto:Calisthenicslabindia@gmail.com', label: 'Email', icon: <Mail size={20} /> }
+                            ].map(({ href, label, icon }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target={href.startsWith('mailto:') ? undefined : '_blank'}
+                                    rel="noreferrer"
+                                    aria-label={label}
+                                    className="glass rounded-full p-3 text-white/80 hover:text-brand-orange hover:-translate-y-0.5 transition-all"
+                                >
+                                    {icon}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    <a href="#schedule" aria-label="Scroll down" className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-white/50 hover:text-brand-orange transition-colors">
+                        <ChevronDown className="animate-bounce" size={28} />
+                    </a>
+                </section>
+
+                {/* SKILLS TICKER */}
+                <div className="relative overflow-hidden border-y border-white/10 bg-ink py-4" aria-hidden="true">
+                    <div className="flex w-max animate-marquee">
+                        {[0, 1].map(copy => (
+                            <div key={copy} className="flex shrink-0 items-center">
+                                {SKILLS.map(skill => (
+                                    <span key={skill} className="flex items-center font-condensed uppercase text-2xl md:text-3xl tracking-[0.2em] text-white/80 pl-10">
+                                        {skill}
+                                        <span className="ember-text pl-10">✦</span>
+                                    </span>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* OUR SCHEDULE */}
+                <section className="relative overflow-hidden" id="schedule">
+                    <img
+                        src="/images/cali_hero_bg.webp"
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 w-full h-full object-cover opacity-25 grayscale"
+                        width="1600"
+                        height="1022"
+                        loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/70 to-ink"></div>
+                    <div className="relative z-10 max-w-3xl mx-auto px-6 pt-14 pb-14 reveal">
+                        <div
+                            className="inline-block ember-bg pl-6 pr-12 py-1.5 mb-8"
+                            style={{ clipPath: 'polygon(0 0, 100% 0, calc(100% - 1.25rem) 100%, 0 100%)' }}
+                        >
+                            <h2 className="text-ink font-condensed uppercase text-4xl md:text-6xl tracking-wide leading-none pt-1">Our Schedule</h2>
+                        </div>
+                        <ul className="glass rounded-3xl px-5 md:px-8 py-3">
+                            {WEEKLY_SCHEDULE.map(({ day, focus }) => (
+                                <li key={day} className="group grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 items-center py-3 border-b border-white/5 last:border-b-0">
+                                    <span className="flex items-center gap-3 text-white font-bold uppercase tracking-wider text-sm sm:text-base md:text-xl">
+                                        <span className="size-1.5 rounded-full ember-bg shadow-[0_0_10px_rgba(243,131,32,0.8)] transition-transform group-hover:scale-150"></span>{day}
+                                    </span>
+                                    <span className="text-white/75 font-medium uppercase tracking-wide text-sm sm:text-base md:text-xl group-hover:text-white transition-colors">
+                                        {focus}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+
+                {/* PLANS & TIMINGS */}
+                <section className="relative py-16 md:py-20 px-4 section-glow overflow-hidden" id="plans">
+                    <div className="max-w-3xl mx-auto relative z-10">
+                        {/* Ribbon */}
+                        <div className="flex items-center mb-8 reveal">
+                            <div className="hidden sm:block flex-1 h-px bg-gradient-to-r from-transparent to-brand-orange"></div>
+                            <p className="mx-auto sm:mx-6 glass rounded-full px-8 md:px-10 py-2 font-condensed text-white text-2xl md:text-4xl tracking-[0.15em] whitespace-nowrap">
+                                Calisthenics Lab <span className="ember-text">India</span>
+                            </p>
+                            <div className="hidden sm:block flex-1 h-px bg-gradient-to-l from-transparent to-brand-orange"></div>
                         </div>
 
-                        {/* Tagline & Headlines */}
-                        <div className="max-w-6xl mx-auto flex flex-col items-center">
-                            <h1 className="text-4xl sm:text-6xl md:text-[6rem] font-black leading-[0.9] text-white tracking-widest flex flex-col uppercase mb-6 italic">
-                                <span className="block drop-shadow-2xl">BY THE COMMUNITY</span>
-                                <span className="block drop-shadow-2xl text-brand-orange">FOR THE COMMUNITY</span>
-                            </h1>
+                        <h2 className="text-center font-condensed uppercase text-white leading-[0.9] mb-10 reveal">
+                            <span className="block text-6xl md:text-8xl">Choose Your Plan</span>
+                            <span className="block text-3xl md:text-5xl">&amp; Begin Your <span className="ember-text">Transformation</span></span>
+                        </h2>
 
-                            <p className="text-lg md:text-2xl text-white/80 font-bold uppercase tracking-[0.4em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mb-10">
-                                Experiment. Evolve. Repeat.
-                            </p>
-
-                            {/* Social Icons Row */}
-                            <div className="flex items-center gap-8 mb-10">
-                                <a
-                                    href="https://maps.app.goo.gl/695SVZHotKEeK4zJ7"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="p-3 bg-white/5 border border-white/10 rounded-full text-white hover:text-brand-orange hover:border-brand-orange transition-all hover:scale-110 shadow-lg"
-                                    aria-label="Google Maps"
-                                >
-                                    <MapPin size={24} />
-                                </a>
-                                <a
-                                    href="https://www.instagram.com/calisthenics.lab.india?igsh=MWI1YnZ0YWRicmNjaA=="
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="p-3 bg-white/5 border border-white/10 rounded-full text-white hover:text-brand-orange hover:border-brand-orange transition-all hover:scale-110 shadow-lg"
-                                    aria-label="Instagram"
-                                >
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                    </svg>
-                                </a>
-                                <a
-                                    href="mailto:Calisthenicslabindia@gmail.com"
-                                    className="p-3 bg-white/5 border border-white/10 rounded-full text-white hover:text-brand-orange hover:border-brand-orange transition-all hover:scale-110 shadow-lg"
-                                    aria-label="Email"
-                                >
-                                    <Mail size={24} />
-                                </a>
+                        {/* Memberships table */}
+                        <div className="max-w-xl mx-auto mb-8 glass edge-ember rounded-3xl overflow-hidden reveal">
+                            <div className="ember-bg text-center font-condensed uppercase text-ink text-2xl md:text-3xl pt-2 pb-1 tracking-wide">
+                                Calisthenics Memberships
                             </div>
+                            <div className="px-5 md:px-8 pt-3 pb-5">
+                                <div className="grid grid-cols-[1fr_8rem] md:grid-cols-[1fr_10rem] font-condensed uppercase text-brand-orange text-xl md:text-2xl tracking-wider">
+                                    <span>Plans</span>
+                                    <span className="pl-4 md:pl-6">Price</span>
+                                </div>
+                                {MEMBERSHIP_PLANS.map(({ plan, price }) => (
+                                    <div key={plan} className="grid grid-cols-[1fr_8rem] md:grid-cols-[1fr_10rem] border-b border-white/10 last:border-b-0 font-condensed uppercase text-white text-xl md:text-3xl tracking-wide hover:bg-white/[0.03] transition-colors">
+                                        <span className="py-2.5 md:py-3">{plan}</span>
+                                        <span className="py-2.5 md:py-3 pl-4 md:pl-6 border-l border-white/10">{price}/-</span>
+                                    </div>
+                                ))}
+                                <p className="mt-3 font-condensed uppercase text-brand-orange text-base md:text-lg tracking-wide">
+                                    *Pay for 10 months, get 2 months free
+                                </p>
+                            </div>
+                        </div>
 
-                            {/* CTA Button */}
-                            <div>
-                                <button
-                                    onClick={() => setIsBookingModalOpen(true)}
-                                    className="group relative px-12 py-4 bg-brand-orange text-black font-black text-xl md:text-2xl uppercase tracking-widest rounded-full overflow-hidden transition-all hover:scale-110 active:scale-95 shadow-[0_0_30px_rgba(242,110,24,0.4)]"
-                                >
-                                    <span className="relative z-10">Book Now</span>
-                                    <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 -z-0 opacity-20"></div>
-                                </button>
+                        {/* Weekend membership */}
+                        <div className="w-fit max-w-full mx-auto mb-16 glass edge-ember rounded-3xl px-5 md:px-8 py-4 flex flex-col sm:flex-row items-center gap-3 sm:gap-6 reveal">
+                            <div className="flex items-center gap-4">
+                                <CalendarDays className="text-brand-orange size-12 md:size-14 shrink-0" strokeWidth={1.5} />
+                                <p className="font-condensed uppercase leading-none whitespace-nowrap">
+                                    <span className="block ember-text text-2xl md:text-3xl">Monthly Weekend</span>
+                                    <span className="block text-white text-3xl md:text-4xl">Membership</span>
+                                </p>
+                            </div>
+                            <div className="sm:border-l border-white/15 sm:pl-6 font-condensed uppercase text-white text-2xl md:text-3xl leading-tight text-center sm:text-left whitespace-nowrap">
+                                <p>1.5 Hour Slot - {PRICING_TIERS['Weekend']['1 Month']}/-</p>
+                                <p>1 Hour Slot - {WEEKEND_ONE_HOUR_MONTHLY}/-</p>
+                            </div>
+                        </div>
+
+                        {/* Timings */}
+                        <h2 className="text-center font-condensed uppercase text-white text-7xl md:text-8xl tracking-[0.15em] mb-10 reveal" id="timings">
+                            Timings
+                        </h2>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 reveal">
+                            <div className="glass edge-ember rounded-3xl p-5 md:p-7">
+                                <BatchBadge Icon={Sun} label="Morning Batches" />
+                                <SlotGroup title="Adult Batches" times={BATCH_TIMINGS['Weekday Batch']['Morning']} />
+                            </div>
+                            <div className="glass edge-ember rounded-3xl p-5 md:p-7">
+                                <BatchBadge Icon={MoonStar} label="Evening Batches" />
+                                <SlotGroup title="Kids Batch" times={BATCH_TIMINGS['Kids Batch']['Weekday']} />
+                                <SlotGroup title="Adult Batches" times={BATCH_TIMINGS['Weekday Batch']['Evening']} />
+                            </div>
+                        </div>
+
+                        <div className="glass edge-ember rounded-3xl px-5 md:px-8 py-5 flex flex-col md:flex-row md:items-center gap-4 md:gap-10 reveal">
+                            <BatchBadge Icon={Sun} label="Weekend Batches" />
+                            <div className="text-white">
+                                <p className="font-bold uppercase tracking-widest text-xs md:text-sm text-brand-orange">Adult</p>
+                                {['Morning', 'Evening'].map(session => (
+                                    <p key={session} className="text-sm md:text-lg font-medium">
+                                        {BATCH_TIMINGS['Weekend'][session].join(' | ')}
+                                    </p>
+                                ))}
+                                <p className="mt-2 font-bold uppercase tracking-widest text-xs md:text-sm text-brand-orange">Kids</p>
+                                <p className="text-sm md:text-lg font-medium">{BATCH_TIMINGS['Kids Batch']['Weekend'].join(' | ')}</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
+                {/* ACTIVITIES */}
+                <RetreatSpotlight />
 
-                <section className="pt-12 pb-4 px-6 md:px-20 bg-black relative overflow-hidden" id="advantage">
-                    <div className="max-w-4xl mx-auto flex flex-col gap-6 relative z-10">
-                        {/* THE CALISTHENICS ADVANTAGE */}
-                        <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
-                            <button
-                                onClick={() => setIsAdvantageOpen(!isAdvantageOpen)}
-                                className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
-                            >
-                                <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
-                                    <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
-                                    The Calisthenics Advantage
-                                </span>
-                                <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isAdvantageOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
-                                    <span className={`material-symbols-outlined text-2xl ${isAdvantageOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
-                                </div>
-                            </button>
-                            <div className={`transition-all duration-500 ease-in-out ${isAdvantageOpen ? 'max-h-[1000px] opacity-100 p-8 pt-0' : 'max-h-0 opacity-0'}`}>
-                                <div className="h-px bg-gradient-to-r from-brand-orange/50 to-transparent mb-8"></div>
-                                <p className="text-base md:text-lg text-white font-bold leading-relaxed mb-8 drop-shadow-md">
+                {/* THE METHOD */}
+                <section className="pt-16 md:pt-20 pb-6 px-6 md:px-20 relative overflow-hidden" id="advantage">
+                    <div className="max-w-4xl mx-auto relative z-10">
+                        <SectionHeading eyebrow="The Method">
+                            Why <span className="ember-text">Calisthenics</span>
+                        </SectionHeading>
+                        <div className="flex flex-col gap-4 reveal">
+                            <Accordion index="01" title="The Calisthenics Advantage" open={isAdvantageOpen} onToggle={() => setIsAdvantageOpen(!isAdvantageOpen)}>
+                                <p className="text-base md:text-lg text-white/90 font-medium leading-relaxed mb-6">
                                     True strength isn't about moving dead weight; it's about absolute control over your own movement. We don't just chase numbers; we build functional, athletic bodies.
                                 </p>
-                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {[
                                         { title: "Deep Mind-Muscle Connection", desc: "Train your nervous system and muscles to fire together as a highly efficient unit." },
                                         { title: "Total Coordination & Balance", desc: "Develop spatial awareness and stability that translates directly into real-world agility." },
                                         { title: "True Mobility & Flexibility", desc: "Build strength through a full range of motion to bulletproof your joints and move without restriction." },
                                         { title: "The Ultimate Byproduct", desc: "Fat loss, lean muscle gain, and a chiseled physique aren't just goals—they are the inevitable, natural results of mastering these skills." }
-                                    ].map((item, i) => (
-                                        <li key={i} className="flex flex-col gap-2 p-4 rounded-xl bg-black/40 border border-white/5 hover:border-brand-orange/30 transition-all">
-                                            <span className="text-brand-orange font-black text-xs uppercase tracking-tighter">{item.title}</span>
-                                            <p className="text-sm text-white/80 font-medium leading-tight">{item.desc}</p>
-                                        </li>
-                                    ))}
+                                    ].map(item => <FeatureCard key={item.title} {...item} />)}
                                 </ul>
-                            </div>
-                        </div>
+                            </Accordion>
 
-                        {/* CALISTHENICS VS GYM */}
-                        <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
-                            <button
-                                onClick={() => setIsVsGymOpen(!isVsGymOpen)}
-                                className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
-                            >
-                                <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
-                                    <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
-                                    Calisthenics vs Gym
-                                </span>
-                                <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isVsGymOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
-                                    <span className={`material-symbols-outlined text-2xl ${isVsGymOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
-                                </div>
-                            </button>
-                            <div className={`transition-all duration-500 ease-in-out ${isVsGymOpen ? 'max-h-[500px] opacity-100 p-8 pt-0' : 'max-h-0 opacity-0'}`}>
-                                <div className="h-px bg-gradient-to-r from-brand-orange/50 to-transparent mb-8"></div>
-                                <p className="text-base md:text-lg text-white font-bold leading-relaxed drop-shadow-md">
-                                    In a traditional gym, you use machines to isolate muscles; at <span className="text-brand-orange font-black uppercase tracking-wider">Calisthenics Lab India</span>, you use your body to build mastery. While most people go to the gym just for the look—focusing on fat loss and muscle gain—we treat those as mere by-products of our training. Our focus is on deep body awareness and movement control. We don't just build a physique; we build a body that knows exactly what it's capable of.
+                            <Accordion index="02" title="Calisthenics vs Gym" open={isVsGymOpen} onToggle={() => setIsVsGymOpen(!isVsGymOpen)}>
+                                <p className="text-base md:text-lg text-white/90 font-medium leading-relaxed">
+                                    In a traditional gym, you use machines to isolate muscles; at <span className="ember-text font-bold uppercase tracking-wider">Calisthenics Lab India</span>, you use your body to build mastery. While most people go to the gym just for the look—focusing on fat loss and muscle gain—we treat those as mere by-products of our training. Our focus is on deep body awareness and movement control. We don't just build a physique; we build a body that knows exactly what it's capable of.
                                 </p>
-                            </div>
+                            </Accordion>
                         </div>
                     </div>
                 </section>
 
-                <section className="pt-4 pb-4 px-6 md:px-20 bg-black relative overflow-hidden" id="programs">
-                    <div className="max-w-4xl mx-auto flex flex-col gap-6 relative z-10">
-                        {/* THE WEEKDAY Opreation */}
-                        <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
-                            <button
-                                onClick={() => setIsWeekdayOpen(!isWeekdayOpen)}
-                                className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
-                            >
-                                <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
-                                    <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
-                                    The Weekday Operation
-                                </span>
-                                <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isWeekdayOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
-                                    <span className={`material-symbols-outlined text-2xl ${isWeekdayOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
-                                </div>
-                            </button>
-                            <div className={`transition-all duration-500 ease-in-out ${isWeekdayOpen ? 'max-h-[1000px] opacity-100 p-8 pt-0' : 'max-h-0 opacity-0'}`}>
-                                <div className="h-px bg-gradient-to-r from-brand-orange/50 to-transparent mb-8"></div>
-                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* PROGRAMS */}
+                <section className="pt-16 pb-16 px-6 md:px-20 relative overflow-hidden" id="programs">
+                    <div className="max-w-4xl mx-auto relative z-10">
+                        <SectionHeading eyebrow="Programs">
+                            Train <span className="ember-text">Your Way</span>
+                        </SectionHeading>
+                        <div className="flex flex-col gap-4 reveal">
+                            <Accordion index="01" title="The Weekday Operation" open={isWeekdayOpen} onToggle={() => setIsWeekdayOpen(!isWeekdayOpen)}>
+                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {[
-                                        { title: "8 Opportunity Windows", desc: "With four batches in the morning and four in the evening, you never have to miss a workout. Your fitness fits your lifestyle, not the other way around." },
+                                        { title: "6 Opportunity Windows", desc: "With three batches in the morning and three in the evening, you never have to miss a workout. Your fitness fits your lifestyle, not the other way around." },
                                         { title: "The 2-Trainer Standard", desc: "Unlike traditional gyms where you're on your own, every weekday slot at the Lab ensures a high coach-to-student ratio. You get the energy of a group with the precision of personal training." },
                                         { title: "End-to-End Coaching", desc: "From the moment you walk in to your final stretch, our coaches manage the clock and the intensity. We handle the programming; you just show up and put in the work." },
                                         { title: "Extended Training", desc: "Finished the session but still have fuel in the tank? Our weekday format allows athletes the freedom to stay back for extra practice, making it the perfect environment for those chasing advanced skills." }
-                                    ].map((item, i) => (
-                                        <li key={i} className="flex flex-col gap-2 p-4 rounded-xl bg-black/40 border border-white/5 hover:border-brand-orange/30 transition-all">
-                                            <span className="text-brand-orange font-black text-xs uppercase tracking-tighter">{item.title}</span>
-                                            <p className="text-sm text-white/80 font-medium leading-tight">{item.desc}</p>
-                                        </li>
-                                    ))}
+                                    ].map(item => <FeatureCard key={item.title} {...item} />)}
                                 </ul>
-                            </div>
-                        </div>
+                            </Accordion>
 
-                        {/* THE WEEKEND RESET */}
-                        <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
-                            <button
-                                onClick={() => setIsWeekendOpen(!isWeekendOpen)}
-                                className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
-                            >
-                                <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
-                                    <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
-                                    The Weekend Reset
-                                </span>
-                                <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isWeekendOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
-                                    <span className={`material-symbols-outlined text-2xl ${isWeekendOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
-                                </div>
-                            </button>
-                            <div className={`transition-all duration-500 ease-in-out ${isWeekendOpen ? 'max-h-[500px] opacity-100 p-8 pt-0' : 'max-h-0 opacity-0'}`}>
-                                <div className="h-px bg-gradient-to-r from-brand-orange/50 to-transparent mb-8"></div>
-                                <div className="bg-black/40 p-6 rounded-xl border border-white/5">
-                                    <p className="text-lg md:text-xl font-black text-white tracking-wide mb-3 leading-tight">
-                                        1.5-hour deep-dive | Saturday & Sunday | 2 trainers
-                                    </p>
-                                    <p className="text-sm md:text-base text-white/80 font-bold leading-relaxed">
-                                        A high-energy group environment designed to level up your skills.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* EXPERIENCE THE LAB Container */}
-                        <div className="mt-8">
-                            <div
-                                onClick={() => setIsBookingModalOpen(true)}
-                                className="bg-brand-orange/5 border-[4px] border-brand-orange rounded-[3rem] p-8 md:p-12 text-center transition-all hover:bg-brand-orange/10 group shadow-2xl shadow-brand-orange/10 cursor-pointer"
-                            >
-                                <h2 className="text-sm md:text-4xl font-black text-white mb-6 underline decoration-brand-orange underline-offset-12">
-                                    Experience the Lab – On Us.
-                                </h2>
-                                <p className="text-sm md:text-2xl text-white font-bold leading-relaxed max-w-3xl mx-auto px-4">
-                                    Book your <span className="text-brand-orange uppercase tracking-wider">Free Demo Session</span> today to feel the energy of our space. If you decide to join the movement, we'll fold the session into your package. If not, it's completely free with no strings attached.
+                            <Accordion index="02" title="The Weekend Reset" open={isWeekendOpen} onToggle={() => setIsWeekendOpen(!isWeekendOpen)}>
+                                <p className="font-condensed uppercase text-2xl md:text-3xl text-white tracking-wide mb-2">
+                                    1.5-hour or 1-hour slots <span className="text-brand-orange">|</span> Saturday & Sunday <span className="text-brand-orange">|</span> 2 trainers
                                 </p>
+                                <p className="text-sm md:text-base text-white/75 font-medium leading-relaxed">
+                                    A high-energy group environment designed to level up your skills.
+                                </p>
+                            </Accordion>
+                        </div>
 
-                            </div>
+                        {/* EXPERIENCE THE LAB */}
+                        <div
+                            onClick={() => setIsBookingModalOpen(true)}
+                            className="group relative mt-10 glass edge-ember rounded-[2.5rem] p-8 md:p-12 text-center overflow-hidden cursor-pointer reveal"
+                        >
+                            <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[70%] h-48 rounded-full bg-brand-orange/25 blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-700"></div>
+                            <span className="eyebrow relative">Free Demo Session</span>
+                            <h2 className="relative mt-4 font-condensed uppercase text-4xl md:text-6xl text-white leading-none">
+                                Experience the Lab – <span className="ember-text">On Us.</span>
+                            </h2>
+                            <p className="relative mt-5 text-sm md:text-xl text-white/75 font-medium leading-relaxed max-w-3xl mx-auto">
+                                Book your <span className="text-brand-orange font-bold">Free Demo Session</span> today to feel the energy of our space. If you decide to join the movement, we'll fold the session into your package. If not, it's completely free with no strings attached.
+                            </p>
+                            <span className="btn-ember relative mt-8 px-8 py-3 text-sm">
+                                Book Now <ArrowRight size={16} />
+                            </span>
                         </div>
                     </div>
                 </section>
 
                 {/* TRAINERS & TIMINGS BROCHURE */}
-                <section className="pt-0 pb-4 bg-black relative overflow-hidden" id="info">
-                    <div className="w-full md:w-[85%] mx-auto relative z-10 transition-all">
-                        <div className="shadow-[0_0_50px_rgba(242,110,24,0.15)] md:rounded-2xl overflow-hidden border-y-2 md:border-2 border-brand-orange/30">
-                            <img
-                                src="/images/cali_trainers_brochure_v2.jpg"
-                                alt="Cali Lab Trainers and Timings"
-                                className="w-full h-auto scale-[1.01] origin-top-left"
-                                width="1200"
-                                height="800"
-                                loading="lazy"
-                            />
-                        </div>
+                <section className="pb-6 px-4 relative overflow-hidden" id="info">
+                    <div className="w-full md:w-[85%] mx-auto relative z-10 rounded-3xl overflow-hidden edge-ember shadow-[0_30px_80px_-30px_rgba(243,131,32,0.35)] reveal">
+                        <img
+                            src="/images/cali_trainers_brochure_v2.webp"
+                            alt="Collage of group photos from Calisthenics Lab India sessions and community events"
+                            className="w-full h-auto"
+                            width="1546"
+                            height="1005"
+                            loading="lazy"
+                        />
                     </div>
                 </section>
 
-                <section className="pt-8 pb-24 px-6 md:px-20 bg-black relative overflow-hidden border-t border-white/5">
+                {/* WHAT YOU GET */}
+                <section className="pt-16 md:pt-20 pb-20 px-6 md:px-20 relative overflow-hidden">
                     <div className="max-w-4xl mx-auto relative z-10">
-                        <div className="text-center mb-16">
-                            <h2 className="text-4xl md:text-6xl font-black text-white italic tracking-tighter uppercase leading-none">
-                                What You're <br /> <span className="text-brand-orange">Going To Get</span>
-                            </h2>
-                        </div>
+                        <SectionHeading eyebrow="The Offer">
+                            What You're <span className="ember-text">Going To Get</span>
+                        </SectionHeading>
+                        <div className="flex flex-col gap-4 reveal">
+                            <Accordion index="01" title="Training Programs Include" open={isProgramsOpen} onToggle={() => setIsProgramsOpen(!isProgramsOpen)}>
+                                <CheckList items={[
+                                    "Strength & Conditioning",
+                                    "Calisthenics Fundamentals",
+                                    "Weight Loss & Fat Burning",
+                                    "Handstands & Balance Training",
+                                    "Core & Mobility Development",
+                                    "Advanced Skill Progressions"
+                                ]} />
+                            </Accordion>
 
-                        <div className="flex flex-col gap-6">
-                            {/* TRAINING PROGRAMS dropdown */}
-                            <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
-                                <button
-                                    onClick={() => setIsProgramsOpen(!isProgramsOpen)}
-                                    className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
-                                >
-                                    <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
-                                        <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
-                                        Training Programs Include
-                                    </span>
-                                    <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isProgramsOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
-                                        <span className={`material-symbols-outlined text-2xl ${isProgramsOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
-                                    </div>
-                                </button>
-                                <div className={`transition-all duration-500 ease-in-out ${isProgramsOpen ? 'max-h-[1000px] opacity-100 p-8 pt-0' : 'max-h-0 opacity-0'}`}>
-                                    <div className="h-px bg-gradient-to-r from-brand-orange/50 to-transparent mb-8"></div>
-                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        {[
-                                            "Strength & Conditioning",
-                                            "Calisthenics Fundamentals",
-                                            "Weight Loss & Fat Burning",
-                                            "Handstands & Balance Training",
-                                            "Core & Mobility Development",
-                                            "Advanced Skill Progressions"
-                                        ].map((item, i) => (
-                                            <li key={i} className="flex items-center gap-4 group">
-                                                <span className="w-2 h-2 bg-brand-orange rounded-full group-hover:scale-150 transition-transform shadow-[0_0_8px_#f26e18]"></span>
-                                                <span className="text-base md:text-lg text-white font-bold tracking-wide">{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/* WHY CHOOSE CALI dropdown */}
-                            <div className="group/accordion border-l-4 border-brand-orange bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-300 hover:bg-white/10 overflow-hidden shadow-2xl">
-                                <button
-                                    onClick={() => setIsWhyUsOpen(!isWhyUsOpen)}
-                                    className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left group"
-                                >
-                                    <span className="text-lg md:text-xl font-black text-white tracking-widest uppercase flex items-center gap-4">
-                                        <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse shadow-[0_0_10px_#f26e18]"></span>
-                                        Why Choose Cali?
-                                    </span>
-                                    <div className={`size-10 shrink-0 aspect-square rounded-full flex-none border border-brand-orange flex items-center justify-center transition-all duration-300 ${isWhyUsOpen ? 'bg-brand-orange rotate-180' : 'bg-transparent text-brand-orange'}`}>
-                                        <span className={`material-symbols-outlined text-2xl ${isWhyUsOpen ? 'text-black' : 'text-brand-orange'}`}>expand_more</span>
-                                    </div>
-                                </button>
-                                <div className={`transition-all duration-500 ease-in-out ${isWhyUsOpen ? 'max-h-[1000px] opacity-100 p-8 pt-0' : 'max-h-0 opacity-0'}`}>
-                                    <div className="h-px bg-gradient-to-r from-brand-orange/50 to-transparent mb-8"></div>
-                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        {[
-                                            "Expert trainers",
-                                            "Small batch focus",
-                                            "Result-driven programming",
-                                            "Beginner-friendly progressions",
-                                            "Motivating training environment"
-                                        ].map((item, i) => (
-                                            <li key={i} className="flex items-center gap-4 group">
-                                                <span className="w-2 h-2 bg-brand-orange rounded-full group-hover:scale-150 transition-transform shadow-[0_0_8px_#f26e18]"></span>
-                                                <span className="text-base md:text-lg text-white font-bold tracking-wide">{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
+                            <Accordion index="02" title="Why Choose Cali?" open={isWhyUsOpen} onToggle={() => setIsWhyUsOpen(!isWhyUsOpen)}>
+                                <CheckList items={[
+                                    "Expert trainers",
+                                    "Small batch focus",
+                                    "Result-driven programming",
+                                    "Beginner-friendly progressions",
+                                    "Motivating training environment"
+                                ]} />
+                            </Accordion>
                         </div>
                     </div>
                 </section>
 
-                <section className="pt-4 pb-12 bg-black overflow-hidden relative border-t border-white/5">
-                    <div className="max-w-7xl mx-auto text-center mb-16 px-6">
-                        <span className="text-brand-orange font-bold uppercase tracking-widest text-[10px] mb-2 block">Clients Testimonials</span>
-                        <h2 className="text-4xl md:text-5xl font-black text-white italic uppercase tracking-tighter">Voices of <span className="text-brand-orange">The Lab</span></h2>
+                {/* TESTIMONIALS */}
+                <section className="pt-16 md:pt-20 pb-12 section-glow overflow-hidden relative">
+                    <div className="max-w-7xl mx-auto px-6">
+                        <SectionHeading eyebrow="Client Testimonials">
+                            Voices of <span className="ember-text">The Lab</span>
+                        </SectionHeading>
                     </div>
 
-                    <div className="relative group px-6 md:px-20">
-                        {/* Navigation Buttons */}
-                        <div className="absolute top-1/2 -left-4 -translate-y-1/2 z-20 hidden md:block">
+                    <div className="relative group px-6 md:px-20 reveal">
+                        <div className="absolute top-1/2 left-2 -translate-y-1/2 z-20 hidden md:block">
                             <button
                                 onClick={() => scroll('left')}
-                                className="p-4 bg-black/50 backdrop-blur-xl border border-white/10 rounded-full text-white hover:text-brand-orange hover:border-brand-orange transition-all hover:scale-110 active:scale-90"
+                                className="glass p-4 rounded-full text-white hover:text-brand-orange transition-all hover:scale-110 active:scale-90"
                                 aria-label="Previous Review"
                             >
                                 <span className="material-symbols-outlined text-3xl">chevron_left</span>
                             </button>
                         </div>
-                        <div className="absolute top-1/2 -right-4 -translate-y-1/2 z-20 hidden md:block">
+                        <div className="absolute top-1/2 right-2 -translate-y-1/2 z-20 hidden md:block">
                             <button
                                 onClick={() => scroll('right')}
-                                className="p-4 bg-black/50 backdrop-blur-xl border border-white/10 rounded-full text-white hover:text-brand-orange hover:border-brand-orange transition-all hover:scale-110 active:scale-90"
+                                className="glass p-4 rounded-full text-white hover:text-brand-orange transition-all hover:scale-110 active:scale-90"
                                 aria-label="Next Review"
                             >
                                 <span className="material-symbols-outlined text-3xl">chevron_right</span>
                             </button>
                         </div>
 
-                        {/* Manual Scroll Container */}
                         <div
                             ref={scrollRef}
                             onClick={() => setIsPaused(!isPaused)}
-                            className="py-12 flex gap-8 overflow-x-auto custom-scrollbar-hide cursor-pointer"
+                            className="py-8 flex gap-6 md:gap-8 overflow-x-auto custom-scrollbar-hide cursor-pointer"
                         >
                             {[...reviews, ...reviews, ...reviews].map((review, i) => (
-                                <div key={i} className="w-[320px] md:w-[450px] bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-10 rounded-[2.5rem] shrink-0 hover:border-brand-orange/50 transition-all duration-500 relative group/card overflow-hidden shadow-2xl">
-                                    <span className="material-symbols-outlined absolute top-4 right-6 text-6xl text-brand-orange/5 select-none translate-y-2 group-hover/card:translate-y-0 transition-transform">format_quote</span>
-                                    <div className="flex flex-col gap-4 md:gap-6 relative z-10">
-                                        <p className="text-white/80 font-medium italic leading-relaxed whitespace-normal text-xs md:text-sm line-clamp-4 group-hover/card:line-clamp-none transition-all duration-500">"{review.text}"</p>
-                                        <div className="flex items-center gap-4">
+                                <div key={i} className="glass w-[300px] md:w-[440px] p-6 md:p-10 rounded-[2rem] shrink-0 hover:-translate-y-1 hover:border-brand-orange/40 transition-all duration-500 relative group/card overflow-hidden">
+                                    <span className="absolute -top-4 right-6 font-condensed text-[9rem] leading-none ember-text opacity-20 select-none">“</span>
+                                    <div className="flex flex-col gap-5 md:gap-6 relative z-10">
+                                        <div className="flex gap-1">
+                                            {[...Array(review.stars)].map((_, j) => (
+                                                <span key={j} className="material-symbols-outlined text-sm text-brand-orange fill-1">star</span>
+                                            ))}
+                                        </div>
+                                        <p className="text-white/80 font-light leading-relaxed whitespace-normal text-sm md:text-base line-clamp-4 group-hover/card:line-clamp-none transition-all duration-500">"{review.text}"</p>
+                                        <div className="flex items-center gap-4 pt-4 border-t border-white/10">
                                             <img
-                                                src={review.img}
-                                                alt={review.name}
-                                                className="size-10 md:size-12 rounded-full object-cover grayscale group-hover/card:grayscale-0 transition-all border border-white/10"
+                                                src={`https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=f38320&color=0a0a0b&bold=true`}
+                                                alt={`${review.name} initials avatar`}
+                                                className="size-10 md:size-12 rounded-full object-cover ring-2 ring-brand-orange/30"
+                                                width="48"
+                                                height="48"
                                                 loading="lazy"
-                                                onError={(e) => {
-                                                    const target = e.target as HTMLImageElement;
-                                                    target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=f26e18&color=fff&bold=true`;
-                                                }}
                                             />
-                                            <div>
-                                                <p className="text-white font-black uppercase text-[10px] md:text-xs tracking-widest">{review.name}</p>
-                                                <div className="flex gap-1 mt-1">
-                                                    {[...Array(review.stars)].map((_, j) => (
-                                                        <span key={j} className="material-symbols-outlined text-[8px] md:text-[10px] text-brand-orange fill-1">star</span>
-                                                    ))}
-                                                </div>
-                                            </div>
+                                            <p className="text-white font-semibold uppercase text-xs tracking-widest">{review.name}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -735,19 +698,19 @@ export default function CaliLab() {
                     </div>
                 </section>
 
-                <section className="py-12 px-6 md:px-20 bg-background-light dark:bg-background-dark">
+                {/* COMMUNITY */}
+                <section className="py-16 md:py-20 px-6 md:px-20">
                     <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-16">
-                            <span className="text-primary font-bold uppercase tracking-widest text-sm">Community First</span>
-                            <h2 className="text-4xl md:text-6xl font-black tracking-tight mt-2 uppercase">WE ARE MORE THAN A TRAINING SPACE</h2>
-                        </div>
-                        <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-brand-orange/10 hover:border-brand-orange/30 transition-all duration-700">
+                        <SectionHeading eyebrow="Community First">
+                            We Are More Than <span className="ember-text">A Training Space</span>
+                        </SectionHeading>
+                        <div className="rounded-3xl overflow-hidden edge-ember shadow-[0_30px_80px_-30px_rgba(243,131,32,0.35)] reveal">
                             <img
                                 src={communityStory}
-                                alt="Cali Lab Community"
-                                className="w-full h-auto grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-1000"
-                                width="1200"
-                                height="800"
+                                alt="Calisthenics Lab India community collage: group workouts, skills sessions and beach training"
+                                className="w-full h-auto md:grayscale md:hover:grayscale-0 transition-all duration-1000"
+                                width="723"
+                                height="1024"
                                 loading="lazy"
                             />
                         </div>
@@ -755,65 +718,20 @@ export default function CaliLab() {
                 </section>
 
                 {/* FAQ SECTION — visible page text for SEO/GEO */}
-                <section className="py-16 px-6 md:px-20 bg-black border-t border-white/5" id="faq" aria-label="Frequently Asked Questions">
+                <section className="pt-16 md:pt-20 pb-24 px-6 md:px-20 section-glow" id="faq" aria-label="Frequently Asked Questions">
                     <div className="max-w-4xl mx-auto">
-                        <div className="text-center mb-12">
-                            <span className="text-brand-orange font-bold uppercase tracking-widest text-[10px] mb-2 block">Got Questions?</span>
-                            <h2 className="text-3xl md:text-5xl font-black text-white italic uppercase tracking-tighter">
-                                Quick <span className="text-brand-orange">Answers</span>
-                            </h2>
-                        </div>
+                        <SectionHeading eyebrow="Got Questions?">
+                            Quick <span className="ember-text">Answers</span>
+                        </SectionHeading>
 
-                        <div className="flex flex-col gap-4">
-                            {[
-                                {
-                                    q: "Where is Calisthenics Lab India located?",
-                                    a: "We're based in Kondapur Hyderabad, Telangana opp. to Kondapur RTO — find us on Google Maps."
-                                },
-                                {
-                                    q: "What programs does Calisthenics Lab India offer?",
-                                    a: "Structured weekday group coaching batches (4 morning + 4 evening slots), a 1.5-hour weekend reset batch, one-on-one personal training, and a dedicated weekend kids program covering calisthenics and gymnastics fundamentals."
-                                },
-                                {
-                                    q: "Is calisthenics suitable for complete beginners?",
-                                    a: "Yes. Coaching is structured by level, starting with foundational bodyweight movements — push-ups, rows, squats, mobility work — before progressing to skills like pull-ups, dips, and handstands. No prior experience needed."
-                                },
-                                {
-                                    q: "How long does it take to learn a muscle-up or handstand?",
-                                    a: "Most consistent beginners build the base for a first muscle-up in 3–5 months. Handstand progress varies, but structured progressions typically yield freestanding balance within 4–6 months of dedicated practice."
-                                },
-                                {
-                                    q: "Does Calisthenics Lab India offer training for kids?",
-                                    a: "Yes — a dedicated weekend program for young learners covering calisthenics and gymnastics fundamentals in a structured, age-appropriate format."
-                                },
-                                {
-                                    q: "How do I join or book a trial session?",
-                                    a: "Hit the Book Now button anywhere on this page to send us your details via WhatsApp. We offer a free demo session — if you decide to join, we fold it into your package."
-                                }
-                            ].map((item, i) => (
-                                <div key={i} className="border border-white/10 rounded-2xl overflow-hidden hover:border-brand-orange/30 transition-all">
-                                    <button
-                                        onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                                        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
-                                    >
-                                        <h3 className="text-white font-black text-sm md:text-base uppercase tracking-wide">
-                                            {item.q}
-                                        </h3>
-                                        <span className={`material-symbols-outlined text-brand-orange shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}>
-                                            expand_more
-                                        </span>
-                                    </button>
-                                    <div className={`transition-all duration-400 ease-in-out overflow-hidden ${openFaq === i ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
-                                        <p className="text-white/70 font-medium text-sm md:text-base leading-relaxed px-6 pb-5">
-                                            {item.a}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
+                        <div className="reveal">
+                            <FaqList faqs={homeFaqs} />
                         </div>
                     </div>
                 </section>
             </div>
+
+            <GoaRetreatPopup />
 
             {/* BOOKING MODAL */}
             {
@@ -826,7 +744,7 @@ export default function CaliLab() {
                         ></div>
 
                         {/* Modal Content */}
-                        <div className="relative w-[95vw] max-w-lg max-h-[90vh] bg-zinc-900/95 border border-brand-orange/30 p-6 md:p-10 rounded-[2.5rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-y-auto custom-scrollbar">
+                        <div className="relative w-[95vw] max-w-lg max-h-[90vh] bg-zinc-900/95 edge-ember p-6 md:p-10 rounded-[2.5rem] shadow-[0_30px_80px_-20px_rgba(243,131,32,0.35)] overflow-y-auto custom-scrollbar">
                             <button
                                 onClick={() => setIsBookingModalOpen(false)}
                                 className="absolute top-6 right-8 text-white/50 hover:text-brand-orange transition-colors"
@@ -836,9 +754,9 @@ export default function CaliLab() {
 
                             {!isSubmitted ? (
                                 <>
-                                    <h2 className="text-3xl md:text-4xl font-black text-white italic tracking-tight mb-2 uppercase">Join the Lab</h2>                                    <p className="text-brand-orange font-bold uppercase tracking-widest text-xs mb-8">Few slots available - reserve your spot now</p>
+                                    <h2 className="font-condensed text-5xl md:text-6xl text-white tracking-wide leading-none mb-2 uppercase">Join the <span className="ember-text">Lab</span></h2>                                    <p className="text-brand-orange font-bold uppercase tracking-widest text-xs mb-8">Few slots available - reserve your spot now</p>
 
-                                    <form onSubmit={handleBookingSubmit} className="space-y-4">
+                                    <form onSubmit={handleBookingSubmit} noValidate className="space-y-4">
                                         {/* NAME INPUT */}
                                         <div className="relative group">
                                             <input
@@ -932,7 +850,7 @@ export default function CaliLab() {
                                                                     onClick={() => {
                                                                         setFormData({
                                                                             ...formData,
-                                                                            batch: batch as keyof typeof PRICING_TIERS,
+                                                                            batch,
                                                                             duration: '',
                                                                             timing: ''
                                                                         });
@@ -981,7 +899,7 @@ export default function CaliLab() {
                                                     <>
                                                         <div className="fixed inset-0 z-[105]" onClick={() => setActiveDropdown(null)}></div>
                                                         <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-zinc-900/95 border border-brand-orange/30 rounded-2xl overflow-hidden z-[110] backdrop-blur-xl shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
-                                                            {Object.keys(PRICING_TIERS[formData.batch as keyof typeof PRICING_TIERS]).map(period => (
+                                                            {Object.keys(PRICING_TIERS[formData.batch]).map(period => (
                                                                 <div
                                                                     key={period}
                                                                     onClick={() => {
@@ -1022,40 +940,24 @@ export default function CaliLab() {
                                                     <>
                                                         <div className="fixed inset-0 z-[105]" onClick={() => setActiveDropdown(null)}></div>
                                                         <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-zinc-900/95 border border-brand-orange/30 rounded-2xl overflow-hidden z-[110] backdrop-blur-xl shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 max-h-[250px] overflow-y-auto custom-scrollbar">
-                                                            {formData.batch === 'Weekend' ? (
-                                                                BATCH_TIMINGS['Weekend'].map((time: string) => (
-                                                                    <div
-                                                                        key={time}
-                                                                        onClick={() => {
-                                                                            setFormData({ ...formData, timing: time });
-                                                                            setActiveDropdown(null);
-                                                                            if (errors.timing) setErrors({ ...errors, timing: '' });
-                                                                        }}
-                                                                        className={`px-6 py-4 hover:bg-brand-orange hover:text-black transition-all cursor-pointer font-black text-xs uppercase tracking-widest ${formData.timing === time ? 'text-brand-orange bg-white/5' : 'text-white/70'}`}
-                                                                    >
-                                                                        {time}
-                                                                    </div>
-                                                                ))
-                                                            ) : (
-                                                                ['Morning', 'Evening'].map(session => (
-                                                                    <div key={session}>
-                                                                        <div className="px-6 py-2 bg-white/5 text-[10px] font-black text-white/30 uppercase tracking-widest">{session} Batches</div>
-                                                                        {BATCH_TIMINGS[formData.batch][session].map((time: string) => (
-                                                                            <div
-                                                                                key={time}
-                                                                                onClick={() => {
-                                                                                    setFormData({ ...formData, timing: `(${session}) ${time}` });
-                                                                                    setActiveDropdown(null);
-                                                                                    if (errors.timing) setErrors({ ...errors, timing: '' });
-                                                                                }}
-                                                                                className={`px-6 py-4 hover:bg-brand-orange hover:text-black transition-all cursor-pointer font-black text-xs uppercase tracking-widest ${formData.timing === `(${session}) ${time}` ? 'text-brand-orange bg-white/5' : 'text-white/70'}`}
-                                                                            >
-                                                                                {time}
-                                                                            </div>
-                                                                        ))}
-                                                                    </div>
-                                                                ))
-                                                            )}
+                                                            {Object.entries(BATCH_TIMINGS[formData.batch]).map(([session, times]) => (
+                                                                <div key={session}>
+                                                                    <div className="px-6 py-2 bg-white/5 text-[10px] font-black text-white/30 uppercase tracking-widest">{session}</div>
+                                                                    {times.map(time => (
+                                                                        <div
+                                                                            key={time}
+                                                                            onClick={() => {
+                                                                                setFormData({ ...formData, timing: `(${session}) ${time}` });
+                                                                                setActiveDropdown(null);
+                                                                                if (errors.timing) setErrors({ ...errors, timing: '' });
+                                                                            }}
+                                                                            className={`px-6 py-4 hover:bg-brand-orange hover:text-black transition-all cursor-pointer font-black text-xs uppercase tracking-widest ${formData.timing === `(${session}) ${time}` ? 'text-brand-orange bg-white/5' : 'text-white/70'}`}
+                                                                        >
+                                                                            {time}
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            ))}
                                                         </div>
                                                     </>
                                                 )}
@@ -1067,7 +969,7 @@ export default function CaliLab() {
                                             <div className="relative z-10">
                                                 <p className="text-[10px] font-black text-brand-orange uppercase tracking-widest">Energy Exchange</p>
                                                 <p className="text-2xl font-black text-white italic">
-                                                    {(formData.batch && formData.duration) ? (PRICING_TIERS as any)[formData.batch][formData.duration] : 'Select Options'}
+                                                    {getPrice(formData.batch, formData.duration, formData.timing) || 'Select Options'}
                                                 </p>
                                             </div>
                                             <div className="text-right relative z-10">
@@ -1092,7 +994,7 @@ export default function CaliLab() {
 
                                         <button
                                             type="submit"
-                                            className="w-full bg-brand-orange text-black font-black py-5 rounded-2xl uppercase tracking-[0.3em] text-lg mt-8 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-brand-orange/20"
+                                            className="btn-ember w-full py-5 text-lg mt-8"
                                         >
                                             Send Details
                                         </button>

@@ -1,73 +1,23 @@
-# React + TypeScript + Vite
+# Calisthenics Lab India
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing and booking site for [Calisthenics Lab India](https://www.calisthenicslabindia.club), a calisthenics gym in Kondapur, Hyderabad.
 
-Currently, two official plugins are available:
+It is a single-page React app with no backend. The booking form opens a prefilled WhatsApp chat (+91 88267 62234) and fires a Meta Pixel `Lead` event.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Commands
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev       # local dev server (client-rendered)
+npm run build     # type-check, build, then prerender every route to static HTML + sitemap
+npm run images    # convert new photos to WebP and refresh src/data/imageSizes.json
+npm run lint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## How SEO works
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `src/data/business.ts`: name, address, phone, hours, geo and links. Keep them identical to the Google Business Profile.
+- `src/seo/pages.ts`: every page's title, description, H1, social image, lastmod and JSON-LD. Add new pages here.
+- `npm run build` renders each route with `src/entry-server.tsx` (`scripts/prerender.mjs`), so the HTML for every URL contains its full content, meta tags and JSON-LD. It also writes `404.html` and `sitemap.xml`, and fails if a title exceeds 60 characters, a description exceeds 160, or a page has more or fewer than one H1.
+- FAQ text lives in `src/data/faqs.ts`, and the FAQPage schema is generated from it.
+- `vercel.json`: clean URLs, 301 from non-www and `/calisthenics-lab` to the home page, and real 404s.

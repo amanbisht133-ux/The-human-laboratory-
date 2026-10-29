@@ -1,383 +1,84 @@
-import { useState } from 'react';
-import { MapPin, Mail } from 'lucide-react';
-import yogHero from '../components/images/yog_hero_brochure.png';
-import { useSEO } from '../hooks/useSEO';
-import JsonLd from '../components/JsonLd';
-import { trackPixelEvent } from '../lib/metaPixel';
+import { CalendarDays, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { usePageMeta } from '../hooks/usePageMeta';
+import { useReveal } from '../hooks/useReveal';
+import { getPageMeta } from '../seo/pages';
+import PageHero from '../components/PageHero';
+import ContactButtons from '../components/ContactButtons';
+import FaqList from '../components/FaqList';
+import { yogFaqs } from '../data/faqs';
+import { YOG_LAB } from '../data/programs';
 
-const YOG_LAB_SCHEMA = {
-    "@context": "https://schema.org",
-    "@type": "SportsActivityLocation",
-    "name": "The Yog Lab",
-    "description": "Yoga and intentional movement studio in Madhapur, HITEC City, Hyderabad. Monday, Wednesday, Friday sessions with structured plans for all levels.",
-    "url": "https://www.calisthenicslabindia.club/yog-lab",
-    "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Madhapur, HITEC City, Hyderabad",
-        "addressRegion": "Telangana",
-        "addressCountry": "IN"
-    },
-    "telephone": "+918826762234",
-    "openingHours": "Mo 06:30-08:30, We 06:30-08:30, Fr 06:30-08:30",
-    "priceRange": "₹₹",
-    "sameAs": [
-        "https://www.instagram.com/calisthenics.lab.india"
-    ]
-};
+const PATH = '/yog-lab';
+const WA_MESSAGE = "Hi! I'd like to join yoga classes at The Yog Lab.";
 
 export default function YogLab() {
-    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-
-    useSEO({
-        title: 'The Yog Lab | Yoga Classes in Madhapur, Hyderabad — Mon, Wed, Fri',
-        description: 'Structured yoga and intentional movement classes in Madhapur, HITEC City, Hyderabad. Monday, Wednesday, Friday sessions. Monthly, quarterly, and yearly plans available.',
-        canonicalPath: '/yog-lab',
-    });
-    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-    const [formData, setFormData] = useState({
-        name: '',
-        phone: '',
-        email: '',
-        duration: '',
-        timing: ''
-    });
-    const [isSubmitted, setIsSubmitted] = useState(false);
-
-    const handleBookingSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        const whatsappNumber = "918826762234";
-        const message = encodeURIComponent(
-            `*THE YOG LAB INQUIRY*\n\n` +
-            `*Name:* ${formData.name}\n` +
-            `*Phone:* ${formData.phone}\n` +
-            `*Email:* ${formData.email}\n` +
-            `*Plan:* ${formData.duration}\n` +
-            `*Timing:* ${formData.timing}\n` +
-            `*Note:* Yoga classes are on Mon, Wed, Fri`
-        );
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`;
-
-        trackPixelEvent('Lead', { content_name: 'Yog Lab Booking', plan: formData.duration });
-        setIsSubmitted(true);
-        setTimeout(() => {
-            const newWindow = window.open(whatsappUrl, '_blank');
-            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-                window.location.href = whatsappUrl;
-            }
-            setIsSubmitted(false);
-            setIsBookingModalOpen(false);
-        }, 1500);
-    };
-
-    const getPrice = (duration: string) => {
-        switch (duration) {
-            case 'Monthly': return '3,333';
-            case 'Quarterly': return '8,888';
-            case 'Half-Yearly': return '17,171';
-            case 'Yearly': return '33,333';
-            default: return '';
-        }
-    };
+    usePageMeta(PATH);
+    useReveal();
+    const meta = getPageMeta(PATH);
 
     return (
-        <div className="bg-[#fffcf5] font-display text-slate-900 scroll-smooth">
-            <JsonLd id="yog-lab-schema" schema={YOG_LAB_SCHEMA} />
-            <div className="relative flex flex-col items-center">
+        <div className="text-white">
+            <PageHero crumbs={[{ name: meta.name }]} eyebrow="The Yog Lab" title={meta.h1}>
+                <p>
+                    The Yog Lab is the yoga studio at Calisthenics Lab India in Kondapur, Hyderabad, near HITEC City, Gachibowli
+                    and Madhapur. Classes run on Monday, Wednesday and Friday mornings, with monthly, quarterly and yearly plans.
+                </p>
+                <ContactButtons message={WA_MESSAGE} className="pt-2" />
+            </PageHero>
 
-                {/* HERO BROCHURE */}
-                <section className="relative w-full flex flex-col items-center pt-24 md:pt-32 pb-4 px-4 bg-white" id="hero">
-                    <div className="max-w-7xl w-full mx-auto relative z-10 animate-reveal text-center">
-                        <div className="shadow-[0_0_50px_rgba(234,88,12,0.1)] rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-orange-100 mb-10">
-                            <img
-                                src={yogHero}
-                                alt="The Yog Lab - Intentional Movement"
-                                className="w-full h-auto"
-                                width="1200"
-                                height="900"
-                                fetchPriority="high"
-                                onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.src = 'https://ui-avatars.com/api/?name=THE+YOG+LAB&background=ea580c&color=fff&bold=true&size=512';
-                                }}
-                            />
-                        </div>
-
-                        {/* Social Icons Row */}
-                        <div className="flex items-center justify-center gap-6 md:gap-10 mb-10 overflow-hidden">
-                            <a
-                                href="https://maps.app.goo.gl/695SVZHotKEeK4zJ7"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="p-3 bg-orange-50 border border-orange-100 rounded-full text-orange-600 hover:bg-orange-600 hover:text-white transition-all hover:scale-110 shadow-sm"
-                                aria-label="Google Maps"
-                            >
-                                <MapPin size={24} />
-                            </a>
-                            <a
-                                href="https://www.instagram.com/calisthenics.lab.india?igsh=MWI1YnZ0YWRicmNjaA=="
-                                target="_blank"
-                                rel="noreferrer"
-                                className="p-3 bg-orange-50 border border-orange-100 rounded-full text-orange-600 hover:bg-orange-600 hover:text-white transition-all hover:scale-110 shadow-sm"
-                                aria-label="Instagram"
-                            >
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                </svg>
-                            </a>
-                            <a
-                                href="mailto:Calisthenicslabindia@gmail.com"
-                                className="p-3 bg-orange-50 border border-orange-100 rounded-full text-orange-600 hover:bg-orange-600 hover:text-white transition-all hover:scale-110 shadow-sm"
-                                aria-label="Email"
-                            >
-                                <Mail size={24} />
-                            </a>
-                        </div>
-
-                        {/* Hero CTA Overlay/Button */}
-                        <div className="text-center group">
-                            <button
-                                onClick={() => setIsBookingModalOpen(true)}
-                                className="px-12 py-5 bg-orange-600 text-white font-black text-xl md:text-2xl uppercase tracking-widest rounded-full transition-all hover:scale-110 active:scale-95 shadow-xl shadow-orange-600/20 hover:shadow-orange-600/40"
-                            >
-                                Book Now
-                            </button>
-                        </div>
+            <section className="px-6 pb-16">
+                <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+                    <div className="rounded-3xl overflow-hidden edge-ember reveal">
+                        <img
+                            src="/images/goa/breathe.webp"
+                            alt="Group yoga and breathwork class in an indoor studio"
+                            width="1400"
+                            height="1091"
+                            loading="lazy"
+                            className="w-full h-auto"
+                        />
                     </div>
-                </section>
-
-                {/* INFO BROCHURE */}
-                <section className="relative w-full py-8 px-4 md:px-8 bg-[#fffcf5]" id="info">
-                    <div className="max-w-6xl w-full mx-auto relative z-10">
-                        <div className="shadow-[0_0_80px_rgba(0,0,0,0.05)] rounded-[2rem] md:rounded-[3.5rem] overflow-hidden border border-orange-50 bg-white">
-                            <img
-                                src="/images/yog_info_brochure_v2.jpg"
-                                alt="Yog Lab Plans and Timings"
-                                className="w-full h-auto"
-                                width="1200"
-                                height="900"
-                                loading="lazy"
-                                onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.src = 'https://ui-avatars.com/api/?name=INFO&background=ea580c&color=fff&bold=true&size=512';
-                                }}
-                            />
+                    <div className="grid gap-5 reveal">
+                        <div className="glass edge-ember rounded-3xl p-6">
+                            <h2 className="flex items-center gap-3 font-condensed uppercase text-3xl tracking-wide"><CalendarDays className="text-brand-orange" /> Class days</h2>
+                            <p className="mt-3 text-lg text-white/85">{YOG_LAB.days.join(' · ')}</p>
                         </div>
-
-                        {/* Bottom CTA */}
-                        <div className="mt-16 text-center">
-                            <h3 className="text-2xl md:text-4xl font-black text-slate-800 italic uppercase tracking-tighter mb-8">
-                                Begin Your <span className="text-orange-600">Journey</span> Today
-                            </h3>
-                            <button
-                                onClick={() => setIsBookingModalOpen(true)}
-                                className="px-10 py-4 border-2 border-orange-600 text-orange-600 font-black text-lg uppercase tracking-widest rounded-full hover:bg-orange-600 hover:text-white transition-all transform hover:scale-105"
-                            >
-                                Start Your Flow
-                            </button>
+                        <div className="glass edge-ember rounded-3xl p-6">
+                            <h2 className="flex items-center gap-3 font-condensed uppercase text-3xl tracking-wide"><Clock className="text-brand-orange" /> Timings</h2>
+                            <ul className="mt-3 space-y-1 text-lg text-white/85">{YOG_LAB.timings.map(t => <li key={t}>{t}</li>)}</ul>
                         </div>
-                    </div>
-                </section>
-
-                {/* FOOTER PADDING */}
-                <div className="h-24 bg-[#fffcf5] w-full"></div>
-            </div>
-
-            {/* BOOKING MODAL */}
-            {isBookingModalOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-12">
-                    <div
-                        className="absolute inset-0 bg-black/60 backdrop-blur-md"
-                        onClick={() => setIsBookingModalOpen(false)}
-                    ></div>
-
-                    <div className="relative w-[95vw] max-w-lg bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-orange-100 overflow-y-auto max-h-[90vh]">
-                        <button
-                            onClick={() => setIsBookingModalOpen(false)}
-                            className="absolute top-8 right-8 text-slate-400 hover:text-orange-600 transition-colors"
-                        >
-                            <span className="material-symbols-outlined text-3xl">close</span>
-                        </button>
-
-                        {!isSubmitted ? (
-                            <>
-                                <h2 className="text-3xl md:text-4xl font-black text-slate-900 italic tracking-tight mb-2 uppercase">The Yog Lab</h2>
-                                <p className="text-orange-600 font-bold uppercase tracking-widest text-[10px] mb-8">Start your transformation today</p>
-
-                                <form onSubmit={handleBookingSubmit} className="space-y-4">
-                                    <div className="relative group">
-                                        <input
-                                            type="text"
-                                            required
-                                            placeholder=" "
-                                            className="peer w-full bg-slate-50 border border-slate-200 focus:border-orange-600 rounded-2xl px-6 py-5 text-slate-900 outline-none transition-all placeholder-transparent"
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        />
-                                        <label className={`absolute left-6 transition-all pointer-events-none uppercase font-black tracking-[0.2em] text-[10px] 
-                                            peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-slate-400
-                                            peer-focus:-top-2 peer-focus:left-4 peer-focus:bg-white peer-focus:px-2 peer-focus:text-orange-600
-                                            ${formData.name ? '-top-2 left-4 bg-white px-2 text-orange-600' : ''}`}>
-                                            Full Name
-                                        </label>
-                                    </div>
-
-                                    <div className="relative group">
-                                        <input
-                                            type="tel"
-                                            required
-                                            placeholder=" "
-                                            className="peer w-full bg-slate-50 border border-slate-200 focus:border-orange-600 rounded-2xl px-6 py-5 text-slate-900 outline-none transition-all placeholder-transparent"
-                                            value={formData.phone}
-                                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        />
-                                        <label className={`absolute left-6 transition-all pointer-events-none uppercase font-black tracking-[0.2em] text-[10px] 
-                                            peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-slate-400
-                                            peer-focus:-top-2 peer-focus:left-4 peer-focus:bg-white peer-focus:px-2 peer-focus:text-orange-600
-                                            ${formData.phone ? '-top-2 left-4 bg-white px-2 text-orange-600' : ''}`}>
-                                            Phone Number
-                                        </label>
-                                    </div>
-
-                                    <div className="relative group">
-                                        <input
-                                            type="email"
-                                            required
-                                            placeholder=" "
-                                            className="peer w-full bg-slate-50 border border-slate-200 focus:border-orange-600 rounded-2xl px-6 py-5 text-slate-900 outline-none transition-all placeholder-transparent font-bold"
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        />
-                                        <label className={`absolute left-6 transition-all pointer-events-none uppercase font-black tracking-[0.2em] text-[10px] 
-                                            peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-slate-400
-                                            peer-focus:-top-2 peer-focus:left-4 peer-focus:bg-white peer-focus:px-2 peer-focus:text-orange-600
-                                            ${formData.email ? '-top-2 left-4 bg-white px-2 text-orange-600' : ''}`}>
-                                            Email Address
-                                        </label>
-                                    </div>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        {/* DURATION DROPDOWN */}
-                                        <div className="relative group">
-                                            <label className="absolute left-6 -top-2 bg-white px-2 transition-all pointer-events-none uppercase font-black tracking-[0.2em] text-[10px] text-orange-600 z-20">
-                                                Duration
-                                            </label>
-                                            <button
-                                                type="button"
-                                                onClick={() => setActiveDropdown(activeDropdown === 'duration' ? null : 'duration')}
-                                                className={`w-full bg-slate-50 border ${activeDropdown === 'duration' ? 'border-orange-600 shadow-[0_0_15px_rgba(234,88,12,0.1)]' : 'border-slate-200'} rounded-2xl px-6 py-5 flex justify-between items-center transition-all group relative z-10`}
-                                            >
-                                                <span className={`font-bold text-sm uppercase ${formData.duration ? 'text-slate-900' : 'text-slate-400'}`}>
-                                                    {formData.duration || 'Select Duration'}
-                                                </span>
-                                                <span className={`material-symbols-outlined transition-transform duration-300 ${activeDropdown === 'duration' ? 'rotate-180 text-orange-600' : 'text-slate-400'}`}>expand_more</span>
-                                            </button>
-
-                                            {activeDropdown === 'duration' && (
-                                                <>
-                                                    <div className="fixed inset-0 z-[105]" onClick={() => setActiveDropdown(null)}></div>
-                                                    <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-white border border-orange-100 rounded-2xl overflow-hidden z-[110] shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
-                                                        {['Monthly', 'Quarterly', 'Half-Yearly', 'Yearly'].map(plan => (
-                                                            <div
-                                                                key={plan}
-                                                                onClick={() => {
-                                                                    setFormData({ ...formData, duration: plan });
-                                                                    setActiveDropdown(null);
-                                                                }}
-                                                                className={`px-6 py-4 hover:bg-orange-600 hover:text-white transition-all cursor-pointer font-bold text-xs uppercase tracking-widest ${formData.duration === plan ? 'text-orange-600 bg-orange-50' : 'text-slate-600'}`}
-                                                            >
-                                                                {plan}
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                </>
-                                            )}
-                                        </div>
-
-                                        {/* TIMING DROPDOWN */}
-                                        <div className="relative group">
-                                            <label className="absolute left-6 -top-2 bg-white px-2 transition-all pointer-events-none uppercase font-black tracking-[0.2em] text-[10px] text-orange-600 z-20">
-                                                Timing
-                                            </label>
-                                            <button
-                                                type="button"
-                                                onClick={() => setActiveDropdown(activeDropdown === 'timing' ? null : 'timing')}
-                                                className={`w-full bg-slate-50 border ${activeDropdown === 'timing' ? 'border-orange-600 shadow-[0_0_15px_rgba(234,88,12,0.1)]' : 'border-slate-200'} rounded-2xl px-6 py-5 flex justify-between items-center transition-all group relative z-10`}
-                                            >
-                                                <span className={`font-bold text-sm uppercase ${formData.timing ? 'text-slate-900' : 'text-slate-400'}`}>
-                                                    {formData.timing || 'Select Timing'}
-                                                </span>
-                                                <span className={`material-symbols-outlined transition-transform duration-300 ${activeDropdown === 'timing' ? 'rotate-180 text-orange-600' : 'text-slate-400'}`}>expand_more</span>
-                                            </button>
-
-                                            {activeDropdown === 'timing' && (
-                                                <>
-                                                    <div className="fixed inset-0 z-[105]" onClick={() => setActiveDropdown(null)}></div>
-                                                    <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-white border border-orange-100 rounded-2xl overflow-hidden z-[110] shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
-                                                        {['6:30 AM - 7:30 AM', '7:30 AM - 8:30 AM'].map(slot => (
-                                                            <div
-                                                                key={slot}
-                                                                onClick={() => {
-                                                                    setFormData({ ...formData, timing: slot });
-                                                                    setActiveDropdown(null);
-                                                                }}
-                                                                className={`px-6 py-4 hover:bg-orange-600 hover:text-white transition-all cursor-pointer font-bold text-xs uppercase tracking-widest ${formData.timing === slot ? 'text-orange-600 bg-orange-50' : 'text-slate-600'}`}
-                                                            >
-                                                                {slot}
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                </>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    {formData.duration && (
-                                        <div className="p-6 bg-orange-50 border border-orange-100 rounded-2xl animate-in fade-in slide-in-from-top-2">
-                                            <div className="flex justify-between items-center mb-1">
-                                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Selected Plan:</span>
-                                                <span className="text-[10px] font-black uppercase tracking-widest text-orange-600">{formData.duration}</span>
-                                            </div>
-                                            <div className="flex justify-between items-baseline">
-                                                <span className="text-slate-900 font-bold">Total Price:</span>
-                                                <span className="text-3xl font-black text-slate-900 italic">₹{getPrice(formData.duration)}<span className="text-xs italic text-slate-400 ml-1">/-</span></span>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                        <p className="text-[10px] font-bold text-slate-500 flex items-start gap-2">
-                                            <span className="material-symbols-outlined text-sm text-orange-600">info</span>
-                                            Note: The classes of yoga will only be on Monday, Wednesday, Friday
-                                        </p>
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        className="w-full bg-orange-600 text-white font-black py-5 rounded-2xl uppercase tracking-[0.3em] text-lg mt-8 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-orange-600/20"
-                                    >
-                                        Send Details
-                                    </button>
-                                </form>
-                            </>
-                        ) : (
-                            <div className="py-12 text-center space-y-6 animate-in fade-in zoom-in duration-500">
-                                <div className="relative size-24 mx-auto">
-                                    <div className="absolute inset-0 bg-orange-600 rounded-full animate-ping opacity-20"></div>
-                                    <div className="relative size-full bg-orange-50 rounded-full flex items-center justify-center border-2 border-orange-600">
-                                        <span className="material-symbols-outlined text-orange-600 text-5xl font-bold animate-pulse">chat</span>
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <h2 className="text-3xl font-black text-slate-900 uppercase italic tracking-tighter">Redirecting...</h2>
-                                    <p className="text-orange-600 font-bold uppercase tracking-widest text-[10px]">Moving to WhatsApp</p>
-                                </div>
-                            </div>
-                        )}
                     </div>
                 </div>
-            )}
+            </section>
+
+            <section className="px-6 pb-16">
+                <div className="max-w-5xl mx-auto">
+                    <h2 className="font-condensed uppercase text-4xl md:text-5xl tracking-wide reveal">Yoga <span className="ember-text">plans</span></h2>
+                    <div className="mt-8 grid sm:grid-cols-3 gap-5">
+                        {YOG_LAB.plans.map(({ plan, price }) => (
+                            <div key={plan} className="glass edge-ember rounded-3xl p-6 text-center reveal">
+                                <p className="eyebrow">{plan}</p>
+                                <p className="mt-3 font-condensed text-5xl tracking-wide">{price}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section className="px-6 pb-20">
+                <div className="max-w-4xl mx-auto">
+                    <h2 className="font-condensed uppercase text-4xl md:text-5xl tracking-wide mb-8 reveal">The Yog Lab <span className="ember-text">FAQs</span></h2>
+                    <div className="reveal"><FaqList faqs={yogFaqs} /></div>
+                    <p className="mt-8 text-white/70 reveal">
+                        Want strength work too? See <Link to="/" className="text-brand-orange underline underline-offset-4">calisthenics batches</Link> at the same location.
+                    </p>
+                    <div className="mt-10 glass edge-ember rounded-3xl p-6 md:p-8 text-center reveal">
+                        <p className="font-condensed uppercase text-3xl md:text-4xl tracking-wide">Join The Yog Lab</p>
+                        <ContactButtons message={WA_MESSAGE} className="mt-5 justify-center" />
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }
