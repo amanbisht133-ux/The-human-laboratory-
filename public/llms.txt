@@ -1,27 +1,26 @@
-# The Human Laboratory
+# Calisthenics Lab India
 
-> Home of Calisthenics Lab India and The Yog Lab — bodyweight strength training, yoga, and kids programs in Madhapur, HITEC City, Hyderabad.
+> Calisthenics academy in Kondapur, Hyderabad, near HITEC City, Gachibowli and Madhapur. Adult calisthenics group batches (beginner to advanced, including weekends), personal coaching, a kids calisthenics & gymnastics program, and yoga at The Yog Lab.
 
-## Calisthenics Lab India
+## Location & contact
 
-- [Calisthenics Lab India](https://www.calisthenicslabindia.club/calisthenics-lab) — Calisthenics and bodyweight strength training academy in Madhapur, HITEC City, Hyderabad
-- Programs: Weekday group coaching batches (4 morning + 4 evening), Weekend Reset batch, Personal Training, Kids Batch
-- Kids program: Weekend calisthenics and gymnastics for young learners
-- All levels welcome — beginners to advanced athletes
-- Tagline: "By The Community, For The Community"
-- Contact: +91 88267 62234 | Calisthenicslabindia@gmail.com
-- [Instagram](https://www.instagram.com/calisthenics.lab.india)
-- [Google Maps](https://maps.app.goo.gl/695SVZHotKEeK4zJ7)
-- Location: Madhapur, HITEC City, Hyderabad, Telangana, India
+- Address: Kondapur Road, Kondapur, New Hafeezpet, Raghavendra Colony, Gachibowli, Hyderabad, Telangana 500084, India
+- Phone / WhatsApp: +91 88267 62234
+- Email: Calisthenicslabindia@gmail.com
+- Calisthenics hours: Monday–Friday 6:30–9:30 AM and 6:00–9:00 PM; Saturday–Sunday 8:30–11:00 AM and 5:30–8:00 PM
+- [Google Maps](https://maps.app.goo.gl/695SVZHotKEeK4zJ7) · [Instagram](https://www.instagram.com/calisthenics.lab.india)
 
-## The Yog Lab
+## Pages
 
-- [The Yog Lab](https://www.calisthenicslabindia.club/yog-lab) — Yoga and intentional movement studio co-located with Calisthenics Lab India
-- Sessions on Monday, Wednesday, and Friday
-- Plans: Monthly, Quarterly, Half-Yearly, Yearly
-- Contact: same as above
+- [Calisthenics classes in Kondapur, Hyderabad](https://www.calisthenicslabindia.club/): group batches, timings, plans and FAQs
+- [Kids calisthenics & gymnastics](https://www.calisthenicslabindia.club/kids-calisthenics): weekdays 5–6 PM and 6–7 PM, weekends 9–10 AM
+- [Personal training](https://www.calisthenicslabindia.club/personal-training): one-on-one coaching, priced after a consultation
+- [About](https://www.calisthenicslabindia.club/about): founder Aman Bisht, a multiple-time national calisthenics champion who has represented India, and a coaching team of three
+- [Contact & location](https://www.calisthenicslabindia.club/contact)
+- [Blog](https://www.calisthenicslabindia.club/blog): first pull-up, calisthenics for beginners, calisthenics vs gym
+- [Strength & Stillness Goa retreat](https://www.calisthenicslabindia.club/goa-retreat): 10–13 December 2026, North Goa
+- [The Yog Lab](https://www.calisthenicslabindia.club/yog-lab): yoga on Monday, Wednesday and Friday, 6:30–7:30 and 7:30–8:30 AM; monthly ₹3,333, quarterly ₹8,888, yearly ₹33,333
 
-## Site
+## Skills taught
 
-- [Homepage](https://www.calisthenicslabindia.club/)
-- Built with React + Vite, deployed on Vercel
+Pull-ups, push-ups, dips, handstands, L-sit, muscle-ups and levers.
