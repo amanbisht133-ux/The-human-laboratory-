@@ -309,6 +309,18 @@ export default function GoaRetreat() {
                                     </div>
                                 ))}
                             </div>
+                            <Label className="mt-8">{stay.resort} · Wake up to the sea</Label>
+                            <div className="mt-4 grid grid-cols-2 md:grid-cols-6 gap-x-4 gap-y-6">
+                                {stay.gallery.map(({ kicker, title, image }, i) => (
+                                    <figure key={kicker} className={i < 3 ? (i === 2 ? 'col-span-2 md:col-span-2' : 'md:col-span-2') : 'md:col-span-3'}>
+                                        <Photo src={image} alt={`${stay.resort} ${kicker.toLowerCase()}`} className={i < 3 ? 'aspect-[26/25]' : 'aspect-[3/2]'} />
+                                        <figcaption className="mt-3">
+                                            <Label className="!text-[0.58rem]">{kicker}</Label>
+                                            <p className="font-italiana text-xl mt-1">{title}</p>
+                                        </figcaption>
+                                    </figure>
+                                ))}
+                            </div>
                             <div className="mt-6 grid md:grid-cols-2 gap-8">
                                 <div>
                                     <Label>Included</Label>

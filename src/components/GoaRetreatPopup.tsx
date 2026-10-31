@@ -57,7 +57,7 @@ export default function GoaRetreatPopup() {
                         <span className="block text-4xl tracking-[0.04em]">STRENGTH</span>
                         <span className="block mt-1.5 pl-[0.4em] font-work font-medium text-rust text-xs tracking-[0.4em]">&amp; STILLNESS</span>
                     </h2>
-                    <p className="mt-4 font-dm text-sm text-espresso/80">{retreat.shortDates} · North Goa beachfront</p>
+                    <p className="mt-4 font-dm text-sm text-espresso/80">{retreat.shortDates} · Just across North Goa</p>
                     <p className="mt-1 font-dm text-sm">
                         Early bird <span className="font-crimson text-2xl align-middle">{retreat.investment.earlyBird.price}</span>
                         <span className="ml-1.5 text-xs text-taupe line-through">{retreat.investment.earlyBird.was}</span>

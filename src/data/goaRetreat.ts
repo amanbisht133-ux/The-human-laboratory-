@@ -10,10 +10,10 @@ export const retreat = {
     tagline: 'A four-day wellness retreat by the sea',
     dates: '10 – 13 December 2026',
     shortDates: '10–13 Dec 2026',
-    footer: 'Strength & Stillness · North Goa · 10–13 Dec 2026',
+    footer: 'Strength & Stillness · Just across North Goa · 10–13 Dec 2026',
     facts: [
         { label: 'When', value: '10 – 13 December 2026' },
-        { label: 'Where', value: 'North Goa, beachfront' },
+        { label: 'Where', value: 'Just across North Goa' },
         { label: 'Stay', value: '3 nights, with a pool' }
     ],
     images: {
@@ -32,7 +32,7 @@ export const retreat = {
         title: 'Come back to yourself.',
         paragraphs: [
             'Most of us live in a constant rush. Alarms, screens, deadlines, traffic. We train hard, work harder, and rarely stop long enough to notice how we actually feel.',
-            'Strength & Stillness is four days to press pause. On a quiet beachfront in North Goa, we wake with the sun, move with intention, breathe deeply and let the sea set the pace. No rush, no noise, no pressure to perform.',
+            'Strength & Stillness is four days to press pause. On an untouched beach just across North Goa, we wake with the sun, move with intention, breathe deeply and let the sea set the pace. No rush, no noise, no pressure to perform.',
             'You build real strength in the mornings and find real stillness in the evenings: yoga by the water, a sound bath under the stars, long conversations around a bonfire.',
             'You leave lighter, calmer and stronger than you arrived, with people who started as strangers and leave as friends.'
         ],
@@ -77,8 +77,8 @@ export const retreat = {
         name: 'Aman Bisht',
         credentials: 'Founder of Calisthenics Lab India, Indian Calisthenics School and Hyderabad Calisthenics.',
         paragraphs: [
-            'Multiple-time national calisthenics champion who has represented India.',
-            'Aman builds strength the patient way; solid foundations, clean progressions and a lot of fun along the way. At the retreat he leads every calisthenics and skills session, and makes sure everyone, at every level, feels at home.'
+            'National calisthenics champion who has represented India.',
+            'Aman builds strength the patient way: solid foundations, clean progressions and a lot of fun along the way. At the retreat he leads every calisthenics and skills session, and makes sure everyone, at every level, feels at home.'
         ]
     },
     facilitators: [
@@ -125,7 +125,7 @@ export const retreat = {
                 ['9:30 AM', 'Breakfast on your own, in Arambol or at the resort'],
                 ['11:00 AM', 'Free time: pool, beach or rest'],
                 ['1–4 PM', 'Lunch on your own'],
-                ['4:00 PM', 'Yoga: mastery and beyond (techniques for forward bends, backbends, side and front splits)'],
+                ['4:00 PM', 'Yoga: mastery and beyond (forward bends, backbends, side and front splits)'],
                 ['7:30 PM', 'Ecstatic dance night'],
                 ['9:00 PM', 'Farewell dinner together at the resort, on us']
             ]
@@ -143,12 +143,12 @@ export const retreat = {
 
     stay: {
         title: 'A home on the beach',
-        text: 'Your home for four days is a beachfront property on a silent stretch of the North Goa coast. Step out of your room onto the sand, wake to the sound of the waves and cool off in the pool between sessions.',
+        text: 'Your home for four days is a beachfront property on an untouched beach just across North Goa, far from the crowds. Step out of your room onto the sand, wake to the sound of the waves and cool off in the pool between sessions.',
         features: [
             { title: 'On the beach', caption: 'Steps from the sand' },
-            { title: 'Silent coast', caption: 'Away from the crowds' },
-            { title: 'Swimming pool', caption: 'Between sessions' },
-            { title: 'Twin sharing', caption: 'Single rooms on request' }
+            { title: 'Silent coast', caption: 'No crowds' },
+            { title: 'Swimming pool', caption: 'Sea-facing' },
+            { title: 'Twin sharing', caption: 'Single on request' }
         ],
         included: [
             "3 nights' beachfront stay, twin sharing",
@@ -157,7 +157,7 @@ export const retreat = {
             'All sessions, workshops and ceremonies',
             'Water sports session',
             'Arambol trek with transport',
-            'Retreat T-shirt and Full Kit',
+            'Retreat T-shirt and journal',
             'Photos and video of your retreat'
         ],
         notIncluded: [
@@ -165,7 +165,15 @@ export const retreat = {
             'Lunches, Day 3 breakfast, dinners on Days 1 and 2',
             'Personal expenses'
         ],
-        gettingThere: 'Make your own way to the resort. Mopa airport and Thivim station are the closest. The exact location is shared once you book.',
+        resort: 'Kahuna Resort',
+        gallery: [
+            { kicker: 'Rooms', title: 'Calm, light-filled', image: `${IMG}/resort-room.webp` },
+            { kicker: 'Suites', title: 'Room to rest', image: `${IMG}/resort-suite.webp` },
+            { kicker: 'Dining hall', title: 'The farewell dinner', image: `${IMG}/resort-dining.webp` },
+            { kicker: 'Swimming pool', title: 'A cool dip between sessions', image: `${IMG}/resort-pool.webp` },
+            { kicker: 'Sports court', title: 'Play after practice', image: `${IMG}/resort-court.webp` }
+        ],
+        gettingThere: 'Make your own way to the resort. Mopa airport in Goa is the closest, under an hour away. The exact location is shared once you book.',
         whatToPack: 'Training clothes for 4 days, swimwear, trek shoes, a light layer for the evening, sunscreen and a water bottle.'
     },
 
