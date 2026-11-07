@@ -12,7 +12,7 @@ const SLIDES = [
     { src: '/images/hero/halloween.webp', w: 1200, h: 1600, pos: 'center 62%', alt: 'Community Halloween party in costumes' },
 ];
 
-export const HERO_SLIDE_SECONDS = 6;
+export const HERO_SLIDE_SECONDS = 3.5;
 
 export default function HeroSlideshow() {
     const total = SLIDES.length * HERO_SLIDE_SECONDS;
@@ -32,7 +32,7 @@ export default function HeroSlideshow() {
                         objectPosition: s.pos,
                         animationDuration: `${total}s`,
                         // First slide starts already faded in; the rest follow in turn.
-                        animationDelay: `${i * HERO_SLIDE_SECONDS - 1.5}s`,
+                        animationDelay: `${i * HERO_SLIDE_SECONDS - HERO_SLIDE_SECONDS / 4}s`,
                     }}
                 />
             ))}
