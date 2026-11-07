@@ -297,11 +297,11 @@ export default function CaliLab() {
                 <section className="relative min-h-[calc(100svh-5rem)] flex flex-col items-center justify-center overflow-hidden px-6 py-16">
                     <div className="absolute inset-0 z-0">
                         <img
-                            src="/images/cali_hero_bg.webp"
-                            alt="Collage of Calisthenics Lab India community group photos from training sessions in Hyderabad"
-                            className="w-full h-full object-cover scale-105 brightness-[0.55] saturate-[0.85]"
-                            width="1600"
-                            height="1022"
+                            src="/images/cali_hero_bg_v2.webp"
+                            alt="Group bar-hang training session at Calisthenics Lab India in Kondapur, Hyderabad"
+                            className="w-full h-full object-cover object-[center_40%] scale-105 brightness-[0.55] saturate-[0.85]"
+                            width="1200"
+                            height="1800"
                             fetchPriority="high"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink"></div>

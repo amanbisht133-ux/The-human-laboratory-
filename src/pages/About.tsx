@@ -19,7 +19,7 @@ export default function About() {
                 <p>
                     Calisthenics Lab India is a calisthenics academy in Kondapur, Hyderabad, built around one idea: by the
                     community, for the community. We coach adults from complete beginners to advanced athletes, run a kids
-                    calisthenics &amp; gymnastics program, offer personal coaching and host yoga at The Yog Lab.
+                    calisthenics, gymnastics &amp; parkour program, offer personal coaching and host yoga at The Yog Lab.
                 </p>
             </PageHero>
 
@@ -58,8 +58,8 @@ export default function About() {
                         {[
                             { title: 'Adult batches', text: 'Beginner to advanced group coaching on weekdays and weekends.', to: '/' },
                             { title: 'Personal coaching', text: 'One-on-one programmes built around your goals.', to: '/personal-training' },
-                            { title: 'Kids program', text: 'Calisthenics and gymnastics fundamentals for kids.', to: '/kids-calisthenics' },
-                            { title: 'The Yog Lab', text: 'Yoga classes on Monday, Wednesday and Friday mornings.', to: '/yog-lab' },
+                            { title: 'Kids program', text: 'Calisthenics, gymnastics and parkour fundamentals for kids.', to: '/kids-calisthenics' },
+                            { title: 'The Yog Lab', text: 'Yoga Abhyas group classes, plus Yoga Sankalp 1-on-1 training for posture correction, PCOD / PCOS support and personal goals.', to: '/yog-lab' },
                         ].map(item => (
                             <Link key={item.title} to={item.to} className="glass rounded-2xl p-5 hover:border-brand-orange/40 transition-colors reveal">
                                 <p className="ember-text font-bold uppercase tracking-widest text-xs">{item.title}</p>
