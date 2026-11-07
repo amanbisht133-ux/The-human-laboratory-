@@ -29,17 +29,16 @@ export default function KidsCalisthenics() {
                     parkour in one subscription for kids aged 3 to 15, taught in three clear levels. Batches run on weekday
                     evenings and weekend mornings, close to HITEC City, Gachibowli and Madhapur.
                 </p>
-                <ContactButtons message={WA_MESSAGE} className="pt-2" />
             </PageHero>
 
             <section className="px-6 pb-16">
                 <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
                     <div className="rounded-3xl overflow-hidden edge-ember reveal">
                         <img
-                            src="/images/goa/community-6.webp"
-                            alt="Coach demonstrating a handstand during a skills workshop at Calisthenics Lab India"
-                            width="1260"
-                            height="1400"
+                            src="/images/tmt-handstand-coaching.webp"
+                            alt="Coach Aman spotting a handstand while two kids watch at The Mighty Tribe"
+                            width="1000"
+                            height="1500"
                             loading="lazy"
                             className="w-full h-auto"
                         />
