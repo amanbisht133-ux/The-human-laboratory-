@@ -25,7 +25,7 @@ export const localBusinessSchema = {
     '@type': 'SportsActivityLocation',
     '@id': `${SITE_URL}/#business`,
     name: business.name,
-    description: 'Calisthenics academy in Kondapur, Hyderabad offering adult group batches, personal coaching, a kids calisthenics, gymnastics & parkour program and yoga at The Yog Lab.',
+    description: 'Calisthenics academy in Kondapur, Hyderabad: adult group batches, personal coaching, a kids calisthenics, gymnastics & parkour program and yoga at The Yog Lab.',
     url: `${SITE_URL}/`,
     logo: business.logo,
     image: business.image,
@@ -100,7 +100,7 @@ const corePages: PageMeta[] = [
     {
         path: '/kids-calisthenics',
         name: 'Kids Calisthenics',
-        title: 'Kids Calisthenics, Gymnastics & Parkour in Kondapur, Hyderabad',
+        title: 'Kids Calisthenics, Gymnastics & Parkour in Kondapur',
         description: 'Kids calisthenics, gymnastics and parkour classes for ages 3–15 in Kondapur, Hyderabad, in three levels. Weekday batches 5–7 PM, weekends 9–10 AM.',
         h1: 'Kids Calisthenics, Gymnastics & Parkour in Kondapur',
         image: '/images/goa/community-6.jpg',
