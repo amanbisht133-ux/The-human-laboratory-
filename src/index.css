@@ -315,3 +315,24 @@ body::after {
     .hero-slide { animation: none; opacity: 0; }
     .hero-slide:first-child { opacity: 1; }
 }
+
+/* About page founder slideshow: 5 photos, each 1/5 of the cycle (~3s). */
+.founder-slide {
+    opacity: 0;
+    animation-name: founder-slide;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+.founder-slide:first-child { opacity: 1; }
+@keyframes founder-slide {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    20% { opacity: 1; }
+    25% { opacity: 0; }
+    100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .founder-slide { animation: none; opacity: 0; }
+    .founder-slide:first-child { opacity: 1; }
+}

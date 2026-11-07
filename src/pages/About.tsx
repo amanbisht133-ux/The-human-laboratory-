@@ -8,6 +8,16 @@ import { business } from '../data/business';
 
 const PATH = '/about';
 
+// Founder photos that cross-fade one at a time (see .founder-slide in index.css).
+const FOUNDER_SLIDE_SECONDS = 3;
+const FOUNDER_PHOTOS = [
+    { src: '/images/goa/aman.webp', w: 1021, h: 1400, pos: 'center', alt: 'Aman Bisht, founder and head coach of Calisthenics Lab India, on the beach' },
+    { src: '/images/founder/aman-start-flag.webp', w: 1600, h: 2000, pos: 'center 40%', alt: 'Aman Bisht flagging off a community run in Hyderabad' },
+    { src: '/images/founder/aman-stage-talk.webp', w: 1800, h: 1200, pos: '46% center', alt: 'Aman Bisht speaking on stage at a calisthenics event' },
+    { src: '/images/founder/aman-judging.webp', w: 1598, h: 1066, pos: '51% center', alt: 'Aman Bisht judging a calisthenics competition' },
+    { src: '/images/founder/aman-namaste.webp', w: 1598, h: 1066, pos: '42% center', alt: 'Aman Bisht greeting the crowd at a calisthenics competition' },
+];
+
 export default function About() {
     usePageMeta(PATH);
     useReveal();
@@ -25,15 +35,23 @@ export default function About() {
 
             <section className="px-6 pb-16">
                 <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_1.2fr] gap-10 items-center">
-                    <div className="rounded-3xl overflow-hidden edge-ember reveal">
-                        <img
-                            src="/images/goa/aman.webp"
-                            alt="Aman Bisht, founder and head coach of Calisthenics Lab India, on the beach"
-                            width="1021"
-                            height="1400"
-                            loading="lazy"
-                            className="w-full h-auto"
-                        />
+                    <div className="relative aspect-[3/4] rounded-3xl overflow-hidden edge-ember reveal">
+                        {FOUNDER_PHOTOS.map((p, i) => (
+                            <img
+                                key={p.src}
+                                src={p.src}
+                                alt={p.alt}
+                                width={p.w}
+                                height={p.h}
+                                loading={i === 0 ? 'eager' : 'lazy'}
+                                className="founder-slide absolute inset-0 w-full h-full object-cover"
+                                style={{
+                                    objectPosition: p.pos,
+                                    animationDuration: `${FOUNDER_PHOTOS.length * FOUNDER_SLIDE_SECONDS}s`,
+                                    animationDelay: `${i * FOUNDER_SLIDE_SECONDS - FOUNDER_SLIDE_SECONDS / 4}s`,
+                                }}
+                            />
+                        ))}
                     </div>
                     <div className="reveal">
                         <span className="eyebrow">Founder & head coach</span>
