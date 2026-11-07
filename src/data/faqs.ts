@@ -74,16 +74,20 @@ export const personalTrainingFaqs: Faq[] = [
 
 export const yogFaqs: Faq[] = [
     {
+        q: 'Who teaches the yoga classes?',
+        a: 'Coach Likhit leads both the Yoga Abhyas group class and Yoga Sankalp personal training.',
+    },
+    {
         q: 'Which days are yoga classes held?',
-        a: 'Monday, Wednesday and Friday.',
+        a: 'The Yoga Abhyas group class runs on Monday, Wednesday and Friday.',
     },
     {
         q: 'What are the class timings?',
-        a: 'Two morning batches: 6:30–7:30 AM and 7:30–8:30 AM.',
+        a: 'The group class has two morning batches: 6:30–7:30 AM and 7:30–8:30 AM.',
     },
     {
         q: 'What plans are available?',
-        a: 'Monthly (₹3,333), quarterly (₹8,888) and yearly (₹33,333).',
+        a: 'Yoga Abhyas, the group class, is ₹6,666 a month for 3 days a week. Yoga Sankalp, 1-on-1 personal training for goals like posture correction or PCOD / PCOS, is ₹11,111 a month for 2 sessions a week.',
     },
     {
         q: 'Where is The Yog Lab?',

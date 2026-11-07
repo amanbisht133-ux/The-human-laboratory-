@@ -93,7 +93,7 @@ export default function Contact() {
                     </div>
                     <div className="glass rounded-3xl p-6 md:p-8 reveal">
                         <h2 className="font-condensed uppercase text-3xl tracking-wide">The Yog Lab</h2>
-                        <p className="mt-3 text-white/75">{YOG_LAB.days.join(', ')}: {YOG_LAB.timings.join(' and ')}.</p>
+                        <p className="mt-3 text-white/75">Group class: {YOG_LAB.days.join(', ')}: {YOG_LAB.timings.join(' and ')}.</p>
                     </div>
                 </div>
             </section>

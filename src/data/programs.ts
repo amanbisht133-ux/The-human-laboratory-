@@ -67,11 +67,28 @@ export const MEMBERSHIP_PLANS = [
 ];
 
 export const YOG_LAB = {
+    coach: 'Coach Likhit',
+    // Days and timings are for the Yoga Abhyas group class.
     days: ['Monday', 'Wednesday', 'Friday'],
     timings: ['6:30 AM - 7:30 AM', '7:30 AM - 8:30 AM'],
-    plans: [
-        { plan: 'Monthly', price: '₹3,333' },
-        { plan: 'Quarterly', price: '₹8,888' },
-        { plan: 'Yearly', price: '₹33,333' },
+    programs: [
+        {
+            name: 'Yoga Abhyas',
+            tag: 'Group class',
+            meaning: 'abhyās: steady practice',
+            summary: 'A regular group session to build your yoga foundation.',
+            points: ['Strength', 'Mobility & flexibility', 'Basic asanas & breathwork'],
+            price: '₹6,666',
+            frequency: '3 days a week',
+        },
+        {
+            name: 'Yoga Sankalp',
+            tag: 'Personal training',
+            meaning: 'saṅkalp: a resolve, a goal',
+            summary: '1-on-1, goal-oriented yoga built around you.',
+            points: ['Posture correction', 'PCOD / PCOS support', 'Your personal yoga goals'],
+            price: '₹11,111',
+            frequency: '2 sessions a week',
+        },
     ],
 };
