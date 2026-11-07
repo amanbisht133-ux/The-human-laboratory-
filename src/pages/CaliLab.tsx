@@ -297,11 +297,11 @@ export default function CaliLab() {
                 <section className="relative min-h-[calc(100svh-5rem)] flex flex-col items-center justify-center overflow-hidden px-6 py-16">
                     <div className="absolute inset-0 z-0">
                         <img
-                            src="/images/cali_hero_bg_v2.webp"
-                            alt="Group bar-hang training session at Calisthenics Lab India in Kondapur, Hyderabad"
-                            className="w-full h-full object-cover object-[center_40%] scale-105 brightness-[0.55] saturate-[0.85]"
-                            width="1200"
-                            height="1800"
+                            src="/images/cali_hero_bg.webp"
+                            alt="Collage of Calisthenics Lab India community group photos from training sessions in Hyderabad"
+                            className="w-full h-full object-cover scale-105 blur-[2px] brightness-[0.45] saturate-[0.8]"
+                            width="1600"
+                            height="1022"
                             fetchPriority="high"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink"></div>
@@ -318,16 +318,16 @@ export default function CaliLab() {
                             fetchPriority="high"
                         />
 
-                        <h1 className="font-condensed uppercase text-white text-2xl sm:text-3xl md:text-4xl tracking-[0.12em] mb-4">
+                        <h1 className="hero-outline font-condensed uppercase text-white text-2xl sm:text-3xl md:text-4xl tracking-[0.12em] mb-4">
                             Calisthenics Academy in <span className="ember-text">Kondapur, Hyderabad</span>
                         </h1>
 
-                        <p className="font-condensed uppercase leading-[0.85] tracking-wide text-6xl sm:text-8xl md:text-[7rem] mb-6">
+                        <p className="hero-outline font-condensed uppercase leading-[0.85] tracking-wide text-6xl sm:text-8xl md:text-[7rem] mb-6">
                             <span className="block text-white">By The Community</span>
                             <span className="block ember-text">For The Community</span>
                         </p>
 
-                        <p className="max-w-2xl text-sm md:text-base text-white/75 leading-relaxed mb-8">
+                        <p className="hero-outline max-w-2xl text-sm md:text-base text-white/90 leading-relaxed mb-8">
                             {business.name} is a calisthenics academy in Kondapur, Hyderabad, near HITEC City, Gachibowli and Madhapur.
                             We coach adults from beginner to advanced in group batches (including weekends), offer{' '}
                             <Link to="/personal-training" className="text-white underline decoration-brand-orange/60 underline-offset-4 hover:text-brand-orange">personal coaching</Link>, run a{' '}

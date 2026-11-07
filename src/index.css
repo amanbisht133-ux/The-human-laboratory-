@@ -292,3 +292,9 @@ body::after {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Home hero: thin dark outline so words stay readable over the photo collage.
+   filter drop-shadow (not text-shadow) so it also works on the gradient ember-text. */
+.hero-outline {
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 1px rgba(0, 0, 0, 0.95)) drop-shadow(0 3px 10px rgba(0, 0, 0, 0.6));
+}
