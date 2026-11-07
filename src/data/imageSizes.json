@@ -62,5 +62,37 @@
   "/images/goa/resort-court.webp": [
     668,
     463
+  ],
+  "/images/hero/street-run-crew.webp": [
+    1280,
+    1600
+  ],
+  "/images/hero/gym-flex.webp": [
+    1600,
+    1200
+  ],
+  "/images/hero/gym-group.webp": [
+    1600,
+    1066
+  ],
+  "/images/hero/holi.webp": [
+    1200,
+    1600
+  ],
+  "/images/hero/courtyard-meetup.webp": [
+    1320,
+    922
+  ],
+  "/images/hero/night-session.webp": [
+    1007,
+    1600
+  ],
+  "/images/hero/ics-certificates.webp": [
+    1600,
+    901
+  ],
+  "/images/hero/halloween.webp": [
+    1200,
+    1600
   ]
 }

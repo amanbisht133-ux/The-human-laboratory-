@@ -298,3 +298,26 @@ body::after {
 .hero-outline {
     filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 1px rgba(0, 0, 0, 0.95)) drop-shadow(0 3px 10px rgba(0, 0, 0, 0.6));
 }
+
+/* Home hero slideshow: 8 slides, each on screen for 1/8 of the cycle.
+   Fade in (~1.5s), hold, fade out while the next fades in; slow zoom throughout. */
+.hero-slide {
+    opacity: 0;
+    animation-name: hero-slide;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    will-change: opacity, transform;
+}
+.hero-slide:first-child { opacity: 1; }
+@keyframes hero-slide {
+    0% { opacity: 0; transform: scale(1.04); }
+    3.125% { opacity: 1; }
+    12.5% { opacity: 1; }
+    15.625% { opacity: 0; transform: scale(1.12); }
+    100% { opacity: 0; transform: scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide { animation: none; opacity: 0; }
+    .hero-slide:first-child { opacity: 1; }
+}

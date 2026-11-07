@@ -5,6 +5,7 @@ import type { LucideIcon } from 'lucide-react';
 import reviews from '../data/reviews.json';
 import { Link } from 'react-router-dom';
 import caliLogo from '../components/images/CALI@2x.webp';
+import HeroSlideshow from '../components/HeroSlideshow';
 import communityStory from '../components/images/community_collage.webp';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { useReveal } from '../hooks/useReveal';
@@ -296,14 +297,7 @@ export default function CaliLab() {
                 {/* HERO SECTION */}
                 <section className="relative min-h-[calc(100svh-5rem)] flex flex-col items-center justify-center overflow-hidden px-6 py-16">
                     <div className="absolute inset-0 z-0">
-                        <img
-                            src="/images/cali_hero_bg.webp"
-                            alt="Collage of Calisthenics Lab India community group photos from training sessions in Hyderabad"
-                            className="w-full h-full object-cover scale-105 brightness-[0.45] saturate-[0.8]"
-                            width="1600"
-                            height="1022"
-                            fetchPriority="high"
-                        />
+                        <HeroSlideshow />
                         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink"></div>
                         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(50% 40% at 50% 45%, rgba(243,131,32,0.22), transparent 70%)' }}></div>
                     </div>
