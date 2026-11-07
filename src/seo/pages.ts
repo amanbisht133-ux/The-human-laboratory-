@@ -100,9 +100,9 @@ const corePages: PageMeta[] = [
     {
         path: '/kids-calisthenics',
         name: 'Kids Calisthenics',
-        title: 'Kids Calisthenics, Gymnastics & Parkour in Kondapur',
-        description: 'Kids calisthenics, gymnastics and parkour classes for ages 3–15 in Kondapur, Hyderabad, in three levels. Weekday batches 5–7 PM, weekends 9–10 AM.',
-        h1: 'Kids Calisthenics, Gymnastics & Parkour in Kondapur',
+        title: 'The Mighty Tribe: Kids Calisthenics in Kondapur, Hyderabad',
+        description: 'The Mighty Tribe kids program in Kondapur, Hyderabad: calisthenics, gymnastics & parkour for ages 3–15 in three levels. Weekday & weekend batches.',
+        h1: 'The Mighty Tribe',
         image: '/images/goa/community-6.jpg',
         lastmod: UPDATED,
         schemas: [faqSchema(kidsFaqs), breadcrumbSchema([{ name: 'Kids Calisthenics', path: '/kids-calisthenics' }])],
