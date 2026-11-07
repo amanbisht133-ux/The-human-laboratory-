@@ -1,4 +1,4 @@
-import { CalendarDays, Clock } from 'lucide-react';
+import { CalendarDays, Clock, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { useReveal } from '../hooks/useReveal';
@@ -20,12 +20,28 @@ export default function YogLab() {
     return (
         <div className="text-white">
             <PageHero crumbs={[{ name: meta.name }]} eyebrow="The Yog Lab" title={meta.h1}>
+                <div className="inline-block rounded-2xl bg-[#fbf4e8] px-5 py-3">
+                    <img
+                        src="/images/yog-lab-logo.webp"
+                        alt="The Yog Lab logo: Optimize Your Energy, From Root to Crown"
+                        width="727"
+                        height="329"
+                        className="h-20 md:h-24 w-auto"
+                    />
+                </div>
                 <p>
                     Build strength, open up mobility and move with intention. The Yog Lab is the yoga studio at Calisthenics Lab
                     India in Kondapur, Hyderabad, near HITEC City, Gachibowli and Madhapur, with two ways to practise
                     with <strong className="text-white">{YOG_LAB.coach}</strong>.
                 </p>
                 <ContactButtons message={WA_MESSAGE} className="pt-2" />
+                <a
+                    href="/brochures/yog-lab-brochure.pdf"
+                    download
+                    className="inline-flex items-center gap-2 text-sm text-white/80 underline decoration-brand-orange/60 underline-offset-4 hover:text-brand-orange"
+                >
+                    <Download size={16} aria-hidden="true" /> Download the yoga brochure (PDF)
+                </a>
             </PageHero>
 
             <section className="px-6 pb-16">

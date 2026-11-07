@@ -531,7 +531,7 @@ export default function CaliLab() {
 
                             <Accordion index="02" title="Calisthenics vs Gym" open={isVsGymOpen} onToggle={() => setIsVsGymOpen(!isVsGymOpen)}>
                                 <p className="text-base md:text-lg text-white/90 font-medium leading-relaxed">
-                                    In a traditional gym, you use machines to isolate muscles; at <span className="ember-text font-bold uppercase tracking-wider">Calisthenics Lab India</span>, you use your body to build mastery. While most people go to the gym just for the look—focusing on fat loss and muscle gain—we treat those as mere by-products of our training. Our focus is on deep body awareness and movement control. We don't just build a physique; we build a body that knows exactly what it's capable of.
+                                    In a gym, you train to look a certain way. At <span className="ember-text font-bold uppercase tracking-wider">Calisthenics Lab India</span>, you train to <em>move</em> a certain way, and the look follows. Fat loss and muscle come as results of learning real skills, not as the only goal. We don't just build a physique; we build a body that knows exactly what it's capable of.
                                 </p>
                             </Accordion>
                         </div>
@@ -611,7 +611,7 @@ export default function CaliLab() {
                                 <CheckList items={[
                                     "Strength & Conditioning",
                                     "Calisthenics Fundamentals",
-                                    "Weight Loss & Fat Burning",
+                                    "Fat Loss Through Skill Training",
                                     "Handstands & Balance Training",
                                     "Core & Mobility Development",
                                     "Advanced Skill Progressions"
