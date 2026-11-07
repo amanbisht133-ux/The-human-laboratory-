@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 type Crumb = { name: string; to?: string };
 
 /** Inner-page header: visible breadcrumb (mirrors the BreadcrumbList schema), H1 and intro. */
-export default function PageHero({ crumbs, eyebrow, title, children }: { crumbs: Crumb[]; eyebrow: string; title: string; children?: ReactNode }) {
+export default function PageHero({ crumbs, eyebrow, title, logo, children }: { crumbs: Crumb[]; eyebrow: string; title: string; logo?: { src: string; alt: string; size: number }; children?: ReactNode }) {
     return (
         <section className="section-glow px-6 pt-10 md:pt-14 pb-12 md:pb-16">
             <div className="max-w-4xl mx-auto">
@@ -19,7 +19,10 @@ export default function PageHero({ crumbs, eyebrow, title, children }: { crumbs:
                         ))}
                     </ol>
                 </nav>
-                <span className="eyebrow mt-8">{eyebrow}</span>
+                {logo && (
+                    <img src={logo.src} alt={logo.alt} width={logo.size} height={logo.size} className="mt-8 size-24 md:size-28" />
+                )}
+                <span className={`eyebrow ${logo ? 'mt-5' : 'mt-8'}`}>{eyebrow}</span>
                 <h1 className="mt-4 font-condensed uppercase text-white text-5xl md:text-7xl leading-[0.92] tracking-wide">{title}</h1>
                 {children && <div className="mt-6 text-base md:text-lg text-white/75 leading-relaxed max-w-3xl space-y-4">{children}</div>}
             </div>
