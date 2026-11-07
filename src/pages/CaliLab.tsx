@@ -299,7 +299,7 @@ export default function CaliLab() {
                         <img
                             src="/images/cali_hero_bg.webp"
                             alt="Collage of Calisthenics Lab India community group photos from training sessions in Hyderabad"
-                            className="w-full h-full object-cover scale-105 blur-[2px] brightness-[0.45] saturate-[0.8]"
+                            className="w-full h-full object-cover scale-105 brightness-[0.45] saturate-[0.8]"
                             width="1600"
                             height="1022"
                             fetchPriority="high"
