@@ -6,10 +6,10 @@ import PageHero from '../components/PageHero';
 import ContactButtons from '../components/ContactButtons';
 import FaqList from '../components/FaqList';
 import { kidsFaqs } from '../data/faqs';
-import { BATCH_TIMINGS, PRICING_TIERS } from '../data/programs';
+import { BATCH_TIMINGS, KIDS_LEVELS, PRICING_TIERS } from '../data/programs';
 
 const PATH = '/kids-calisthenics';
-const WA_MESSAGE = "Hi! I'd like to know more about the kids calisthenics & gymnastics batch.";
+const WA_MESSAGE = "Hi! I'd like to know more about the kids calisthenics, gymnastics & parkour batch.";
 
 export default function KidsCalisthenics() {
     usePageMeta(PATH);
@@ -20,8 +20,8 @@ export default function KidsCalisthenics() {
         <div className="text-white">
             <PageHero crumbs={[{ name: meta.name }]} eyebrow="Kids Program" title={meta.h1}>
                 <p>
-                    Our kids program at Calisthenics Lab India in Kondapur, Hyderabad combines calisthenics and gymnastics
-                    fundamentals in one subscription, coached in a structured, age-appropriate format. Batches run on weekday
+                    Our kids program at Calisthenics Lab India in Kondapur, Hyderabad combines calisthenics, gymnastics and
+                    parkour in one subscription for kids aged 3 to 15, taught in three clear levels. Batches run on weekday
                     evenings and weekend mornings, close to HITEC City, Gachibowli and Madhapur.
                 </p>
                 <ContactButtons message={WA_MESSAGE} className="pt-2" />
@@ -41,16 +41,17 @@ export default function KidsCalisthenics() {
                     </div>
                     <div className="reveal">
                         <h2 className="font-condensed uppercase text-4xl md:text-5xl tracking-wide">
-                            Calisthenics <span className="ember-text">+ Gymnastics</span>
+                            Calisthenics, Gymnastics <span className="ember-text">+ Parkour</span>
                         </h2>
                         <p className="mt-4 text-white/75 leading-relaxed">
-                            One subscription covers both disciplines. Kids build strength, balance and body control through
-                            bodyweight training and gymnastics fundamentals, coached step by step in small groups.
+                            One subscription covers all three. Every class is about 40% calisthenics, 40% gymnastics and 20%
+                            parkour, so kids build strength, balance, body control and the confidence to move freely.
                         </p>
                         <ul className="mt-6 space-y-3">
                             {[
-                                'Calisthenics and gymnastics fundamentals in a single subscription',
-                                'Structured, age-appropriate coaching',
+                                'For ages 3 to 15, with play-based classes for the youngest',
+                                'Three levels with a skills checklist and a certificate at each step',
+                                'Strong kids can be selected for competitions',
                                 'Weekday evening and weekend morning batches',
                             ].map(item => (
                                 <li key={item} className="flex gap-3">
@@ -59,6 +60,34 @@ export default function KidsCalisthenics() {
                                 </li>
                             ))}
                         </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section className="px-6 pb-16">
+                <div className="max-w-5xl mx-auto">
+                    <h2 className="font-condensed uppercase text-4xl md:text-5xl tracking-wide reveal">Three levels, <span className="ember-text">one clear path</span></h2>
+                    <p className="mt-4 max-w-3xl text-white/75 leading-relaxed reveal">
+                        Kids move up when they pass their level's skills checklist, not because of their age. Skills are tested
+                        every 3 months, parents get a progress card, and every level passed earns a certificate. Ages 3–5 learn
+                        Level 1 through games and obstacle courses.
+                    </p>
+                    <div className="mt-8 grid md:grid-cols-3 gap-5">
+                        {KIDS_LEVELS.map(l => (
+                            <div key={l.level} className="glass edge-ember rounded-3xl p-6 reveal">
+                                <p className="eyebrow">{l.level}</p>
+                                <h3 className="mt-2 font-condensed uppercase text-3xl tracking-wide">{l.name}</h3>
+                                <p className="mt-3 text-white/80 leading-relaxed">{l.goal}</p>
+                                <ul className="mt-4 space-y-2">
+                                    {l.skills.map(sk => (
+                                        <li key={sk} className="flex gap-3 text-white/85">
+                                            <Sparkles size={16} className="text-brand-orange shrink-0 mt-1" />
+                                            <span>{sk}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>

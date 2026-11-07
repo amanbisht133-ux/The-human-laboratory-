@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
-import { MapPin, Mail, Sparkles, Sun, MoonStar, CalendarDays, Plus, ArrowRight, ChevronDown, Check } from 'lucide-react';
+import { MapPin, Mail, Sparkles, Sun, MoonStar, CalendarDays, Plus, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Check, Star, X, Info, MessageCircle } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import reviews from '../data/reviews.json';
 import { Link } from 'react-router-dom';
@@ -197,7 +197,7 @@ export default function CaliLab() {
             `*Email:* ${formData.email}\n` +
             `*Phone:* ${formData.phone}\n` +
             `*Batch:* ${formData.batch}\n` +
-            `*Duration:* ${formData.duration}\n` +
+            `*Duration:* ${formData.duration === '1 Day' ? 'Demo session' : formData.duration}\n` +
             (formData.timing ? `*Timing:* ${formData.timing}\n` : '') +
             `*Total Price:* ${price}\n\n` +
             `_I'm interested in joining Calisthenics Lab India. Please provide further details._`
@@ -325,7 +325,7 @@ export default function CaliLab() {
                             {business.name} is a calisthenics academy in Kondapur, Hyderabad, near HITEC City, Gachibowli and Madhapur.
                             We coach adults from beginner to advanced in group batches (including weekends), offer{' '}
                             <Link to="/personal-training" className="text-white underline decoration-brand-orange/60 underline-offset-4 hover:text-brand-orange">personal coaching</Link>, run a{' '}
-                            <Link to="/kids-calisthenics" className="text-white underline decoration-brand-orange/60 underline-offset-4 hover:text-brand-orange">kids calisthenics &amp; gymnastics program</Link> and host yoga at{' '}
+                            <Link to="/kids-calisthenics" className="text-white underline decoration-brand-orange/60 underline-offset-4 hover:text-brand-orange">kids calisthenics, gymnastics &amp; parkour program</Link> and host yoga at{' '}
                             <Link to="/yog-lab" className="text-white underline decoration-brand-orange/60 underline-offset-4 hover:text-brand-orange">The Yog Lab</Link>.
                         </p>
 
@@ -572,12 +572,12 @@ export default function CaliLab() {
                             className="group relative mt-10 glass edge-ember rounded-[2.5rem] p-8 md:p-12 text-center overflow-hidden cursor-pointer reveal"
                         >
                             <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[70%] h-48 rounded-full bg-brand-orange/25 blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-700"></div>
-                            <span className="eyebrow relative">Free Demo Session</span>
+                            <span className="eyebrow relative">Free Weekday Demo</span>
                             <h2 className="relative mt-4 font-condensed uppercase text-4xl md:text-6xl text-white leading-none">
                                 Experience the Lab – <span className="ember-text">On Us.</span>
                             </h2>
                             <p className="relative mt-5 text-sm md:text-xl text-white/75 font-medium leading-relaxed max-w-3xl mx-auto">
-                                Book your <span className="text-brand-orange font-bold">Free Demo Session</span> today to feel the energy of our space. If you decide to join the movement, we'll fold the session into your package. If not, it's completely free with no strings attached.
+                                Your first session is <span className="text-brand-orange font-bold">free on any weekday</span>, Monday to Friday, in any batch slot. Prefer the weekend? A weekend demo is ₹800, and we adjust it in your package when you join.
                             </p>
                             <span className="btn-ember relative mt-8 px-8 py-3 text-sm">
                                 Book Now <ArrowRight size={16} />
@@ -646,7 +646,7 @@ export default function CaliLab() {
                                 className="glass p-4 rounded-full text-white hover:text-brand-orange transition-all hover:scale-110 active:scale-90"
                                 aria-label="Previous Review"
                             >
-                                <span className="material-symbols-outlined text-3xl">chevron_left</span>
+                                <ChevronLeft className="size-8" aria-hidden="true" />
                             </button>
                         </div>
                         <div className="absolute top-1/2 right-2 -translate-y-1/2 z-20 hidden md:block">
@@ -655,7 +655,7 @@ export default function CaliLab() {
                                 className="glass p-4 rounded-full text-white hover:text-brand-orange transition-all hover:scale-110 active:scale-90"
                                 aria-label="Next Review"
                             >
-                                <span className="material-symbols-outlined text-3xl">chevron_right</span>
+                                <ChevronRight className="size-8" aria-hidden="true" />
                             </button>
                         </div>
 
@@ -670,7 +670,7 @@ export default function CaliLab() {
                                     <div className="flex flex-col gap-5 md:gap-6 relative z-10">
                                         <div className="flex gap-1">
                                             {[...Array(review.stars)].map((_, j) => (
-                                                <span key={j} className="material-symbols-outlined text-sm text-brand-orange fill-1">star</span>
+                                                <Star key={j} className="size-4 text-brand-orange fill-brand-orange" aria-hidden="true" />
                                             ))}
                                         </div>
                                         <p className="text-white/80 font-light leading-relaxed whitespace-normal text-sm md:text-base line-clamp-4 group-hover/card:line-clamp-none transition-all duration-500">"{review.text}"</p>
@@ -743,7 +743,7 @@ export default function CaliLab() {
                                 onClick={() => setIsBookingModalOpen(false)}
                                 className="absolute top-6 right-8 text-white/50 hover:text-brand-orange transition-colors"
                             >
-                                <span className="material-symbols-outlined text-3xl">close</span>
+                                <X className="size-8" aria-hidden="true" />
                             </button>
 
                             {!isSubmitted ? (
@@ -829,7 +829,7 @@ export default function CaliLab() {
                                                     <span className={`font-black text-xs uppercase tracking-tighter ${formData.batch ? 'text-white' : 'text-white/30'}`}>
                                                         {formData.batch || 'Select Preferred Batch'}
                                                     </span>
-                                                    <span className={`material-symbols-outlined transition-transform duration-300 ${activeDropdown === 'batch' ? 'rotate-180 text-brand-orange' : 'text-white/30'}`}>expand_more</span>
+                                                    <ChevronDown aria-hidden="true" className={`size-6 transition-transform duration-300 ${activeDropdown === 'batch' ? 'rotate-180 text-brand-orange' : 'text-white/30'}`} />
                                                 </button>
 
                                                 {errors.batch && <p className="text-[10px] text-red-500 mt-1 ml-4 uppercase font-bold">{errors.batch}</p>}
@@ -867,7 +867,7 @@ export default function CaliLab() {
                                                     <div className="flex gap-3 items-center">
                                                         <Sparkles className="text-brand-orange shrink-0" size={18} />
                                                         <p className="text-[10px] md:text-xs font-black text-white/90 uppercase tracking-[0.1em] leading-relaxed">
-                                                            Elite Curriculum: Includes <span className="text-brand-orange underline underline-offset-4 decoration-2">Calisthenics + Gymnastics</span> in a single subscription.
+                                                            Elite Curriculum: Includes <span className="text-brand-orange underline underline-offset-4 decoration-2">Calisthenics + Gymnastics + Parkour</span> in a single subscription.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -884,7 +884,7 @@ export default function CaliLab() {
                                                     <span className={`font-black text-xs uppercase tracking-tighter ${formData.duration ? 'text-white' : 'text-white/30'}`}>
                                                         {formData.duration || 'Select Duration'}
                                                     </span>
-                                                    <span className={`material-symbols-outlined transition-transform duration-300 ${activeDropdown === 'duration' ? 'rotate-180 text-brand-orange' : 'text-white/30'}`}>expand_more</span>
+                                                    <ChevronDown aria-hidden="true" className={`size-6 transition-transform duration-300 ${activeDropdown === 'duration' ? 'rotate-180 text-brand-orange' : 'text-white/30'}`} />
                                                 </button>
 
                                                 {errors.duration && <p className="text-[10px] text-red-500 mt-1 ml-4 uppercase font-bold">{errors.duration}</p>}
@@ -895,7 +895,7 @@ export default function CaliLab() {
                                                         <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-zinc-900/95 border border-brand-orange/30 rounded-2xl overflow-hidden z-[110] backdrop-blur-xl shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
                                                             {Object.keys(PRICING_TIERS[formData.batch]).map(period => (
                                                                 <div
-                                                                    key={period}
+                                                                    key={period === '1 Day' ? 'Demo session' : period}
                                                                     onClick={() => {
                                                                         setFormData({ ...formData, duration: period, timing: '' });
                                                                         setActiveDropdown(null);
@@ -925,7 +925,7 @@ export default function CaliLab() {
                                                     <span className={`font-black text-xs uppercase tracking-tighter ${formData.timing ? 'text-white' : 'text-white/30'}`}>
                                                         {formData.timing || 'Select Time Slot'}
                                                     </span>
-                                                    <span className={`material-symbols-outlined transition-transform duration-300 ${activeDropdown === 'timing' ? 'rotate-180 text-brand-orange' : 'text-white/30'}`}>expand_more</span>
+                                                    <ChevronDown aria-hidden="true" className={`size-6 transition-transform duration-300 ${activeDropdown === 'timing' ? 'rotate-180 text-brand-orange' : 'text-white/30'}`} />
                                                 </button>
 
                                                 {errors.timing && <p className="text-[10px] text-red-500 mt-1 ml-4 uppercase font-bold">{errors.timing}</p>}
@@ -979,9 +979,13 @@ export default function CaliLab() {
 
                                         {formData.duration === '1 Day' && (
                                             <div className="p-4 bg-brand-orange/5 border border-brand-orange/20 rounded-2xl flex items-start gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                                                <span className="material-symbols-outlined text-brand-orange text-lg">info</span>
+                                                <Info className="size-5 shrink-0 text-brand-orange" aria-hidden="true" />
                                                 <p className="text-[10px] font-black text-white/50 uppercase leading-relaxed tracking-[0.1em]">
-                                                    <span className="text-brand-orange">Professional Continuity:</span> This trial investment can be fully credited toward your membership if you decide to upgrade your training plan.
+                                                    {formData.batch === 'Weekday Batch' ? (
+                                                        <><span className="text-brand-orange">Free demo:</span> come on any one weekday, in any batch slot.</>
+                                                    ) : (
+                                                        <><span className="text-brand-orange">₹800 demo:</span> adjusted in your package when you join a weekday or weekend plan. Weekday demos are free.</>
+                                                    )}
                                                 </p>
                                             </div>
                                         )}
@@ -999,7 +1003,7 @@ export default function CaliLab() {
                                     <div className="relative size-24 mx-auto">
                                         <div className="absolute inset-0 bg-brand-orange rounded-full animate-ping opacity-20"></div>
                                         <div className="relative size-full bg-brand-orange rounded-full flex items-center justify-center shadow-glow shadow-brand-orange/40">
-                                            <span className="material-symbols-outlined text-black text-5xl font-bold animate-pulse">chat</span>
+                                            <MessageCircle className="size-12 text-black animate-pulse" strokeWidth={2.5} aria-hidden="true" />
                                         </div>
                                     </div>
                                     <div className="space-y-2">

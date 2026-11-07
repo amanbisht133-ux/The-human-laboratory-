@@ -133,7 +133,7 @@ export const blogPosts: BlogPost[] = [
         cta: { text: 'Ready to start with a coach and a community?', to: '/', label: 'See batch timings and plans' },
         related: [
             { to: '/', label: 'Adult calisthenics batches in Kondapur' },
-            { to: '/kids-calisthenics', label: 'Kids calisthenics & gymnastics' },
+            { to: '/kids-calisthenics', label: 'Kids calisthenics, gymnastics & parkour' },
             { to: '/blog/how-to-do-your-first-pull-up', label: 'How to do your first pull-up' },
         ],
     },

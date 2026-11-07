@@ -199,12 +199,6 @@ body::after {
   }
 }
 
-@layer utilities {
-  .fill-1 {
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24 !important;
-  }
-}
-
 /* Scroll reveal: CaliLab adds .is-visible when an element enters the viewport */
 .reveal {
   opacity: 0;

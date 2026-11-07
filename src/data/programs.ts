@@ -2,8 +2,10 @@
 // the kids page, the Yog Lab page and the booking form.
 
 export const PRICING_TIERS: Record<string, Record<string, string>> = {
+    // Weekday demo is free (any one weekday, any slot). Weekend demo is ₹800,
+    // adjusted in the package if they join.
     'Weekday Batch': {
-        '1 Day': '₹800',
+        '1 Day': 'Free',
         '1 Month': '₹7,777',
         '3 Months': '₹22,222',
         '6 Months': '₹44,444',
@@ -51,11 +53,11 @@ export const BATCH_TIMINGS: Record<string, Record<string, string[]>> = {
 };
 
 export const WEEKLY_SCHEDULE = [
-    { day: 'Monday', focus: 'Upperbody Push & Pull' },
+    { day: 'Monday', focus: 'Upper Body Push & Pull' },
     { day: 'Tuesday', focus: 'Legs & Core' },
-    { day: 'Wednesday', focus: 'Skills & Upperbody' },
+    { day: 'Wednesday', focus: 'Skills & Upper Body' },
     { day: 'Thursday', focus: 'Full Body Endurance' },
-    { day: 'Friday', focus: 'Skills | Upperbody' }
+    { day: 'Friday', focus: 'Skills | Upper Body' }
 ];
 
 export const MEMBERSHIP_PLANS = [
@@ -92,3 +94,25 @@ export const YOG_LAB = {
         },
     ],
 };
+
+// Kids program levels (ages 3–15), shown on the kids page. Matches the parent program guide.
+export const KIDS_LEVELS = [
+    {
+        level: 'Level 1',
+        name: 'Foundation',
+        goal: 'Body control, coordination, safe falling and basic strength. Usually 3–6 months.',
+        skills: ['Animal movements and body shapes', 'Forward rolls and soft landings', 'Dead hangs, planks and balance'],
+    },
+    {
+        level: 'Level 2',
+        name: 'Builder',
+        goal: 'Real strength and the first calisthenics and gymnastics skills. Usually 6–12 months.',
+        skills: ['First chin-ups and full push-ups', 'Wall handstands and tuck L-sits', 'Cartwheels, bridges and backward rolls'],
+    },
+    {
+        level: 'Level 3',
+        name: 'Advanced',
+        goal: 'Master advanced skills, link them into routines and get ready to compete. 12+ months.',
+        skills: ['Pull-up sets, dips and tuck front lever', 'Freestanding handstand and full L-sit', 'Round-off, walkovers and a full routine'],
+    },
+];

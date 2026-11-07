@@ -10,7 +10,7 @@ export const homeFaqs: Faq[] = [
     },
     {
         q: 'What programs does Calisthenics Lab India offer?',
-        a: 'Adult calisthenics group batches from beginner to advanced (including weekend batches), one-on-one personal coaching, a kids calisthenics & gymnastics program, and yoga classes at The Yog Lab.',
+        a: 'Adult calisthenics group batches from beginner to advanced (including weekend batches), one-on-one personal coaching, a kids calisthenics, gymnastics & parkour program, and yoga classes at The Yog Lab.',
     },
     {
         q: 'What are the calisthenics batch timings?',
@@ -26,18 +26,26 @@ export const homeFaqs: Faq[] = [
     },
     {
         q: 'Does Calisthenics Lab India offer training for kids?',
-        a: 'Yes. Our kids calisthenics & gymnastics program runs on weekdays (5:00–6:00 PM and 6:00–7:00 PM) and weekends (9:00–10:00 AM).',
+        a: 'Yes. Our kids calisthenics, gymnastics & parkour program for ages 3 to 15 runs on weekdays (5:00–6:00 PM and 6:00–7:00 PM) and weekends (9:00–10:00 AM).',
     },
     {
         q: 'How do I join or book a trial session?',
-        a: 'Hit the Book Now button anywhere on this page to send us your details via WhatsApp. We offer a free demo session — if you decide to join, we fold it into your package.',
+        a: 'Hit the Book Now button anywhere on this page to send us your details via WhatsApp. Your demo is free on any weekday (Monday to Friday, any batch slot). A weekend demo is ₹800, adjusted in your package when you join.',
     },
 ];
 
 export const kidsFaqs: Faq[] = [
     {
         q: 'What does the kids program include?',
-        a: 'Calisthenics and gymnastics fundamentals in a single subscription, coached in a structured, age-appropriate format.',
+        a: 'Calisthenics, gymnastics and parkour in a single subscription for ages 3 to 15, taught in three levels: Foundation, Builder and Advanced.',
+    },
+    {
+        q: 'What age group is the kids program for?',
+        a: 'Kids aged 3 to 15. Little ones (3–5) learn through games and obstacle courses; older kids move on to real skills and strength work.',
+    },
+    {
+        q: 'How do kids move up a level?',
+        a: 'Each level has a skills checklist, tested every 3 months. Parents get a progress card, and every level passed earns a certificate. Kids who pass Level 3, or show strong talent in Level 2, can be selected for competitions.',
     },
     {
         q: 'When are the kids batches?',
