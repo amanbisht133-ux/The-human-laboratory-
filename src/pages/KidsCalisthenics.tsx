@@ -37,8 +37,8 @@ export default function KidsCalisthenics() {
                         <img
                             src="/images/tmt-handstand-coaching.webp"
                             alt="Coach Aman spotting a handstand while two kids watch at The Mighty Tribe"
-                            width="1000"
-                            height="1500"
+                            width="1400"
+                            height="2100"
                             loading="lazy"
                             className="w-full h-auto"
                         />

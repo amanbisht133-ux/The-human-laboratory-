@@ -12,10 +12,10 @@ const PATH = '/about';
 const FOUNDER_SLIDE_SECONDS = 3;
 const FOUNDER_PHOTOS = [
     { src: '/images/goa/aman.webp', w: 1021, h: 1400, pos: 'center', alt: 'Aman Bisht, founder and head coach of Calisthenics Lab India, on the beach' },
-    { src: '/images/founder/aman-start-flag.webp', w: 1400, h: 1750, pos: 'center 40%', alt: 'Aman Bisht flagging off a community run in Hyderabad' },
-    { src: '/images/founder/aman-stage-talk.webp', w: 1400, h: 933, pos: '46% center', alt: 'Aman Bisht speaking on stage at a calisthenics event' },
-    { src: '/images/founder/aman-judging.webp', w: 799, h: 533, pos: '51% center', alt: 'Aman Bisht judging a calisthenics competition' },
-    { src: '/images/founder/aman-namaste.webp', w: 799, h: 533, pos: '42% center', alt: 'Aman Bisht greeting the crowd at a calisthenics competition' },
+    { src: '/images/founder/aman-start-flag.webp', w: 1600, h: 2000, pos: 'center 40%', alt: 'Aman Bisht flagging off a community run in Hyderabad' },
+    { src: '/images/founder/aman-stage-talk.webp', w: 1800, h: 1200, pos: '46% center', alt: 'Aman Bisht speaking on stage at a calisthenics event' },
+    { src: '/images/founder/aman-judging.webp', w: 1598, h: 1066, pos: '51% center', alt: 'Aman Bisht judging a calisthenics competition' },
+    { src: '/images/founder/aman-namaste.webp', w: 1598, h: 1066, pos: '42% center', alt: 'Aman Bisht greeting the crowd at a calisthenics competition' },
 ];
 
 export default function About() {
