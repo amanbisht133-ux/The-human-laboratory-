@@ -65,6 +65,7 @@ export default function About() {
                             He leads a coaching team of three, so every batch gets close attention, from first push-ups to
                             muscle-ups, handstands and levers.
                         </p>
+                        <Link to="/aman-bisht" className="btn-ember mt-6 px-7 py-3.5 text-sm">Read Aman's story</Link>
                     </div>
                 </div>
             </section>

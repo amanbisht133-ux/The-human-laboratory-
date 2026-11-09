@@ -3,6 +3,7 @@
 import { SITE_URL, business, openingHoursSpecification } from '../data/business';
 import { homeFaqs, kidsFaqs, personalTrainingFaqs, yogFaqs, type Faq } from '../data/faqs';
 import { blogPosts } from '../data/blog';
+import { founder } from '../data/founder';
 
 export type PageMeta = {
     path: string;
@@ -28,14 +29,30 @@ const founderSchema = {
     '@type': 'Person',
     '@id': FOUNDER_ID,
     name: business.founder.name,
-    jobTitle: 'Founder',
-    description: 'Founder of Calisthenics Lab India (Kondapur) and Indian Calisthenics School (Madhapur), and of the Hyderabad Calisthenics community. National calisthenics champion who has represented India.',
-    url: abs('/about'),
+    jobTitle: 'Calisthenics athlete, coach and founder',
+    description: founder.summary,
+    url: abs(founder.path),
+    mainEntityOfPage: abs(founder.path),
+    image: abs('/images/goa/aman.jpg'),
+    nationality: { '@type': 'Country', name: 'India' },
+    homeLocation: { '@type': 'City', name: 'Hyderabad' },
+    knowsAbout: ['Calisthenics', 'Street workout', 'Freestyle calisthenics', 'Bodyweight strength training', 'Calisthenics coaching'],
+    award: founder.awards,
+    // The same person's profile on the sister academy's site
+    sameAs: [founder.instagram, 'https://www.indiancalisthenicsschool.com/aman-bisht'],
     worksFor: [
         { '@id': `${SITE_URL}/#business` },
         { '@type': 'SportsActivityLocation', name: 'Indian Calisthenics School', url: 'https://www.indiancalisthenicsschool.com/' },
     ],
     memberOf: { '@type': 'Organization', name: 'Hyderabad Calisthenics', sameAs: ['https://www.instagram.com/hyderabad.calisthenics/'] },
+};
+
+/** The founder page is a profile of one person; this tells Google who the page is about. */
+const founderProfileSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    dateModified: '2026-11-10',
+    mainEntity: founderSchema,
 };
 
 export const localBusinessSchema = {
@@ -144,6 +161,16 @@ const corePages: PageMeta[] = [
         image: '/images/goa/aman.jpg',
         lastmod: UPDATED,
         schemas: [founderSchema, breadcrumbSchema([{ name: 'About', path: '/about' }])],
+    },
+    {
+        path: founder.path,
+        name: 'Aman Bisht',
+        title: 'Aman Bisht | Calisthenics Athlete & Coach, Hyderabad',
+        description: 'Aman Bisht is a national calisthenics champion who has represented India three times, and the founder of Hyderabad Calisthenics and two academies.',
+        h1: 'Aman Bisht',
+        image: '/images/goa/aman.jpg',
+        lastmod: UPDATED,
+        schemas: [founderProfileSchema, breadcrumbSchema([{ name: 'About', path: '/about' }, { name: 'Aman Bisht', path: founder.path }])],
     },
     {
         path: '/contact',

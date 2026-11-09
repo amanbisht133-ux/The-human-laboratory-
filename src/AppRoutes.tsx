@@ -6,6 +6,7 @@ const CaliLab = lazy(() => import('./pages/CaliLab'));
 const KidsCalisthenics = lazy(() => import('./pages/KidsCalisthenics'));
 const PersonalTraining = lazy(() => import('./pages/PersonalTraining'));
 const About = lazy(() => import('./pages/About'));
+const Founder = lazy(() => import('./pages/Founder'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
@@ -27,6 +28,7 @@ export default function AppRoutes() {
           <Route path="kids-calisthenics" element={<KidsCalisthenics />} />
           <Route path="personal-training" element={<PersonalTraining />} />
           <Route path="about" element={<About />} />
+          <Route path="aman-bisht" element={<Founder />} />
           <Route path="contact" element={<Contact />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/:slug" element={<BlogPost />} />
