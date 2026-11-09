@@ -33,7 +33,7 @@ export const business = {
         name: 'Aman Bisht',
         credentials: 'Multiple-time national calisthenics champion who has represented India',
     },
-    logo: `${SITE_URL}/images/cali-logo.png`,
+    logo: `${SITE_URL}/images/cali-logo-square.png`,
     image: `${SITE_URL}/images/cali_hero_bg.jpg`,
 };
 
