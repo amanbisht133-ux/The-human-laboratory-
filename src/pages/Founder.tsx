@@ -99,6 +99,9 @@ export default function Founder() {
                                 </li>
                             ))}
                         </ol>
+                        <p className={P}>
+                            He now sits on the other side of the table too. Aman has judged calisthenics competitions all over India.
+                        </p>
                         <Photo src="/images/founder/aman-judging.webp" alt="Aman Bisht on the judging panel at a calisthenics competition" w={1598} h={1066} pos="51% center" />
                     </section>
 
@@ -136,7 +139,8 @@ export default function Founder() {
                     <aside className="mt-14 glass edge-ember rounded-3xl p-6 md:p-8 text-center reveal">
                         <p className="font-condensed uppercase text-3xl md:text-4xl tracking-wide">Train with Aman's team</p>
                         <p className="mt-3 text-white/70">
-                            For workshops, events and media, message us on WhatsApp. <Link to="/about" className="text-brand-orange underline underline-offset-4">About the academy</Link>.
+                            For workshops, events and media, message us on WhatsApp. You can also follow Aman on{' '}
+                            <a href={founder.instagram} target="_blank" rel="noopener me" className="text-brand-orange underline underline-offset-4">Instagram</a>.
                         </p>
                         <ContactButtons message="Hi! I read about Aman Bisht and would like to get in touch." className="mt-6 justify-center" />
                     </aside>
