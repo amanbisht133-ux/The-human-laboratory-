@@ -38,6 +38,8 @@ const founderSchema = {
     homeLocation: { '@type': 'City', name: 'Hyderabad' },
     knowsAbout: ['Calisthenics', 'Street workout', 'Freestyle calisthenics', 'Bodyweight strength training', 'Calisthenics coaching'],
     award: founder.awards,
+    // The same person's profile on the sister academy's site
+    sameAs: ['https://www.indiancalisthenicsschool.com/aman-bisht'],
     worksFor: [
         { '@id': `${SITE_URL}/#business` },
         { '@type': 'SportsActivityLocation', name: 'Indian Calisthenics School', url: 'https://www.indiancalisthenicsschool.com/' },
