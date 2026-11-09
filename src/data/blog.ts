@@ -18,6 +18,107 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
     {
+        slug: 'calisthenics-kondapur-gachibowli',
+        title: 'Calisthenics in Kondapur & Gachibowli: Fees and Timings',
+        description: 'Calisthenics classes near Kondapur, Gachibowli and HITEC City: batch timings, monthly fees, weekend options, kids classes and how a first session works.',
+        datePublished: '2026-11-10',
+        image: '/images/goa/community-5.webp',
+        imageWidth: 1260,
+        imageHeight: 1400,
+        imageAlt: 'Members training together at Calisthenics Lab India in Kondapur',
+        intro: 'If you live or work around Kondapur, Gachibowli or HITEC City and want to get stronger without machines, calisthenics is one of the most rewarding ways to train. Here is everything you need to know before your first session at Calisthenics Lab India.',
+        sections: [
+            {
+                heading: 'Where we are',
+                paragraphs: [
+                    'Calisthenics Lab India is on Kondapur Road, Kondapur, New Hafeezpet, Raghavendra Colony, Gachibowli, Hyderabad 500084, close to HITEC City, Gachibowli and Madhapur.',
+                ],
+            },
+            {
+                heading: 'Batch timings',
+                list: [
+                    'Monday to Friday: 6:30–9:30 AM and 6:00–9:00 PM, in one-hour batches',
+                    'Saturday and Sunday: 8:30–11:00 AM and 5:30–8:00 PM',
+                    'Kids (The Mighty Tribe, ages 3–15): weekdays 5–6 PM and 6–7 PM, weekends 9–10 AM',
+                ],
+            },
+            {
+                heading: 'Fees',
+                list: [
+                    'Weekday batches: ₹7,777 a month, ₹22,222 for 3 months, ₹44,444 for 6 months, ₹77,777 for a year',
+                    'Weekend batches: ₹5,555 a month for 1.5-hour slots, ₹4,444 a month for 1-hour slots',
+                    'Kids: ₹5,555 a month',
+                    'Personal coaching: priced after a short consultation',
+                ],
+            },
+            {
+                heading: 'Your first session',
+                paragraphs: [
+                    'Your demo session is free on any weekday, in any batch slot. A weekend demo is ₹800, adjusted in your package when you join.',
+                    'Every session starts with a warm-up, then strength and skill work at your level, then a cool-down. If you cannot do a push-up or pull-up yet, you start with an easier version and build up. No experience is needed.',
+                ],
+            },
+            {
+                heading: 'What you can learn',
+                paragraphs: [
+                    'Pull-ups, push-ups, dips, handstands, L-sits, muscle-ups and levers, each taught with step-by-step progressions. We also run yoga at The Yog Lab and a kids program covering calisthenics, gymnastics and parkour.',
+                ],
+            },
+        ],
+        cta: { text: 'Try a session at Calisthenics Lab India in Kondapur.', to: '/', label: 'See batches and book' },
+        related: [
+            { to: '/blog/calisthenics-for-beginners', label: 'Calisthenics for beginners: where to start' },
+            { to: '/kids-calisthenics', label: 'The Mighty Tribe: kids calisthenics, gymnastics & parkour' },
+        ],
+    },
+    {
+        slug: 'weekend-calisthenics-hyderabad',
+        title: 'Weekend Calisthenics in Hyderabad: Saturdays & Sundays',
+        description: 'Can you get strong training only on weekends? How weekend calisthenics batches work in Kondapur, what to expect, timings, fees and tips to progress.',
+        datePublished: '2026-11-10',
+        image: '/images/goa/community-6.webp',
+        imageWidth: 1260,
+        imageHeight: 1400,
+        imageAlt: 'Coach demonstrating a handstand during a weekend skills session',
+        intro: 'Long weekdays in Hyderabad leave many people with only Saturday and Sunday free. The good news: two focused sessions a week are enough to build real strength and learn calisthenics skills, as long as you keep showing up.',
+        sections: [
+            {
+                heading: 'Is training twice a week enough?',
+                paragraphs: [
+                    'For most beginners, yes. Two well-structured sessions a week, done consistently for a few months, build strength, mobility and your first skills. Progress comes from consistency and good progressions, not from training every day.',
+                ],
+            },
+            {
+                heading: 'Weekend batches at Calisthenics Lab India',
+                list: [
+                    'Saturday and Sunday mornings: 8:30–10:00 AM (1.5 hours) and 10:00–11:00 AM (1 hour)',
+                    'Saturday and Sunday evenings: 5:30–7:00 PM (1.5 hours) and 7:00–8:00 PM (1 hour)',
+                    'Fees: ₹5,555 a month for 1.5-hour slots, ₹4,444 a month for 1-hour slots',
+                ],
+            },
+            {
+                heading: 'How to make the most of weekend training',
+                list: [
+                    'Pick one slot and keep it every weekend',
+                    'Add 10–15 minutes of hangs, push-ups and mobility at home on one or two weekdays',
+                    'Sleep well and eat enough protein, so you recover between sessions',
+                    'Track your reps and holds, so you can see your progress',
+                ],
+            },
+            {
+                heading: 'Try a session',
+                paragraphs: [
+                    'A weekend demo session is ₹800, adjusted in your package when you join. If you can make it on a weekday, the demo is free.',
+                ],
+            },
+        ],
+        cta: { text: 'Book a weekend batch at Calisthenics Lab India, Kondapur.', to: '/', label: 'See weekend batches' },
+        related: [
+            { to: '/blog/how-to-do-your-first-pull-up', label: 'How to do your first pull-up' },
+            { to: '/blog/calisthenics-vs-gym', label: 'Calisthenics vs gym' },
+        ],
+    },
+    {
         slug: 'how-to-do-your-first-pull-up',
         title: 'How to Do Your First Pull-Up',
         description: 'A step-by-step plan to go from zero to your first strict pull-up: hangs, scapular pulls, negatives and rows, with how often to train.',

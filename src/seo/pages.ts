@@ -20,6 +20,24 @@ export type PageMeta = {
 
 const abs = (path: string) => (path.startsWith('http') ? path : `${SITE_URL}${path}`);
 
+const FOUNDER_ID = `${SITE_URL}/about#aman-bisht`;
+
+/** Aman Bisht, founder of both academies and the Hyderabad Calisthenics community. */
+const founderSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': FOUNDER_ID,
+    name: business.founder.name,
+    jobTitle: 'Founder',
+    description: 'Founder of Calisthenics Lab India (Kondapur) and Indian Calisthenics School (Madhapur), and of the Hyderabad Calisthenics community. National calisthenics champion who has represented India.',
+    url: abs('/about'),
+    worksFor: [
+        { '@id': `${SITE_URL}/#business` },
+        { '@type': 'SportsActivityLocation', name: 'Indian Calisthenics School', url: 'https://www.indiancalisthenicsschool.com/' },
+    ],
+    memberOf: { '@type': 'Organization', name: 'Hyderabad Calisthenics', sameAs: ['https://www.instagram.com/hyderabad.calisthenics/'] },
+};
+
 export const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'SportsActivityLocation',
@@ -36,7 +54,7 @@ export const localBusinessSchema = {
     hasMap: business.googleBusinessProfile,
     openingHoursSpecification,
     areaServed: ['Kondapur', 'Gachibowli', 'HITEC City', 'Madhapur', 'Hyderabad'].map(name => ({ '@type': 'Place', name })),
-    founder: { '@type': 'Person', name: business.founder.name },
+    founder: { '@id': FOUNDER_ID },
     sameAs: [business.instagram, business.googleBusinessProfile],
 };
 
@@ -84,7 +102,7 @@ const goaEventSchema = {
     ],
 };
 
-const UPDATED = '2026-10-29';
+const UPDATED = '2026-11-10';
 
 const corePages: PageMeta[] = [
     {
@@ -125,7 +143,7 @@ const corePages: PageMeta[] = [
         h1: 'About Calisthenics Lab India',
         image: '/images/goa/aman.jpg',
         lastmod: UPDATED,
-        schemas: [breadcrumbSchema([{ name: 'About', path: '/about' }])],
+        schemas: [founderSchema, breadcrumbSchema([{ name: 'About', path: '/about' }])],
     },
     {
         path: '/contact',
@@ -167,7 +185,7 @@ const postPages: PageMeta[] = blogPosts.map(post => ({
             image: abs(post.image.replace(/\.webp$/, '.jpg')),
             datePublished: post.datePublished,
             dateModified: post.datePublished,
-            author: { '@type': 'Organization', name: business.name, url: `${SITE_URL}/` },
+            author: { '@type': 'Person', '@id': FOUNDER_ID, name: business.founder.name, url: abs('/about') },
             publisher: { '@type': 'Organization', name: business.name, logo: { '@type': 'ImageObject', url: business.logo } },
             mainEntityOfPage: abs(`/blog/${post.slug}`),
         },
