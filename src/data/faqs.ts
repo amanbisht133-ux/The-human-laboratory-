@@ -29,6 +29,18 @@ export const homeFaqs: Faq[] = [
         a: 'Yes. Our kids calisthenics, gymnastics & parkour program for ages 3 to 15 runs on weekdays (5:00–6:00 PM and 6:00–7:00 PM) and weekends (9:00–10:00 AM).',
     },
     {
+        q: 'How much does calisthenics cost at Calisthenics Lab India?',
+        a: 'Weekday batches are ₹7,777 a month (₹22,222 for 3 months, ₹44,444 for 6 months, ₹77,777 for a year). Weekend batches are ₹5,555 a month for 1.5-hour slots or ₹4,444 a month for 1-hour slots. Kids batches are ₹5,555 a month. Personal coaching is priced after a consultation.',
+    },
+    {
+        q: 'Do you have yoga classes?',
+        a: 'Yes, at The Yog Lab with Coach Likhit: Yoga Abhyas group classes (₹6,666 a month, 3 days a week) and Yoga Sankalp 1-on-1 training (₹11,111 a month, 2 sessions a week).',
+    },
+    {
+        q: 'Is calisthenics good for women?',
+        a: 'Yes. Calisthenics suits anyone, at any fitness level. Every exercise is scaled to your current strength, so you build up to skills like pull-ups, handstands and L-sits step by step.',
+    },
+    {
         q: 'How do I join or book a trial session?',
         a: 'Hit the Book Now button anywhere on this page to send us your details via WhatsApp. Your demo is free on any weekday (Monday to Friday, any batch slot). A weekend demo is ₹800, adjusted in your package when you join.',
     },

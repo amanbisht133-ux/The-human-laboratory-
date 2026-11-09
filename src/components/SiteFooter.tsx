@@ -53,6 +53,7 @@ export default function SiteFooter() {
                             <li key={l.to}><Link to={l.to} className="hover:text-brand-orange transition-colors">{l.label === 'Home' ? 'Calisthenics Classes' : l.label}</Link></li>
                         ))}
                         <li><a href={business.instagram} target="_blank" rel="noreferrer" className="hover:text-brand-orange transition-colors">Instagram</a></li>
+                        <li><a href="https://www.indiancalisthenicsschool.com/" target="_blank" rel="noopener" className="hover:text-brand-orange transition-colors">Our Madhapur academy: Indian Calisthenics School</a></li>
                     </ul>
                 </nav>
             </div>
