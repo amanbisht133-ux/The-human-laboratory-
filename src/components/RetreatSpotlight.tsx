@@ -58,10 +58,10 @@ export default function RetreatSpotlight() {
 
                         <div className="mt-auto pt-8 flex flex-wrap items-end justify-between gap-5">
                             <div>
-                                <p className="brochure-label text-taupe">Early bird · first 10 spots</p>
+                                <p className="brochure-label text-taupe">Per person · twin sharing</p>
                                 <p className="mt-1 font-crimson text-4xl md:text-5xl leading-none">
-                                    {retreat.investment.earlyBird.price}
-                                    <span className="ml-3 text-xl text-taupe line-through">{retreat.investment.earlyBird.was}</span>
+                                    {retreat.investment.price.price}
+                                    <span className="ml-3 text-xl text-taupe line-through">{retreat.investment.price.was}</span>
                                 </p>
                             </div>
                             <span className="btn-rust px-7 py-4">Explore the retreat <ArrowRight size={16} /></span>

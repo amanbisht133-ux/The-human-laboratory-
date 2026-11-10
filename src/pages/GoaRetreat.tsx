@@ -208,22 +208,16 @@ export default function GoaRetreat() {
                     <SectionHead kicker="Investment" title="Reserve your spot" />
                     <p className="mt-5 text-[15px] md:text-base leading-relaxed max-w-3xl reveal">{investment.intro}</p>
 
-                    <div className="mt-8 grid md:grid-cols-2 gap-5 reveal">
+                    <div className="mt-8 reveal">
                         <div className="rounded-2xl bg-espresso text-white p-7 md:p-9 shadow-[0_30px_60px_-30px_rgba(28,24,19,0.8)]">
                             <div className="flex items-center justify-between gap-4">
-                                <Label className="text-white/60">Early bird · first 10 spots</Label>
+                                <Label className="text-white/60">Retreat price</Label>
                                 <span className="h-3 w-16 rounded-full bg-rust-light"></span>
                             </div>
-                            <p className="mt-5 font-crimson text-2xl text-rust-light line-through">{investment.earlyBird.was}</p>
-                            <p className="font-crimson text-6xl md:text-7xl leading-none">{investment.earlyBird.price}</p>
-                            <Label className="mt-5 text-white/60">{investment.earlyBird.note}</Label>
-                            <Label className="mt-2 text-rust-light">{investment.earlyBird.saving}</Label>
-                        </div>
-                        <div className="rounded-2xl border border-espresso/50 p-7 md:p-9">
-                            <span className="inline-block rounded-full border border-espresso/40 px-3 py-1 brochure-label !tracking-[0.2em] text-taupe">{investment.regular.badge}</span>
-                            <Label className="mt-4 text-taupe">Regular</Label>
-                            <p className="mt-6 font-crimson text-6xl md:text-7xl leading-none">{investment.regular.price}</p>
-                            <Label className="mt-5 text-taupe">{investment.regular.note}</Label>
+                            <p className="mt-5 font-crimson text-2xl text-rust-light line-through">{investment.price.was}</p>
+                            <p className="font-crimson text-6xl md:text-7xl leading-none">{investment.price.price}</p>
+                            <Label className="mt-5 text-white/60">{investment.price.note}</Label>
+                            <Label className="mt-2 text-rust-light">{investment.price.saving}</Label>
                         </div>
                     </div>
 

@@ -114,8 +114,7 @@ const goaEventSchema = {
     },
     organizer: { '@type': 'Organization', name: business.name, url: `${SITE_URL}/` },
     offers: [
-        { '@type': 'Offer', name: 'Early bird (first 10 spots)', price: '25000', priceCurrency: 'INR', availability: 'https://schema.org/LimitedAvailability', url: abs('/goa-retreat') },
-        { '@type': 'Offer', name: 'Regular', price: '30000', priceCurrency: 'INR', url: abs('/goa-retreat') },
+        { '@type': 'Offer', name: 'Per person, twin sharing', price: '30000', priceCurrency: 'INR', url: abs('/goa-retreat') },
     ],
 };
 
