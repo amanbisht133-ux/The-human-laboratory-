@@ -123,10 +123,10 @@ export const blogPosts: BlogPost[] = [
         title: 'How to Do Your First Pull-Up',
         description: 'A step-by-step plan to go from zero to your first strict pull-up: hangs, scapular pulls, negatives and rows, with how often to train.',
         datePublished: '2026-10-29',
-        image: '/images/goa/handstand.webp',
-        imageWidth: 933,
-        imageHeight: 1400,
-        imageAlt: 'Coach spotting a student during a skill session at Calisthenics Lab India',
+        image: '/images/blog-pull-up-bar-hang.webp',
+        imageWidth: 1000,
+        imageHeight: 1500,
+        imageAlt: 'Members hanging from the pull-up bars during a group session at Calisthenics Lab India',
         intro: 'The first strict pull-up is a milestone for almost everyone who starts calisthenics. It rarely comes from just trying pull-ups again and again. It comes from building the pieces separately: grip, shoulder control and pulling strength, then putting them together.',
         sections: [
             {
