@@ -184,9 +184,8 @@ export const retreat = {
     },
 
     investment: {
-        intro: 'One price covers your stay, breakfasts, the farewell dinner, every session, the trek, water sports and your retreat kit. The first ten spots are offered at the early-bird price.',
-        earlyBird: { price: '₹25,000', was: '₹30,000', note: 'Per person · Twin sharing', saving: 'You save ₹5,000' },
-        regular: { price: '₹30,000', badge: 'After the first 10 spots', note: 'Per person · Twin sharing', caption: 'Once early-bird spots are gone' },
+        intro: 'One price covers your stay, breakfasts, the farewell dinner, every session, the trek, water sports and your retreat kit.',
+        price: { price: '₹30,000', was: '₹35,000', note: 'Per person · Twin sharing', saving: 'You save ₹5,000' },
         extras: [
             { label: 'Single room', value: '+ ₹5,500' },
             { label: 'Deposit to book', value: '₹10,000' },
