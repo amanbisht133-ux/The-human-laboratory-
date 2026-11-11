@@ -78,7 +78,7 @@ const monthlyOffer = (name: string, price: string) => ({
     priceSpecification: { '@type': 'UnitPriceSpecification', price: inr(price), priceCurrency: 'INR', unitText: 'month' },
 });
 
-function serviceSchema(opts: { id: string; name: string; serviceType: string; description: string; path: string; offers?: object[] }) {
+function serviceSchema(opts: { id: string; name: string; serviceType: string; description: string; path: string; offers?: object[]; hoursAvailable?: object[] }) {
     return {
         '@context': 'https://schema.org',
         '@type': 'Service',
@@ -90,6 +90,7 @@ function serviceSchema(opts: { id: string; name: string; serviceType: string; de
         provider: businessRef,
         areaServed: { '@type': 'City', name: 'Hyderabad' },
         ...(opts.offers ? { offers: opts.offers } : {}),
+        ...(opts.hoursAvailable ? { hoursAvailable: opts.hoursAvailable } : {}),
     };
 }
 
@@ -110,8 +111,14 @@ const personalCoachingService = serviceSchema({
     id: 'personal-coaching',
     name: 'Calisthenics personal coaching',
     serviceType: 'Personal training',
-    description: '1-on-1 calisthenics coaching in Kondapur, Hyderabad, planned around your goals, level and schedule. Fees are shared after a consultation.',
+    description: '1-on-1 calisthenics coaching in Kondapur, Hyderabad, available 24/7 by appointment and planned around your goals, level and schedule. Fees are shared after a consultation.',
     path: '/personal-training',
+    hoursAvailable: [{
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(d => `https://schema.org/${d}`),
+        opens: '00:00',
+        closes: '23:59',
+    }],
 });
 
 const kidsService = serviceSchema({
@@ -216,7 +223,7 @@ const goaEventSchema = {
     ],
 };
 
-const UPDATED = '2026-11-10';
+const UPDATED = '2026-11-11';
 
 const corePages: PageMeta[] = [
     {
@@ -243,7 +250,7 @@ const corePages: PageMeta[] = [
         path: '/personal-training',
         name: 'Personal Training',
         title: 'Personal Calisthenics Training in Kondapur, Hyderabad',
-        description: 'One-on-one calisthenics coaching in Kondapur, Hyderabad for pull-ups, handstands, muscle-ups and levers. Book a consultation on WhatsApp or call us.',
+        description: 'One-on-one calisthenics coaching in Kondapur, Hyderabad, available 24/7 by appointment. Pull-ups, handstands, muscle-ups and levers. Book on WhatsApp.',
         h1: 'Personal Calisthenics Coaching in Hyderabad',
         image: '/images/goa/handstand.jpg',
         lastmod: UPDATED,

@@ -10,7 +10,7 @@ export const homeFaqs: Faq[] = [
     },
     {
         q: 'What programs does Calisthenics Lab India offer?',
-        a: 'Adult calisthenics group batches from beginner to advanced (including weekend batches), one-on-one personal coaching, a kids calisthenics, gymnastics & parkour program, and yoga classes at The Yog Lab.',
+        a: 'Adult calisthenics group batches from beginner to advanced (including weekend batches), one-on-one personal coaching (available 24/7 by appointment), a kids calisthenics, gymnastics & parkour program, and yoga classes at The Yog Lab.',
     },
     {
         q: 'What are the calisthenics batch timings?',
@@ -77,6 +77,10 @@ export const personalTrainingFaqs: Faq[] = [
     {
         q: 'What does personal coaching include?',
         a: 'One-on-one sessions with a programme built around your goals, whether that is your first pull-up or advanced skills like handstands, muscle-ups and levers.',
+    },
+    {
+        q: 'When can I do personal training?',
+        a: 'Any time, 24/7. Personal sessions are booked by appointment at a time that suits you, including early mornings, late nights and weekends. Only the group batches run at fixed timings (weekdays 6:30–9:30 AM and 6–9 PM).',
     },
     {
         q: 'How much does personal training cost?',
