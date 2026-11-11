@@ -3,6 +3,7 @@
 import { SITE_URL, business, openingHoursSpecification } from '../data/business';
 import { homeFaqs, kidsFaqs, personalTrainingFaqs, yogFaqs, type Faq } from '../data/faqs';
 import { blogPosts } from '../data/blog';
+import { PRICING_TIERS, WEEKEND_ONE_HOUR_MONTHLY, YOG_LAB } from '../data/programs';
 import { founder } from '../data/founder';
 
 export type PageMeta = {
@@ -22,6 +23,16 @@ export type PageMeta = {
 const abs = (path: string) => (path.startsWith('http') ? path : `${SITE_URL}${path}`);
 
 const FOUNDER_ID = `${SITE_URL}/about#aman-bisht`;
+const BUSINESS_ID = `${SITE_URL}/#business`;
+
+/** Points at the academy; name, url and logo are repeated so it also reads on pages without the full block. */
+const businessRef = {
+    '@type': 'HealthClub',
+    '@id': BUSINESS_ID,
+    name: business.name,
+    url: `${SITE_URL}/`,
+    logo: { '@type': 'ImageObject', url: business.logo },
+};
 
 /** Aman Bisht, founder of both academies and the Hyderabad Calisthenics community. */
 const founderSchema = {
@@ -41,7 +52,7 @@ const founderSchema = {
     // The same person's profile on the sister academy's site
     sameAs: [founder.instagram, 'https://www.indiancalisthenicsschool.com/aman-bisht'],
     worksFor: [
-        { '@id': `${SITE_URL}/#business` },
+        { '@id': BUSINESS_ID },
         { '@type': 'SportsActivityLocation', name: 'Indian Calisthenics School', url: 'https://www.indiancalisthenicsschool.com/' },
     ],
     memberOf: { '@type': 'Organization', name: 'Hyderabad Calisthenics', sameAs: ['https://www.instagram.com/hyderabad.calisthenics/'] },
@@ -55,10 +66,90 @@ const founderProfileSchema = {
     mainEntity: founderSchema,
 };
 
+/** "₹7,777" → "7777" for schema.org prices. */
+const inr = (price: string) => price.replace(/[^\d]/g, '');
+
+const monthlyOffer = (name: string, price: string) => ({
+    '@type': 'Offer',
+    name,
+    price: inr(price),
+    priceCurrency: 'INR',
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: inr(price), priceCurrency: 'INR', unitText: 'month' },
+});
+
+function serviceSchema(opts: { id: string; name: string; serviceType: string; description: string; path: string; offers?: object[] }) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        '@id': abs(`${opts.path}#${opts.id}`),
+        name: opts.name,
+        serviceType: opts.serviceType,
+        description: opts.description,
+        url: abs(opts.path),
+        provider: businessRef,
+        areaServed: { '@type': 'City', name: 'Hyderabad' },
+        ...(opts.offers ? { offers: opts.offers } : {}),
+    };
+}
+
+const groupClassesService = serviceSchema({
+    id: 'group-classes',
+    name: 'Calisthenics group classes for adults',
+    serviceType: 'Group calisthenics classes',
+    description: 'Coached calisthenics batches for adults of all levels in Kondapur, Hyderabad: weekday morning and evening batches, plus weekend batches.',
+    path: '/',
+    offers: [
+        monthlyOffer('Weekday batch (Mon–Fri), monthly', PRICING_TIERS['Weekday Batch']['1 Month']),
+        monthlyOffer('Weekend batch, 1.5-hour slot, monthly', PRICING_TIERS['Weekend']['1 Month']),
+        monthlyOffer('Weekend batch, 1-hour slot, monthly', WEEKEND_ONE_HOUR_MONTHLY),
+    ],
+});
+
+const personalCoachingService = serviceSchema({
+    id: 'personal-coaching',
+    name: 'Calisthenics personal coaching',
+    serviceType: 'Personal training',
+    description: '1-on-1 calisthenics coaching in Kondapur, Hyderabad, planned around your goals, level and schedule. Fees are shared after a consultation.',
+    path: '/personal-training',
+});
+
+const kidsService = serviceSchema({
+    id: 'kids-program',
+    name: 'Kids calisthenics, gymnastics & parkour classes',
+    serviceType: 'Kids fitness classes',
+    description: 'Weekend calisthenics, gymnastics and parkour classes for kids aged 3–15 in Kondapur, Hyderabad, in three levels.',
+    path: '/kids-calisthenics',
+    offers: [monthlyOffer('Kids batch, monthly', PRICING_TIERS['Kids Batch']['1 Month'])],
+});
+
+const yogaServices = YOG_LAB.programs.map(program =>
+    serviceSchema({
+        id: program.name.toLowerCase().replace(/\s+/g, '-'),
+        name: `${program.name} (${program.tag.toLowerCase()})`,
+        serviceType: program.tag === 'Group class' ? 'Group yoga classes' : 'Personal yoga training',
+        description: `${program.summary} ${program.frequency}, at The Yog Lab, Kondapur.`,
+        path: '/yog-lab',
+        offers: [monthlyOffer(`${program.name}, monthly`, program.price)],
+    }),
+);
+
+const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
+    name: business.name,
+    alternateName: 'Calisthenics Lab',
+    url: `${SITE_URL}/`,
+    inLanguage: 'en-IN',
+    publisher: { '@id': BUSINESS_ID },
+};
+
 export const localBusinessSchema = {
     '@context': 'https://schema.org',
-    '@type': 'SportsActivityLocation',
-    '@id': `${SITE_URL}/#business`,
+    // HealthClub is a LocalBusiness (and an Organization), so this one block
+    // carries both the local-business and the organization details.
+    '@type': 'HealthClub',
+    '@id': BUSINESS_ID,
     name: business.name,
     description: 'Calisthenics academy in Kondapur, Hyderabad: adult group batches, personal coaching, a kids calisthenics, gymnastics & parkour program and yoga at The Yog Lab.',
     url: `${SITE_URL}/`,
@@ -72,7 +163,13 @@ export const localBusinessSchema = {
     openingHoursSpecification,
     areaServed: ['Kondapur', 'Gachibowli', 'HITEC City', 'Madhapur', 'Hyderabad'].map(name => ({ '@type': 'Place', name })),
     founder: { '@id': FOUNDER_ID },
+    priceRange: '₹4,444–₹11,111 per month',
+    currenciesAccepted: 'INR',
     sameAs: [business.instagram, business.googleBusinessProfile],
+    makesOffer: [groupClassesService, personalCoachingService, kidsService, ...yogaServices].map(service => ({
+        '@type': 'Offer',
+        itemOffered: { '@id': service['@id'] },
+    })),
 };
 
 function faqSchema(faqs: Faq[]) {
@@ -112,7 +209,7 @@ const goaEventSchema = {
         name: 'Beachfront resort, North Goa',
         address: { '@type': 'PostalAddress', addressRegion: 'Goa', addressCountry: 'IN' },
     },
-    organizer: { '@type': 'Organization', name: business.name, url: `${SITE_URL}/` },
+    organizer: businessRef,
     offers: [
         { '@type': 'Offer', name: 'Per person, twin sharing', price: '30000', priceCurrency: 'INR', url: abs('/goa-retreat') },
     ],
@@ -129,7 +226,7 @@ const corePages: PageMeta[] = [
         h1: 'Calisthenics Academy in Kondapur, Hyderabad',
         image: '/images/cali_hero_bg.jpg',
         lastmod: UPDATED,
-        schemas: [localBusinessSchema, faqSchema(homeFaqs)],
+        schemas: [localBusinessSchema, websiteSchema, groupClassesService, faqSchema(homeFaqs)],
     },
     {
         path: '/kids-calisthenics',
@@ -139,7 +236,7 @@ const corePages: PageMeta[] = [
         h1: 'The Mighty Tribe',
         image: '/images/goa/community-6.jpg',
         lastmod: UPDATED,
-        schemas: [faqSchema(kidsFaqs), breadcrumbSchema([{ name: 'Kids Calisthenics', path: '/kids-calisthenics' }])],
+        schemas: [kidsService, faqSchema(kidsFaqs), breadcrumbSchema([{ name: 'Kids Calisthenics', path: '/kids-calisthenics' }])],
     },
     {
         path: '/personal-training',
@@ -149,7 +246,7 @@ const corePages: PageMeta[] = [
         h1: 'Personal Calisthenics Coaching in Hyderabad',
         image: '/images/goa/handstand.jpg',
         lastmod: UPDATED,
-        schemas: [faqSchema(personalTrainingFaqs), breadcrumbSchema([{ name: 'Personal Training', path: '/personal-training' }])],
+        schemas: [personalCoachingService, faqSchema(personalTrainingFaqs), breadcrumbSchema([{ name: 'Personal Training', path: '/personal-training' }])],
     },
     {
         path: '/about',
@@ -212,7 +309,7 @@ const postPages: PageMeta[] = blogPosts.map(post => ({
             datePublished: post.datePublished,
             dateModified: post.datePublished,
             author: { '@type': 'Person', '@id': FOUNDER_ID, name: business.founder.name, url: abs('/about') },
-            publisher: { '@type': 'Organization', name: business.name, logo: { '@type': 'ImageObject', url: business.logo } },
+            publisher: businessRef,
             mainEntityOfPage: abs(`/blog/${post.slug}`),
         },
         breadcrumbSchema([{ name: 'Blog', path: '/blog' }, { name: post.title, path: `/blog/${post.slug}` }]),
@@ -238,7 +335,7 @@ const extraPages: PageMeta[] = [
         h1: 'Yoga Classes in Kondapur, Hyderabad',
         image: '/images/goa/breathe.jpg',
         lastmod: UPDATED,
-        schemas: [faqSchema(yogFaqs), breadcrumbSchema([{ name: 'The Yog Lab', path: '/yog-lab' }])],
+        schemas: [...yogaServices, faqSchema(yogFaqs), breadcrumbSchema([{ name: 'The Yog Lab', path: '/yog-lab' }])],
     },
 ];
 
