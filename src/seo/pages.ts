@@ -62,7 +62,8 @@ const founderSchema = {
 const founderProfileSchema = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
-    dateModified: '2026-11-10',
+    dateCreated: '2026-11-10T00:00:00+05:30',
+    dateModified: '2026-11-11T00:00:00+05:30',
     mainEntity: founderSchema,
 };
 
@@ -306,8 +307,8 @@ const postPages: PageMeta[] = blogPosts.map(post => ({
             headline: post.title,
             description: post.description,
             image: abs(post.image.replace(/\.webp$/, '.jpg')),
-            datePublished: post.datePublished,
-            dateModified: post.datePublished,
+            datePublished: `${post.datePublished}T09:00:00+05:30`,
+            dateModified: `${post.datePublished}T09:00:00+05:30`,
             author: { '@type': 'Person', '@id': FOUNDER_ID, name: business.founder.name, url: abs('/about') },
             publisher: businessRef,
             mainEntityOfPage: abs(`/blog/${post.slug}`),
