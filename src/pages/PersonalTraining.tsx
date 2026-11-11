@@ -27,6 +27,10 @@ export default function PersonalTraining() {
                     One-on-one calisthenics coaching at Calisthenics Lab India in Kondapur, Hyderabad. We build a programme
                     around your goals, whether that is your first pull-up or advanced skills like handstands, muscle-ups and levers.
                 </p>
+                <p>
+                    Personal sessions are available <strong className="text-white">24/7</strong>, booked by appointment at a time that
+                    suits you. Group batches are the only classes with fixed timings.
+                </p>
                 <ContactButtons message={WA_MESSAGE} className="pt-2" />
             </PageHero>
 
@@ -55,7 +59,7 @@ export default function PersonalTraining() {
                         <h2 className="mt-10 font-condensed uppercase text-4xl md:text-5xl tracking-wide">How it <span className="ember-text">works</span></h2>
                         <ol className="mt-5 space-y-4">
                             {[
-                                ['Consultation', 'Message or call us and tell us your goals, schedule and training history.'],
+                                ['Consultation', 'Message or call us and tell us your goals, training history and the time that suits you, any hour of the day.'],
                                 ['Your programme', 'We build progressions around where you are today and where you want to get to.'],
                                 ['One-on-one sessions', 'Coached sessions with feedback on every rep, adjusted as you progress.'],
                             ].map(([title, text], i) => (
