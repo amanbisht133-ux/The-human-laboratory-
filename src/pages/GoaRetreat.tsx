@@ -215,7 +215,7 @@ export default function GoaRetreat() {
                     <SectionHead kicker="Day 1 to Day 4" title="Your 4 days at a glance" />
                     {/* Illustrated walkway map (src/assets/retreat-map.svg, generated; photos load from /images/goa) */}
                     <p className="mt-4 text-[15px] text-espresso/75 reveal">
-                        Tap any stop <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-rust text-white text-sm font-bold align-middle">+</span> to see what it is and what you will do.
+                        Tap <span className="inline-block rounded-full bg-rust px-2.5 py-0.5 text-white text-xs font-bold align-middle">See details ›</span> on any stop to know what it is and what you will do.
                     </p>
                     <div
                         className="mt-6 -mx-6 sm:mx-auto max-w-md reveal"
