@@ -161,7 +161,7 @@ export default function GoaRetreat() {
                 <div className="max-w-5xl mx-auto">
                     <SectionHead kicker="Day 1 to Day 4" title="Your 4 days at a glance" />
                     {/* Illustrated walkway map (src/assets/retreat-map.svg, generated; photos load from /images/goa) */}
-                    <div className="mt-8 mx-auto max-w-md reveal" dangerouslySetInnerHTML={{ __html: retreatMap }} />
+                    <div className="mt-8 -mx-6 sm:mx-auto max-w-md reveal" dangerouslySetInnerHTML={{ __html: retreatMap }} />
                     <div className="mt-2 text-center">
                         <button
                             onClick={() => {
