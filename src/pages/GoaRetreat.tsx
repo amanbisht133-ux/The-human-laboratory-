@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import retreatMap from '../assets/retreat-map.svg?raw';
 import type { ReactNode } from 'react';
 import { ArrowRight, ArrowUpRight, Plus } from 'lucide-react';
 import caliLogo from '../components/images/CALI@2x.webp';
@@ -159,39 +160,19 @@ export default function GoaRetreat() {
             <section className="px-6 pt-14 md:pt-20" id="four-days" aria-label="Your 4 days at a glance">
                 <div className="max-w-5xl mx-auto">
                     <SectionHead kicker="Day 1 to Day 4" title="Your 4 days at a glance" />
-                    <ol className="relative mt-10 grid gap-6 md:grid-cols-4 md:gap-5">
-                        {/* the route line: down the left on phones, across the top on wider screens */}
-                        <span aria-hidden="true" className="absolute left-[1.35rem] top-3 bottom-3 w-px border-l-2 border-dashed border-rust/50 md:left-6 md:right-6 md:top-[1.35rem] md:bottom-auto md:h-px md:w-auto md:border-l-0 md:border-t-2"></span>
-                        {days.map((d, i) => (
-                            <li key={d.number} className="relative pl-14 md:pl-0 reveal">
-                                <span className="absolute left-0 top-0 md:static flex h-11 w-11 items-center justify-center rounded-full bg-espresso text-white font-italiana text-xl shadow-[0_0_0_6px_var(--color-sand)]">
-                                    {d.number}
-                                </span>
-                                <div className="md:mt-5 rounded-xl bg-white/60 border border-espresso/10 p-5">
-                                    <Label className="text-taupe">{d.date}</Label>
-                                    <h3 className="mt-1 font-italiana text-2xl leading-tight">{d.title}</h3>
-                                    <ul className="mt-3 space-y-1.5">
-                                        {d.highlights.map(h => (
-                                            <li key={h} className="flex gap-2 text-[15px] leading-snug">
-                                                <span aria-hidden="true" className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-rust"></span>
-                                                <span>{h}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <button
-                                        onClick={() => {
-                                            setActiveDay(i);
-                                            setOpenDetail('journey');
-                                            document.getElementById('details')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                        }}
-                                        className="mt-4 brochure-label !tracking-[0.18em] text-rust underline underline-offset-4"
-                                    >
-                                        Full timings →
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                    </ol>
+                    {/* Illustrated walkway map (src/assets/retreat-map.svg, generated; photos load from /images/goa) */}
+                    <div className="mt-8 mx-auto max-w-md reveal" dangerouslySetInnerHTML={{ __html: retreatMap }} />
+                    <div className="mt-2 text-center">
+                        <button
+                            onClick={() => {
+                                setOpenDetail('journey');
+                                document.getElementById('details')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }}
+                            className="btn-rust px-7 py-3.5"
+                        >
+                            See full timings
+                        </button>
+                    </div>
                 </div>
             </section>
 
