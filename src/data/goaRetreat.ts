@@ -96,6 +96,7 @@ export const retreat = {
     days: [
         {
             number: '01', date: 'Thu · 10 Dec', title: 'Arrive & connect',
+            highlights: ['Check-in & retreat kit', 'Opening circle', 'Calisthenics skills', 'Sunset beach walk & breathwork', 'Sound healing under the stars'],
             items: [
                 ['12–2 PM', 'Check-in, welcome drink, retreat kit'],
                 ['4:00 PM', 'Opening circle'],
@@ -106,6 +107,7 @@ export const retreat = {
         },
         {
             number: '02', date: 'Fri · 11 Dec', title: 'Train, play & jam',
+            highlights: ['Body cleansing (jal neti, kunjal kriya)', 'Sunrise yoga', 'Water sports', 'Calisthenics by the pool', 'Bonfire & music jam'],
             items: [
                 ['6:30 AM', 'Body cleansing (jal neti, sutra neti & kunjal kriya)'],
                 ['7:15 AM', 'Sunrise yoga'],
@@ -119,6 +121,7 @@ export const retreat = {
         },
         {
             number: '03', date: 'Sat · 12 Dec', title: 'Explore & dance',
+            highlights: ['Sunrise Arambol jungle trek', 'Partner yoga on the beach', 'Yoga: bends & splits', 'Ecstatic dance night', 'Farewell dinner together'],
             items: [
                 ['6:00 AM', 'Sunrise jungle trek in Arambol, before the heat'],
                 ['8:30 AM', 'Partner yoga on Arambol beach, at the end of the trail'],
@@ -132,6 +135,7 @@ export const retreat = {
         },
         {
             number: '04', date: 'Sun · 13 Dec', title: 'Integrate & depart',
+            highlights: ['Gentle yoga & meditation', 'Closing circle & certificates', 'Checkout by 11 AM'],
             items: [
                 ['7:00 AM', 'Gentle yoga and meditation'],
                 ['8:30 AM', 'Breakfast'],
