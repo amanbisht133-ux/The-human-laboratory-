@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import retreatMap from '../assets/retreat-map.svg?raw';
 import type { ReactNode } from 'react';
-import { ArrowRight, ArrowUpRight, Plus } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Plus, X } from 'lucide-react';
 import caliLogo from '../components/images/CALI@2x.webp';
-import { retreat, RETREAT_PATH, RETREAT_REGISTER_URL, RETREAT_WHATSAPP_URL } from '../data/goaRetreat';
+import { retreat, retreatStops, RETREAT_PATH, RETREAT_REGISTER_URL, RETREAT_WHATSAPP_URL } from '../data/goaRetreat';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { useReveal } from '../hooks/useReveal';
 import { trackPixelEvent } from '../lib/metaPixel';
@@ -109,6 +110,20 @@ export default function GoaRetreat() {
     const [openExperience, setOpenExperience] = useState<number | null>(null);
     const [openDetail, setOpenDetail] = useState<Detail | null>(null);
     const [activeDay, setActiveDay] = useState(0);
+    // Map stop whose pop-up is open (key from data-stop in the SVG), or null
+    const [stopKey, setStopKey] = useState<string | null>(null);
+    const stop = stopKey ? retreatStops[stopKey] : null;
+    useEffect(() => {
+        if (!stopKey) return;
+        const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setStopKey(null); };
+        document.addEventListener('keydown', onKey);
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.removeEventListener('keydown', onKey);
+            document.body.style.overflow = '';
+        };
+    }, [stopKey]);
+    const stopFromEvent = (target: EventTarget) => (target as Element).closest?.('[data-stop]')?.getAttribute('data-stop') ?? null;
     const toggleDetail = (d: Detail) => setOpenDetail(openDetail === d ? null : d);
 
     const { invitation, experiences, lead, facilitators, audience, days, stay, community, investment } = retreat;
@@ -116,6 +131,45 @@ export default function GoaRetreat() {
 
     return (
         <div className="bg-sand text-espresso font-dm overflow-x-hidden">
+
+            {stop && (
+                <div className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="stop-title">
+                    <div className="absolute inset-0 bg-espresso/70" onClick={() => setStopKey(null)}></div>
+                    <div className="relative w-full sm:max-w-md max-h-[88svh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-sand text-espresso shadow-2xl">
+                        <button
+                            onClick={() => setStopKey(null)}
+                            aria-label="Close"
+                            autoFocus
+                            className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-espresso/80 text-white"
+                        >
+                            <X size={20} />
+                        </button>
+                        {stop.image ? (
+                            <img src={stop.image} alt="" className="h-48 w-full object-cover" />
+                        ) : (
+                            <div className="h-28 w-full bg-[#7dbfd0]"></div>
+                        )}
+                        <div className="p-6 pb-8">
+                            <Label>{stop.day} · {stop.time}</Label>
+                            <h3 id="stop-title" className="mt-2 font-italiana text-4xl leading-tight">{stop.title}</h3>
+                            <p className="mt-4 text-base leading-relaxed text-espresso/85">{stop.what}</p>
+                            <Label className="mt-6 text-taupe">What you will do</Label>
+                            <ul className="mt-3 space-y-2">
+                                {stop.points.map(pt => (
+                                    <li key={pt} className="flex gap-2.5 text-[15px] leading-snug">
+                                        <span aria-hidden="true" className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-rust"></span>
+                                        <span>{pt}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            <p className="mt-5 rounded-xl bg-white/70 border border-espresso/10 px-4 py-3 text-sm leading-relaxed">
+                                <span className="font-bold text-rust">Good to know: </span>{stop.note}
+                            </p>
+                            <button onClick={() => setStopKey(null)} className="btn-rust mt-6 w-full justify-center px-7 py-3.5">Back to the map</button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* COVER */}
             <section className="relative min-h-[calc(100svh-5rem)] flex flex-col overflow-hidden">
@@ -152,6 +206,38 @@ export default function GoaRetreat() {
                         ))}
                     </div>
                     <Label className="mt-8 text-center text-white/60">Travel with like-minded people</Label>
+                </div>
+            </section>
+
+            {/* 4-DAY MAP: the whole retreat at a glance, right after the cover */}
+            <section className="px-6 pt-14 md:pt-20" id="four-days" aria-label="Your 4 days at a glance">
+                <div className="max-w-5xl mx-auto">
+                    <SectionHead kicker="Day 1 to Day 4" title="Your 4 days at a glance" />
+                    {/* Illustrated walkway map (src/assets/retreat-map.svg, generated; photos load from /images/goa) */}
+                    <p className="mt-4 text-[15px] text-espresso/75 reveal">
+                        Tap <span className="inline-block rounded-full bg-rust px-2.5 py-0.5 text-white text-xs font-bold align-middle">See details ›</span> on any stop to know what it is and what you will do.
+                    </p>
+                    <div
+                        className="mt-6 -mx-6 sm:mx-auto max-w-md reveal"
+                        onClick={e => { const k = stopFromEvent(e.target); if (k) setStopKey(k); }}
+                        onKeyDown={e => {
+                            if (e.key !== 'Enter' && e.key !== ' ') return;
+                            const k = stopFromEvent(e.target);
+                            if (k) { e.preventDefault(); setStopKey(k); }
+                        }}
+                        dangerouslySetInnerHTML={{ __html: retreatMap }}
+                    />
+                    <div className="mt-2 text-center">
+                        <button
+                            onClick={() => {
+                                setOpenDetail('journey');
+                                document.getElementById('details')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }}
+                            className="btn-rust px-7 py-3.5"
+                        >
+                            See full timings
+                        </button>
+                    </div>
                 </div>
             </section>
 
@@ -242,7 +328,7 @@ export default function GoaRetreat() {
             </section>
 
             {/* DETAILS: everything else, collapsed */}
-            <section className="px-6 pt-16 md:pt-24 pb-20">
+            <section className="px-6 pt-16 md:pt-24 pb-20 scroll-mt-20" id="details">
                 <div className="max-w-5xl mx-auto">
                     <SectionHead kicker="The Details" title="Everything you need to know" />
                     <div className="mt-8 border-t border-espresso/20 reveal">

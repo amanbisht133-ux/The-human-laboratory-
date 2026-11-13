@@ -56,6 +56,17 @@ export default function RetreatSpotlight() {
                             ))}
                         </div>
 
+                        {/* Day 1 to Day 4 at a glance */}
+                        <ol className="mt-6 grid grid-cols-2 gap-3 font-dm">
+                            {retreat.days.map(d => (
+                                <li key={d.number} className="rounded-lg bg-white/60 border border-espresso/10 px-3 py-2.5">
+                                    <p className="brochure-label !tracking-[0.18em] text-rust">Day {d.number} · {d.date.split(' · ')[0]}</p>
+                                    <p className="mt-0.5 font-italiana text-lg leading-tight">{d.title}</p>
+                                    <p className="mt-0.5 text-xs text-espresso/65 leading-snug">{d.highlights.slice(0, 3).join(' · ')}</p>
+                                </li>
+                            ))}
+                        </ol>
+
                         <div className="mt-auto pt-8 flex flex-wrap items-end justify-between gap-5">
                             <div>
                                 <p className="brochure-label text-taupe">Per person · twin sharing</p>

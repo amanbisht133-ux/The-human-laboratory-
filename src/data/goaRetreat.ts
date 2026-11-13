@@ -96,6 +96,7 @@ export const retreat = {
     days: [
         {
             number: '01', date: 'Thu · 10 Dec', title: 'Arrive & connect',
+            highlights: ['Check-in & retreat kit', 'Opening circle', 'Calisthenics skills', 'Sunset beach walk & breathwork', 'Sound healing under the stars'],
             items: [
                 ['12–2 PM', 'Check-in, welcome drink, retreat kit'],
                 ['4:00 PM', 'Opening circle'],
@@ -106,6 +107,7 @@ export const retreat = {
         },
         {
             number: '02', date: 'Fri · 11 Dec', title: 'Train, play & jam',
+            highlights: ['Body cleansing (jal neti, kunjal kriya)', 'Sunrise yoga', 'Water sports', 'Calisthenics by the pool', 'Bonfire & music jam'],
             items: [
                 ['6:30 AM', 'Body cleansing (jal neti, sutra neti & kunjal kriya)'],
                 ['7:15 AM', 'Sunrise yoga'],
@@ -119,6 +121,7 @@ export const retreat = {
         },
         {
             number: '03', date: 'Sat · 12 Dec', title: 'Explore & dance',
+            highlights: ['Sunrise Arambol jungle trek', 'Partner yoga on the beach', 'Yoga: bends & splits', 'Ecstatic dance night', 'Farewell dinner together'],
             items: [
                 ['6:00 AM', 'Sunrise jungle trek in Arambol, before the heat'],
                 ['8:30 AM', 'Partner yoga on Arambol beach, at the end of the trail'],
@@ -132,6 +135,7 @@ export const retreat = {
         },
         {
             number: '04', date: 'Sun · 13 Dec', title: 'Integrate & depart',
+            highlights: ['Gentle yoga & meditation', 'Closing circle & certificates', 'Checkout by 11 AM'],
             items: [
                 ['7:00 AM', 'Gentle yoga and meditation'],
                 ['8:30 AM', 'Breakfast'],
@@ -210,3 +214,94 @@ export const RETREAT_REGISTER_URL = 'https://tally.so/r/dbWe7o';
 export const RETREAT_WHATSAPP_URL = `https://api.whatsapp.com/send?phone=918826762234&text=${encodeURIComponent(
     "Hi! I'd like to reserve a spot for Strength & Stillness, the Goa retreat (10–13 Dec 2026)."
 )}`;
+
+// What each stop on the illustrated map is, shown in a pop-up when it is tapped.
+// Keys match data-stop in src/assets/retreat-map.svg (d<day>-<stop>).
+export type RetreatStop = { day: string; time: string; title: string; image?: string; what: string; points: string[]; note: string };
+const GOA = '/images/goa';
+export const retreatStops: Record<string, RetreatStop> = {
+    'd1-1': {
+        day: 'Day 1 · Thu 10 Dec', time: '12–2 PM', title: 'Check-in & welcome drink', image: `${GOA}/resort-pool.webp`,
+        what: 'You arrive at the beachfront resort, get your room and settle in. This is your slow start: no sessions yet, just the sea, the pool and the people you will spend four days with.',
+        points: ['A welcome drink on arrival', 'Your retreat kit: T-shirt and journal', 'Free time on the beach or by the pool until 4 PM'],
+        note: 'Travel to the resort is on your own. It is under an hour from Mopa airport.',
+    },
+    'd1-2': {
+        day: 'Day 1 · Thu 10 Dec', time: '4:00 PM', title: 'Opening circle & skills', image: `${GOA}/handstand.webp`,
+        what: 'We sit together, meet the coaches and each other, and set an intention for the retreat. Then the first training session: calisthenics skills, which means learning to control your own bodyweight.',
+        points: ['Handstand, L-sit, pull-ups and elbow lever', 'Every skill is broken into steps for your level', 'Coaches spot you and correct your form'],
+        note: 'Complete beginners are welcome. You do not need to be able to do any of these yet.',
+    },
+    'd1-3': {
+        day: 'Day 1 · Thu 10 Dec', time: '6:15 PM', title: 'Sunset walk & breathwork', image: `${GOA}/breathe.webp`,
+        what: 'A slow walk along the beach as the sun goes down, followed by guided breathwork: simple breathing patterns that slow the heart rate and calm a busy mind.',
+        points: ['An easy barefoot walk on the sand', 'Guided breathing you can use any time you feel stressed', 'A quiet way to arrive after a day of travel'],
+        note: 'Nothing to bring. Come as you are.',
+    },
+    'd1-4': {
+        day: 'Day 1 · Thu 10 Dec', time: '8:30 PM', title: 'Sound healing', image: `${GOA}/heal.webp`,
+        what: 'Sound healing, also called a sound bath, is deep relaxation through sound. You lie down comfortably while instruments such as singing bowls and chimes are played around you, and the tones and vibrations help the body let go.',
+        points: ['You simply lie down and listen: there is nothing to do', 'Held outdoors, under the stars', 'Many people drift off, and that is completely fine'],
+        note: 'Wear something warm and comfortable for the evening breeze.',
+    },
+    'd2-1': {
+        day: 'Day 2 · Fri 11 Dec', time: '6:30 AM', title: 'Body cleansing & sunrise yoga', image: `${GOA}/stay.webp`,
+        what: 'We start with traditional yogic cleansing practices, done on an empty stomach and guided step by step by a certified teacher. Then, at 7:15 AM, sunrise yoga by the sea.',
+        points: ['Jal neti: rinsing the nose with warm salt water', 'Sutra neti: cleaning the nasal passage with a soft thread', 'Kunjal kriya: drinking warm salt water and bringing it back up to cleanse the stomach'],
+        note: 'Every practice is optional. Try what you are comfortable with and watch the rest. Breakfast follows at 8:30 AM.',
+    },
+    'd2-2': {
+        day: 'Day 2 · Fri 11 Dec', time: '9:30 AM', title: 'Water sports',
+        what: 'A morning of adrenaline after the calm: water sports in the sea, right across from the resort. It is included in your retreat price.',
+        points: ['A fun, playful break from training', 'Done together as a group', 'The activities on the day depend on the sea conditions'],
+        note: 'Tell us in advance if you cannot swim or are not comfortable in water, and we will plan around it.',
+    },
+    'd2-3': {
+        day: 'Day 2 · Fri 11 Dec', time: '3:30 PM', title: 'Calisthenics by the pool', image: `${GOA}/move.webp`,
+        what: 'Calisthenics is strength training using your own bodyweight: push-ups, pull-ups, dips, squats and core work, with no machines. This is a full workout by the pool, scaled so everyone trains at their own level.',
+        points: ['A coached strength workout for the whole body', 'Easier and harder versions of every exercise', 'Recovery stretch and breathwork at 5:30 PM'],
+        note: 'Lunch and pool time come first, from 1 to 3:30 PM.',
+    },
+    'd2-4': {
+        day: 'Day 2 · Fri 11 Dec', time: '7:30 PM', title: 'Bonfire & music jam', image: `${GOA}/celebrate.webp`,
+        what: 'An evening around the fire. Someone starts a song, someone picks up a drum or a guitar, and it grows from there. No stage and no audience: everyone is part of it.',
+        points: ['Singing, rhythm and stories around a bonfire', 'Bring an instrument if you play one', 'You do not need to sing well to join in'],
+        note: 'This is where strangers usually become friends.',
+    },
+    'd3-1': {
+        day: 'Day 3 · Sat 12 Dec', time: '6:00 AM', title: 'Sunrise jungle trek', image: `${GOA}/jungle.webp`,
+        what: 'We leave early and walk the jungle trails of Arambol while it is still cool, as the forest wakes up. The trail comes out onto the beach.',
+        points: ['An easy to moderate walk through the forest', 'Van transfer to the trail is included', 'We finish on Arambol beach, ready for partner yoga'],
+        note: 'Wear shoes with grip and carry a water bottle.',
+    },
+    'd3-2': {
+        day: 'Day 3 · Sat 12 Dec', time: '8:30 AM', title: 'Partner yoga on the beach', image: `${GOA}/invitation.webp`,
+        what: 'Partner yoga is yoga practised in pairs. You support, balance and stretch each other, which takes you deeper into poses than you can go alone and builds trust quickly.',
+        points: ['Simple supported stretches and balances', 'On Arambol beach, at the end of the trail', 'Laughing is part of the practice'],
+        note: 'You do not need to come with a partner. We pair everyone up.',
+    },
+    'd3-3': {
+        day: 'Day 3 · Sat 12 Dec', time: '4:00 PM', title: 'Yoga: bends & splits', image: `${GOA}/days-3-4.webp`,
+        what: 'A deeper yoga session called mastery and beyond, focused on flexibility: forward bends, backbends, and side and front splits, taught with safe progressions.',
+        points: ['Step-by-step progressions, not forcing', 'Learn how to open hips, hamstrings and spine', 'Drills you can keep practising at home'],
+        note: 'You will be nicely warmed up after the morning trek. Free time and lunch come before this.',
+    },
+    'd3-4': {
+        day: 'Day 3 · Sat 12 Dec', time: '7:30 PM', title: 'Ecstatic dance & farewell dinner', image: `${GOA}/resort-dining.webp`,
+        what: 'Ecstatic dance is free-form movement to music. There are no steps to learn and nobody watching: you move however the music moves you. It is a release, and a celebration of the days together.',
+        points: ['No choreography and no dance experience needed', 'No judgement: eyes closed is welcome', 'At 9:00 PM, a farewell dinner together at the resort, on us'],
+        note: 'Come barefoot or in whatever lets you move freely.',
+    },
+    'd4-1': {
+        day: 'Day 4 · Sun 13 Dec', time: '7:00 AM', title: 'Gentle yoga & meditation', image: `${GOA}/rest.webp`,
+        what: 'A slow, easy session to wake the body after three full days, followed by a guided meditation to let everything settle before you travel home.',
+        points: ['Soft stretching, nothing demanding', 'A guided meditation by the sea', 'Breakfast at 8:30 AM'],
+        note: 'A calm last morning. Keep your phone away for one more hour.',
+    },
+    'd4-2': {
+        day: 'Day 4 · Sun 13 Dec', time: '9:30 AM', title: 'Closing circle & certificates', image: `${GOA}/community-7.webp`,
+        what: 'We sit together one last time and share what we are taking home. You leave with a plan, so the retreat continues after Goa.',
+        points: ['A training plan to keep practising at home', 'Your retreat certificate', 'Photos, hugs and goodbyes'],
+        note: 'Checkout is at 11:00 AM. Onward travel is on your own.',
+    },
+};
