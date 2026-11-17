@@ -107,7 +107,7 @@ export const retreat = {
         },
         {
             number: '02', date: 'Fri · 11 Dec', title: 'Train, play & jam',
-            highlights: ['Body cleansing (jal neti, kunjal kriya)', 'Sunrise yoga', 'Water sports', 'Calisthenics by the pool', 'Bonfire & music jam'],
+            highlights: ['Body cleansing (jal neti, sutra neti, kunjal kriya)', 'Sunrise yoga', 'Water sports', 'Calisthenics by the pool', 'Bonfire & music jam'],
             items: [
                 ['6:30 AM', 'Body cleansing (jal neti, sutra neti & kunjal kriya)'],
                 ['7:15 AM', 'Sunrise yoga'],
@@ -188,7 +188,7 @@ export const retreat = {
     },
 
     investment: {
-        intro: 'One price covers your stay, breakfasts, the farewell dinner, every session, the trek, water sports and your retreat kit.',
+        intro: 'One price covers your stay, breakfasts on Days 2 and 4, the farewell dinner, every session, the trek, water sports and your retreat kit.',
         price: { price: '₹30,000', was: '₹35,000', note: 'Per person · Twin sharing', saving: 'You save ₹5,000' },
         extras: [
             { label: 'Single room', value: '+ ₹5,500' },
@@ -227,7 +227,7 @@ export const retreatStops: Record<string, RetreatStop> = {
         note: 'Travel to the resort is on your own. It is under an hour from Mopa airport.',
     },
     'd1-2': {
-        day: 'Day 1 · Thu 10 Dec', time: '4:00 PM', title: 'Opening circle & skills', image: `${GOA}/handstand.webp`,
+        day: 'Day 1 · Thu 10 Dec', time: '4:00 PM', title: 'Opening circle, then skills at 5 PM', image: `${GOA}/handstand.webp`,
         what: 'We sit together, meet the coaches and each other, and set an intention for the retreat. Then the first training session: calisthenics skills, which means learning to control your own bodyweight.',
         points: ['Handstand, L-sit, pull-ups and elbow lever', 'Every skill is broken into steps for your level', 'Coaches spot you and correct your form'],
         note: 'Complete beginners are welcome. You do not need to be able to do any of these yet.',

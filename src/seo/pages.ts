@@ -223,7 +223,7 @@ const goaEventSchema = {
     ],
 };
 
-const UPDATED = '2026-11-11';
+const UPDATED = '2026-11-18';
 
 const corePages: PageMeta[] = [
     {
@@ -242,7 +242,7 @@ const corePages: PageMeta[] = [
         title: 'The Mighty Tribe: Kids Calisthenics in Kondapur, Hyderabad',
         description: 'The Mighty Tribe kids program in Kondapur, Hyderabad: calisthenics, gymnastics & parkour for ages 3–15 in three levels. Weekday & weekend batches.',
         h1: 'The Mighty Tribe',
-        image: '/images/goa/community-6.jpg',
+        image: '/images/tmt-handstand-coaching.jpg',
         lastmod: UPDATED,
         schemas: [kidsService, faqSchema(kidsFaqs), breadcrumbSchema([{ name: 'Kids Calisthenics', path: '/kids-calisthenics' }])],
     },
@@ -260,7 +260,7 @@ const corePages: PageMeta[] = [
         path: '/about',
         name: 'About',
         title: 'About Us | Calisthenics Lab India, Kondapur',
-        description: 'Meet Calisthenics Lab India: founded by Aman Bisht, a multiple-time national calisthenics champion, with a coaching team of three in Kondapur, Hyderabad.',
+        description: 'Meet Calisthenics Lab India: founded by Aman Bisht, a several-time national calisthenics champion, with a coaching team of three in Kondapur, Hyderabad.',
         h1: 'About Calisthenics Lab India',
         image: '/images/goa/aman.jpg',
         lastmod: UPDATED,

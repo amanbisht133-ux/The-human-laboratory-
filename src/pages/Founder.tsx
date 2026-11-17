@@ -77,7 +77,7 @@ export default function Founder() {
                             “People were doing calisthenics, but they were not together. There was no community.”
                         </blockquote>
                         <p className={P}>
-                            So the same year, he started Hyderabad Calisthenics to bring them together. The first meetup drew five to ten
+                            Soon after arriving, he started Hyderabad Calisthenics to bring them together. The first meetup drew five to ten
                             people. Today 40 to 50 people turn up to every event, from open park sessions and group runs to
                             inter-academy competitions.
                         </p>

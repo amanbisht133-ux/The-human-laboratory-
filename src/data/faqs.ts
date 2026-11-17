@@ -14,7 +14,7 @@ export const homeFaqs: Faq[] = [
     },
     {
         q: 'What are the calisthenics batch timings?',
-        a: 'Monday to Friday, 6:30–9:30 AM and 6:00–9:00 PM. Weekend batches run Saturday and Sunday, 8:30–11:00 AM and 5:30–8:00 PM.',
+        a: 'Adult batches run Monday to Friday, 6:30–9:30 AM and 6:00–9:00 PM, and on weekends 8:30–11:00 AM and 5:30–8:00 PM. Kids batches (The Mighty Tribe) run weekdays 5:00–6:00 PM and 6:00–7:00 PM, and weekends 9:00–10:00 AM.',
     },
     {
         q: 'Is calisthenics suitable for complete beginners?',
@@ -88,7 +88,7 @@ export const personalTrainingFaqs: Faq[] = [
     },
     {
         q: 'Who coaches personal training?',
-        a: 'Our coaching team, led by founder Aman Bisht, a multiple-time national calisthenics champion who has represented India.',
+        a: 'Our coaching team, led by founder Aman Bisht, a several-time national calisthenics champion who has represented India.',
     },
     {
         q: 'How do I book a consultation?',
