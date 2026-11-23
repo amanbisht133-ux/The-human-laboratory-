@@ -48,7 +48,7 @@ export const BATCH_TIMINGS: Record<string, Record<string, string[]>> = {
     },
     'Kids Batch': {
         'Weekday': ['5:00 PM - 6:00 PM', '6:00 PM - 7:00 PM'],
-        'Weekend': ['9:00 AM - 10:00 AM']
+        'Weekend': ['7:30 AM - 8:30 AM', '8:30 AM - 9:30 AM']
     }
 };
 

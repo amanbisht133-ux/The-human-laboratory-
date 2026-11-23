@@ -14,7 +14,7 @@ export const homeFaqs: Faq[] = [
     },
     {
         q: 'What are the calisthenics batch timings?',
-        a: 'Adult batches run Monday to Friday, 6:30–9:30 AM and 6:00–9:00 PM, and on weekends 8:30–11:00 AM and 5:30–8:00 PM. Kids batches (The Mighty Tribe) run weekdays 5:00–6:00 PM and 6:00–7:00 PM, and weekends 9:00–10:00 AM.',
+        a: 'Adult batches run Monday to Friday, 6:30–9:30 AM and 6:00–9:00 PM, and on weekends 8:30–11:00 AM and 5:30–8:00 PM. Kids batches (The Mighty Tribe) run weekdays 5:00–6:00 PM and 6:00–7:00 PM, and weekends 7:30–8:30 AM and 8:30–9:30 AM.',
     },
     {
         q: 'Is calisthenics suitable for complete beginners?',
@@ -26,7 +26,7 @@ export const homeFaqs: Faq[] = [
     },
     {
         q: 'Does Calisthenics Lab India offer training for kids?',
-        a: 'Yes. Our kids calisthenics, gymnastics & parkour program for ages 3 to 15 runs on weekdays (5:00–6:00 PM and 6:00–7:00 PM) and weekends (9:00–10:00 AM).',
+        a: 'Yes. Our kids calisthenics, gymnastics & parkour program for ages 3 to 15 runs on weekdays (5:00–6:00 PM and 6:00–7:00 PM) and weekends (7:30–8:30 AM and 8:30–9:30 AM).',
     },
     {
         q: 'How much does calisthenics cost at Calisthenics Lab India?',
@@ -61,7 +61,7 @@ export const kidsFaqs: Faq[] = [
     },
     {
         q: 'When are the kids batches?',
-        a: 'Weekdays 5:00–6:00 PM and 6:00–7:00 PM, and weekends 9:00–10:00 AM.',
+        a: 'Weekdays 5:00–6:00 PM and 6:00–7:00 PM, and weekends 7:30–8:30 AM and 8:30–9:30 AM.',
     },
     {
         q: 'How much does the kids program cost?',
