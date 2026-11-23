@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { navLinks } from '../data/nav';
+import { navLinks, staffLoginUrl } from '../data/nav';
 
 export default function SiteHeader() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -44,6 +44,11 @@ export default function SiteHeader() {
                             </NavLink>
                         </li>
                     ))}
+                    <li>
+                        <a href={staffLoginUrl} rel="nofollow noopener" onClick={() => setMenuOpen(false)} className="block rounded-xl px-4 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white/80 hover:bg-white/5">
+                            Staff Login
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </header>

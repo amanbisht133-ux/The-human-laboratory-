@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { business, hours, whatsappUrl } from '../data/business';
-import { navLinks } from '../data/nav';
+import { navLinks, staffLoginUrl } from '../data/nav';
 
 /** Footer with NAP (name, address, phone) and hours on every page. */
 export default function SiteFooter() {
@@ -55,6 +55,7 @@ export default function SiteFooter() {
                         <li><Link to="/aman-bisht" className="hover:text-brand-orange transition-colors">Founder: Aman Bisht</Link></li>
                         <li><a href={business.instagram} target="_blank" rel="noreferrer" className="hover:text-brand-orange transition-colors">Instagram</a></li>
                         <li><a href="https://www.indiancalisthenicsschool.com/" target="_blank" rel="noopener" className="hover:text-brand-orange transition-colors">Our Madhapur academy: Indian Calisthenics School</a></li>
+                        <li><a href={staffLoginUrl} rel="nofollow noopener" className="hover:text-brand-orange transition-colors">Staff Login</a></li>
                     </ul>
                 </nav>
             </div>

@@ -10,3 +10,6 @@ export const navLinks = [
     { to: '/goa-retreat', label: 'Goa Retreat' },
     { to: '/yog-lab', label: 'The Yog Lab' },
 ];
+
+// Staff/trainer login for the CalisthenicsHQ attendance app (separate site).
+export const staffLoginUrl = 'https://attendance.calisthenicslabindia.club';
