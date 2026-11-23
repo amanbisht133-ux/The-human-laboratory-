@@ -13,16 +13,16 @@ export default function SiteHeader() {
     // While the menu is open, freeze the page behind it so it can't scroll or shift.
     useEffect(() => {
         if (!menuOpen) return;
-        const { body, documentElement: html } = document;
+        // Lock only <body>: also locking <html> turns <body> into its own scroll box,
+        // which makes the sticky header (and the menu inside it) jump to the top of
+        // the page and disappear when the visitor has scrolled down.
+        const { body } = document;
         const prevBody = body.style.overflow;
-        const prevHtml = html.style.overflow;
         body.style.overflow = 'hidden';
-        html.style.overflow = 'hidden';
         const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false); };
         window.addEventListener('keydown', onKey);
         return () => {
             body.style.overflow = prevBody;
-            html.style.overflow = prevHtml;
             window.removeEventListener('keydown', onKey);
         };
     }, [menuOpen]);
