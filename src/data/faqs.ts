@@ -26,7 +26,7 @@ export const homeFaqs: Faq[] = [
     },
     {
         q: 'Does Calisthenics Lab India offer training for kids?',
-        a: 'Yes. Our kids calisthenics, gymnastics & parkour program for ages 3 to 15 runs on weekdays (5:00–6:00 PM and 6:00–7:00 PM) and weekends (7:30–8:30 AM and 8:30–9:30 AM).',
+        a: 'Yes. Our kids calisthenics, gymnastics & parkour program for ages 3 and up runs on weekdays (5:00–6:00 PM and 6:00–7:00 PM) and weekends (7:30–8:30 AM and 8:30–9:30 AM).',
     },
     {
         q: 'How much does calisthenics cost at Calisthenics Lab India?',
@@ -48,12 +48,16 @@ export const homeFaqs: Faq[] = [
 
 export const kidsFaqs: Faq[] = [
     {
+        q: 'Is calisthenics a good workout for kids and toddlers?',
+        a: 'Yes. Calisthenics is a bodyweight workout, so children build strength, balance and coordination without any heavy weights. For toddlers and preschoolers (from age 3) the workout is play: animal walks, rolls, hanging and balance games. Older kids progress to push-ups, chin-ups, handstands and cartwheels.',
+    },
+    {
         q: 'What does the kids program include?',
-        a: 'Calisthenics, gymnastics and parkour in a single subscription for ages 3 to 15, taught in three levels: Foundation, Builder and Advanced.',
+        a: 'Calisthenics, gymnastics and parkour in a single subscription for ages 3 and up, taught in three levels: Foundation, Builder and Advanced.',
     },
     {
         q: 'What age group is the kids program for?',
-        a: 'Kids aged 3 to 15. Little ones (3–5) learn through games and obstacle courses; older kids move on to real skills and strength work.',
+        a: 'Kids aged 3 and up. Little ones (3–5) learn through games and obstacle courses; older kids move on to real skills and strength work.',
     },
     {
         q: 'How do kids move up a level?',

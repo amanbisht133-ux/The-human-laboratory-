@@ -95,7 +95,7 @@ export const YOG_LAB = {
     ],
 };
 
-// Kids program levels (ages 3–15), shown on the kids page. Matches the parent program guide.
+// Kids program levels (ages 3+), shown on the kids page. Matches the parent program guide.
 export const KIDS_LEVELS = [
     {
         level: 'Level 1',

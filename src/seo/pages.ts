@@ -125,7 +125,7 @@ const kidsService = serviceSchema({
     id: 'kids-program',
     name: 'Kids calisthenics, gymnastics & parkour classes',
     serviceType: 'Kids fitness classes',
-    description: 'Weekend calisthenics, gymnastics and parkour classes for kids aged 3–15 in Kondapur, Hyderabad, in three levels.',
+    description: 'Weekend calisthenics, gymnastics and parkour classes for kids aged 3+ in Kondapur, Hyderabad, in three levels.',
     path: '/kids-calisthenics',
     offers: [monthlyOffer('Kids batch, monthly', PRICING_TIERS['Kids Batch']['1 Month'])],
 });
@@ -240,7 +240,7 @@ const corePages: PageMeta[] = [
         path: '/kids-calisthenics',
         name: 'Kids Calisthenics',
         title: 'The Mighty Tribe: Kids Calisthenics in Kondapur, Hyderabad',
-        description: 'The Mighty Tribe kids program in Kondapur, Hyderabad: calisthenics, gymnastics & parkour for ages 3–15 in three levels. Weekday & weekend batches.',
+        description: 'Kids workout & fitness classes in Kondapur, Hyderabad: The Mighty Tribe teaches calisthenics, gymnastics & parkour to children aged 3+, in three levels.',
         h1: 'The Mighty Tribe',
         image: '/images/tmt-handstand-coaching.jpg',
         lastmod: UPDATED,
