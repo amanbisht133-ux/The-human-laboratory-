@@ -44,8 +44,8 @@ export default function SiteHeader() {
                             </NavLink>
                         </li>
                     ))}
-                    <li className="sm:col-span-2 mt-1 pt-1 border-t border-white/5">
-                        <a href={staffLoginUrl} rel="nofollow noopener" onClick={() => setMenuOpen(false)} className="block rounded-xl px-4 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/50 hover:bg-white/5 hover:text-white">
+                    <li>
+                        <a href={staffLoginUrl} rel="nofollow noopener" onClick={() => setMenuOpen(false)} className="block rounded-xl px-4 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white/80 hover:bg-white/5">
                             Staff Login
                         </a>
                     </li>
