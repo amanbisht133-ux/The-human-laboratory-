@@ -56,6 +56,10 @@ export const kidsFaqs: Faq[] = [
         a: 'Calisthenics, gymnastics and parkour in a single subscription for ages 3 and up, taught in three levels: Foundation, Builder and Advanced.',
     },
     {
+        q: 'Is this a gym for kids?',
+        a: 'Yes. The Mighty Tribe is a supervised kids gym in Kondapur for calisthenics and kids gymnastics. Children train on bars, rings and mats with their own bodyweight, with no heavy weights, and a coach runs every session.',
+    },
+    {
         q: 'What age group is the kids program for?',
         a: 'Kids aged 3 and up. Little ones (3–5) learn through games and obstacle courses; older kids move on to real skills and strength work.',
     },
