@@ -17,7 +17,7 @@ import RetreatSpotlight from '../components/RetreatSpotlight';
 import { trackPixelEvent } from '../lib/metaPixel';
 import { PRICING_TIERS, WEEKEND_ONE_HOUR_MONTHLY, WEEKEND_ONE_HOUR_SLOTS, BATCH_TIMINGS, WEEKLY_SCHEDULE, MEMBERSHIP_PLANS } from '../data/programs';
 
-const SKILLS = ['Muscle-Up', 'Handstand', 'Front Lever', 'Human Flag', 'Planche', 'Back Lever', 'Pistol Squat', 'L-Sit'];
+const SKILLS = ['Mind-Muscle Connection', 'Muscle Coordination', 'Mobility', 'Flexibility', 'Strength', 'Fat Loss', 'Muscle Gain'];
 
 function SectionHeading({ eyebrow, children }: { eyebrow: string; children: ReactNode }) {
     return (
