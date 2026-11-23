@@ -39,7 +39,7 @@ export const blogPosts: BlogPost[] = [
                 list: [
                     'Monday to Friday: 6:30–9:30 AM and 6:00–9:00 PM, in one-hour batches',
                     'Saturday and Sunday: 8:30–11:00 AM and 5:30–8:00 PM',
-                    'Kids (The Mighty Tribe, ages 3–15): weekdays 5–6 PM and 6–7 PM, weekends 7:30–8:30 AM and 8:30–9:30 AM',
+                    'Kids (The Mighty Tribe, ages 3+): weekdays 5–6 PM and 6–7 PM, weekends 7:30–8:30 AM and 8:30–9:30 AM',
                 ],
             },
             {

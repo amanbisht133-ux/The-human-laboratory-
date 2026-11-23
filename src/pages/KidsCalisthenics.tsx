@@ -25,8 +25,8 @@ export default function KidsCalisthenics() {
                 logo={{ src: '/images/the-mighty-tribe-logo.webp', alt: 'The Mighty Tribe logo', size: 480 }}
             >
                 <p>
-                    The Mighty Tribe is our kids program at Calisthenics Lab India in Kondapur, Hyderabad. It combines calisthenics, gymnastics and
-                    parkour in one subscription for kids aged 3 to 15, taught in three clear levels. Batches run on weekday
+                    The Mighty Tribe is our kids program at Calisthenics Lab India in Kondapur, Hyderabad: a kids gym for calisthenics, gymnastics and parkour. It combines calisthenics, gymnastics and
+                    parkour in one subscription for kids aged 3 and up, taught in three clear levels. Batches run on weekday
                     evenings and weekend mornings, close to HITEC City, Gachibowli and Madhapur.
                 </p>
             </PageHero>
@@ -53,7 +53,7 @@ export default function KidsCalisthenics() {
                         </p>
                         <ul className="mt-6 space-y-3">
                             {[
-                                'For ages 3 to 15, with play-based classes for the youngest',
+                                'For ages 3 and up, with play-based classes for the youngest',
                                 'Three levels with a skills checklist and a certificate at each step',
                                 'Strong kids can be selected for competitions',
                                 'Weekday evening and weekend morning batches',
