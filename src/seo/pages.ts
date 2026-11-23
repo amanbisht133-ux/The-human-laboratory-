@@ -223,7 +223,7 @@ const goaEventSchema = {
     ],
 };
 
-const UPDATED = '2026-11-18';
+const UPDATED = '2026-11-24';
 
 const corePages: PageMeta[] = [
     {
@@ -338,9 +338,9 @@ const extraPages: PageMeta[] = [
     {
         path: '/yog-lab',
         name: 'The Yog Lab',
-        title: 'Yoga Classes in Kondapur, Hyderabad | The Yog Lab',
-        description: 'Yoga classes in Kondapur, Hyderabad with Coach Likhit: Yoga Abhyas group class (3 days a week) and Yoga Sankalp 1-on-1 personal training.',
-        h1: 'Yoga Classes in Kondapur, Hyderabad',
+        title: 'Yoga Classes in Kondapur & Gachibowli | The Yog Lab',
+        description: 'Yoga classes in Kondapur & Gachibowli, Hyderabad with Coach Likhit: morning group class 3 days a week, plus 1-on-1 yoga for posture or PCOD goals.',
+        h1: 'Yoga Classes in Kondapur & Gachibowli, Hyderabad',
         image: '/images/goa/breathe.jpg',
         lastmod: UPDATED,
         schemas: [...yogaServices, faqSchema(yogFaqs), breadcrumbSchema([{ name: 'The Yog Lab', path: '/yog-lab' }])],

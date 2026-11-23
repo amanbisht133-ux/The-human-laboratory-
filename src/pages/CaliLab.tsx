@@ -632,10 +632,10 @@ export default function CaliLab() {
                 </section>
 
                 {/* TESTIMONIALS */}
-                <section className="pt-16 md:pt-20 pb-12 section-glow overflow-hidden relative">
+                <section className="pt-16 md:pt-20 pb-12 section-glow overflow-hidden relative" id="reviews">
                     <div className="max-w-7xl mx-auto px-6">
-                        <SectionHeading eyebrow="Client Testimonials">
-                            Voices of <span className="ember-text">The Lab</span>
+                        <SectionHeading eyebrow="Google Reviews">
+                            Calisthenics Lab India <span className="ember-text">Reviews</span>
                         </SectionHeading>
                     </div>
 
@@ -690,6 +690,16 @@ export default function CaliLab() {
                             ))}
                         </div>
                     </div>
+                    <p className="text-center px-6">
+                        <a
+                            href={business.googleBusinessProfile}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 min-h-11 font-bold text-brand-orange hover:text-white transition-colors"
+                        >
+                            Read all reviews on Google <ArrowRight size={16} />
+                        </a>
+                    </p>
                 </section>
 
                 {/* COMMUNITY */}

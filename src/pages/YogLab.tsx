@@ -31,7 +31,7 @@ export default function YogLab() {
                 </div>
                 <p>
                     Build strength, open up mobility and move with intention. The Yog Lab is the yoga studio at Calisthenics Lab
-                    India in Kondapur, Hyderabad, near HITEC City, Gachibowli and Madhapur, with two ways to practise
+                    India in Kondapur, Hyderabad, close to Gachibowli, Hafeezpet and HITEC City, with two ways to practise
                     with <strong className="text-white">{YOG_LAB.coach}</strong>.
                 </p>
                 <ContactButtons message={WA_MESSAGE} className="pt-2" />
