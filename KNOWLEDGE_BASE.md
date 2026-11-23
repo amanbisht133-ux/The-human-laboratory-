@@ -92,7 +92,7 @@ Name → Email → Phone (10 digits) → Batch → Duration → Timing (skipped 
 ### Timings (`BATCH_TIMINGS`, grouped as `{ heading: slots[] }`)
 - Weekday Batch: Morning 6:30–9:30 AM (3 × 1 h), Evening 6–9 PM (3 × 1 h)
 - Weekend: Morning 8:30–10:00 AM (1.5 h) and 10–11 AM (1 h); Evening 5:30–7:00 PM (1.5 h) and 7–8 PM (1 h)
-- Kids Batch: Weekday 5–6 and 6–7 PM, Weekend 9–10 AM
+- Kids Batch: Weekday 5–6 and 6–7 PM, Weekend 7:30–8:30 and 8:30–9:30 AM
 - A 1-hour weekend slot is ₹4,444/month (`WEEKEND_ONE_HOUR_MONTHLY`, applied by `getPrice()`). 1.5-hour slots use the Weekend tier.
 - Weekly focus (`WEEKLY_SCHEDULE`): Mon push & pull · Tue legs & core · Wed skills & upper body · Thu full-body endurance · Fri skills / upper body
 

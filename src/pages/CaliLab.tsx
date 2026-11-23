@@ -722,7 +722,7 @@ export default function CaliLab() {
                                 ['Where', 'Kondapur Road, Kondapur, Hyderabad 500084, near HITEC City, Gachibowli and Madhapur'],
                                 ['Weekday fees', '₹7,777/month · ₹22,222 for 3 months · ₹77,777 for a year'],
                                 ['Weekend fees', '₹5,555/month (1.5-hour slots) · ₹4,444/month (1-hour slots)'],
-                                ['Kids (The Mighty Tribe, 3–15)', '₹5,555/month · weekdays 5–7 PM, weekends 9–10 AM'],
+                                ['Kids (The Mighty Tribe, 3–15)', '₹5,555/month · weekdays 5–7 PM, weekends 7:30–8:30 & 8:30–9:30 AM'],
                                 ['Timings', 'Mon–Fri 6:30–9:30 AM & 6–9 PM · Sat–Sun 8:30–11 AM & 5:30–8 PM'],
                                 ['Demo', `Free on weekdays · Weekend demo ₹800, adjusted when you join · WhatsApp ${business.phoneDisplay}`],
                             ].map(([k, v]) => (
