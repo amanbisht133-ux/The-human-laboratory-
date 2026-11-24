@@ -37,6 +37,37 @@ function Photo({ src, alt, className = '' }: { src: string; alt: string; classNa
     );
 }
 
+// Facilitator photos: swipeable on phones, and shown whole (object-contain over a
+// soft blurred copy) so nobody in a photo gets cropped out.
+function FacilitatorPhotos({ photos }: { photos: { src: string; alt: string }[] }) {
+    const [index, setIndex] = useState(0);
+    return (
+        <div className="relative">
+            <div
+                className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                onScroll={e => {
+                    const el = e.currentTarget;
+                    setIndex(Math.round(el.scrollLeft / el.clientWidth));
+                }}
+            >
+                {photos.map(({ src, alt }) => (
+                    <div key={src} className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden bg-espresso/10">
+                        <img src={src} alt="" aria-hidden="true" loading="lazy" className="absolute inset-0 h-full w-full object-cover scale-110 blur-2xl opacity-70" />
+                        <img src={src} alt={alt} width={sizeOf(src)[0]} height={sizeOf(src)[1]} loading="lazy" className="relative h-full w-full object-contain" />
+                    </div>
+                ))}
+            </div>
+            {photos.length > 1 && (
+                <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5" aria-hidden="true">
+                    {photos.map(({ src }, i) => (
+                        <span key={src} className={`h-1.5 rounded-full transition-all ${i === index ? 'w-5 bg-white' : 'w-1.5 bg-white/60'}`}></span>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
 function Collapse({ open, children }: { open: boolean; children: ReactNode }) {
     return (
         <div className={`grid transition-[grid-template-rows] duration-500 ease-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
@@ -288,6 +319,37 @@ export default function GoaRetreat() {
                 </div>
             </section>
 
+            {/* FACILITATORS */}
+            <section className="px-6 pt-16 md:pt-24" id="facilitators">
+                <div className="max-w-5xl mx-auto">
+                    <SectionHead kicker="Your Facilitators" title="Meet the people guiding you" />
+                    <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {facilitators.map(f => (
+                            <article key={f.name} className="rounded-xl bg-white/50 border border-espresso/10 overflow-hidden reveal">
+                                <FacilitatorPhotos
+                                    photos={[
+                                        { src: f.image, alt: f.imageAlt },
+                                        ...(f.secondImage ? [{ src: f.secondImage, alt: f.secondImageAlt ?? f.name }] : [])
+                                    ]}
+                                />
+                                <div className="p-5 md:p-6">
+                                    <Label>{f.role}</Label>
+                                    <h3 className="mt-2 font-italiana text-4xl leading-tight">{f.name}</h3>
+                                    <p className="mt-3 text-[15px] leading-relaxed text-espresso/80">{f.bio}</p>
+                                    <Label className="mt-5 text-taupe">At the retreat</Label>
+                                    <ul className="mt-3 flex flex-wrap gap-2">
+                                        {f.teaches.map(t => (
+                                            <li key={t} className="rounded-full border border-rust/40 bg-rust/5 px-3 py-1.5 text-sm text-espresso">{t}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                    <p className="mt-6 text-sm leading-relaxed text-taupe"><span className="font-bold text-espresso">{retreat.team.title}</span> is on the ground for all four days, so you can switch off completely.</p>
+                </div>
+            </section>
+
             {/* INVESTMENT: kept up front */}
             <section className="px-6 pt-16 md:pt-24" id="reserve">
                 <div className="max-w-5xl mx-auto">
@@ -432,12 +494,16 @@ export default function GoaRetreat() {
                             </div>
                             <Label className="mt-8">With specialist facilitators</Label>
                             <div className="mt-4 grid sm:grid-cols-2 gap-x-10 gap-y-5">
-                                {facilitators.map(({ title, text }) => (
-                                    <div key={title}>
-                                        <p className="font-italiana text-2xl">{title}</p>
-                                        <p className="mt-1 text-sm leading-relaxed text-taupe">{text}</p>
-                                    </div>
+                                {facilitators.filter(f => f.name !== lead.name).map(({ name, role }) => (
+                                    <a key={name} href="#facilitators" className="block group">
+                                        <p className="font-italiana text-2xl group-hover:text-rust transition-colors">{name}</p>
+                                        <p className="mt-1 text-sm leading-relaxed text-taupe">{role}</p>
+                                    </a>
                                 ))}
+                                <div>
+                                    <p className="font-italiana text-2xl">{retreat.team.title}</p>
+                                    <p className="mt-1 text-sm leading-relaxed text-taupe">{retreat.team.text}</p>
+                                </div>
                             </div>
                             <Label className="mt-8">Who it is for</Label>
                             <div className="mt-4 grid grid-cols-3 gap-4">

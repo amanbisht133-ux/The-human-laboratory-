@@ -55,7 +55,7 @@ export const retreat = {
             text: 'Yoga every day, from partner yoga on the beach to a deep session on bends and splits. Guided breathwork teaches you to calm your nervous system on demand, and a traditional body cleansing session (jal neti, sutra neti and kunjal kriya) prepares you for practice.'
         },
         {
-            numeral: 'III', kicker: 'Heal', title: 'Sound healing & recovery', image: `${IMG}/heal.webp`,
+            numeral: 'III', kicker: 'Heal', title: 'Sound bath & recovery', image: `${IMG}/heal.webp`,
             text: 'Lie back as bowls and gongs wash over you in a sound bath under the night sky. Daily recovery with mobility and stretching helps your body absorb the work, so you wake up fresh every morning.'
         },
         {
@@ -82,11 +82,46 @@ export const retreat = {
         ]
     },
     facilitators: [
-        { title: 'Yoga, breathwork & cleansing', text: 'A certified teacher leads the yoga, breathwork and body cleansing sessions.' },
-        { title: 'Sound healing', text: 'A trained sound healer leads the sound bath under the stars.' },
-        { title: 'Ecstatic dance', text: 'A facilitator holds the space for a night of free, joyful movement.' },
-        { title: 'The CLI team', text: 'On the ground for all four days, so you can switch off completely.' }
+        {
+            name: 'Aman Bisht',
+            role: 'Calisthenics',
+            image: `${IMG}/aman.webp`,
+            imageAlt: 'Aman Bisht on the beach',
+            secondImage: `${IMG}/handstand.webp`,
+            secondImageAlt: 'Handstand practice during a beach session',
+            bio: 'Founder of Calisthenics Lab India, Indian Calisthenics School and Hyderabad Calisthenics. Several-time national calisthenics champion who has represented India, with 10 years of training and coaching behind him.',
+            teaches: ['Handstand workshop', 'Pull-up workshop', 'Beach calisthenics workshop']
+        },
+        {
+            name: 'Shivani Bamrara',
+            role: 'Yoga & meditation',
+            image: `${IMG}/facilitators/shivani-meditation.webp`,
+            imageAlt: 'Shivani Bamrara meditating outdoors',
+            secondImage: `${IMG}/facilitators/shivani-balance.webp`,
+            secondImageAlt: 'Shivani Bamrara in an arm balance',
+            bio: "Master's degree in Yoga and teaching since 2020, with deep knowledge of alignment, anatomy, pranayama and meditation. Also a 6-time national calisthenics champion who has represented India twice.",
+            teaches: ['Meditation', 'Yoga', 'Partner yoga', 'Flexibility', 'Forward bends']
+        },
+        {
+            name: 'Ravina Reddy',
+            role: 'Sound bath',
+            image: `${IMG}/facilitators/ravina.webp`,
+            imageAlt: 'Ravina Reddy with her singing bowls',
+            bio: 'Five years of sound practice, trained at Sound Healing India, Mumbai and Svaram, Auroville. She has held sound sessions at the Viraamam and ANANT retreats in Rishikesh.',
+            teaches: ['Sound bath under the stars']
+        },
+        {
+            name: 'Mario Sun',
+            role: 'Cacao ceremony & ecstatic dance',
+            image: `${IMG}/facilitators/mario-flute.webp`,
+            imageAlt: 'Mario Sun playing a wooden flute',
+            secondImage: `${IMG}/facilitators/mario-live.webp`,
+            secondImageAlt: 'Mario Sun performing live',
+            bio: 'Ecstatic dance DJ, producer and songwriter. His sets weave singing circles, medicine music, organic sounds, deep bass and tribal rhythms with live voice, breath and guitar.',
+            teaches: ['Cacao ceremony', 'Ecstatic dance night']
+        }
     ],
+    team: { title: 'The CLI team', text: 'On the ground for all four days, so you can switch off completely.' },
     audience: [
         { title: 'First timers', caption: 'No experience needed' },
         { title: 'Regular trainees', caption: 'Chasing new skills' },
@@ -96,13 +131,13 @@ export const retreat = {
     days: [
         {
             number: '01', date: 'Thu · 10 Dec', title: 'Arrive & connect',
-            highlights: ['Check-in & retreat kit', 'Opening circle', 'Calisthenics skills', 'Sunset beach walk & breathwork', 'Sound healing under the stars'],
+            highlights: ['Check-in & retreat kit', 'Opening circle', 'Calisthenics skills', 'Sunset beach walk & breathwork', 'Sound bath under the stars'],
             items: [
                 ['12–2 PM', 'Check-in, welcome drink, retreat kit'],
                 ['4:00 PM', 'Opening circle'],
                 ['5:00 PM', 'Skills: handstand, L-sit, pull-ups, elbow lever'],
                 ['6:15 PM', 'Sunset beach walk and breathwork'],
-                ['8:30 PM', 'Sound healing under the stars']
+                ['8:30 PM', 'Sound bath under the stars']
             ]
         },
         {
@@ -239,8 +274,8 @@ export const retreatStops: Record<string, RetreatStop> = {
         note: 'Nothing to bring. Come as you are.',
     },
     'd1-4': {
-        day: 'Day 1 · Thu 10 Dec', time: '8:30 PM', title: 'Sound healing', image: `${GOA}/heal.webp`,
-        what: 'Sound healing, also called a sound bath, is deep relaxation through sound. You lie down comfortably while instruments such as singing bowls and chimes are played around you, and the tones and vibrations help the body let go.',
+        day: 'Day 1 · Thu 10 Dec', time: '8:30 PM', title: 'Sound bath', image: `${GOA}/heal.webp`,
+        what: 'A sound bath is deep relaxation through sound. You lie down comfortably while instruments such as singing bowls and chimes are played around you, and the tones and vibrations help the body let go.',
         points: ['You simply lie down and listen: there is nothing to do', 'Held outdoors, under the stars', 'Many people drift off, and that is completely fine'],
         note: 'Wear something warm and comfortable for the evening breeze.',
     },
