@@ -3,6 +3,17 @@
 // retreat page, the home-page popup and the home-page activity section.
 
 export const RETREAT_PATH = '/goa-retreat';
+
+export type Facilitator = {
+    name: string;
+    role: string;
+    image: string;
+    imageAlt: string;
+    secondImage?: string;
+    secondImageAlt?: string;
+    bio: string;
+    teaches: string[];
+};
 const IMG = '/images/goa';
 
 export const retreat = {
@@ -120,7 +131,7 @@ export const retreat = {
             bio: 'Ecstatic dance DJ, producer and songwriter. His sets weave singing circles, medicine music, organic sounds, deep bass and tribal rhythms with live voice, breath and guitar.',
             teaches: ['Cacao ceremony', 'Ecstatic dance night']
         }
-    ],
+    ] as Facilitator[],
     team: { title: 'The CLI team', text: 'On the ground for all four days, so you can switch off completely.' },
     audience: [
         { title: 'First timers', caption: 'No experience needed' },
