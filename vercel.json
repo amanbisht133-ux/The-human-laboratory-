@@ -1,20 +1,57 @@
 {
-    "cleanUrls": true,
-    "trailingSlash": false,
-    "redirects": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path(.*)",
+      "has": [
         {
-            "source": "/:path(.*)",
-            "has": [{ "type": "host", "value": "calisthenicslabindia.club" }],
-            "destination": "https://www.calisthenicslabindia.club/:path",
-            "statusCode": 301
-        },
-        { "source": "/calisthenics-lab", "destination": "/", "statusCode": 301 },
-        { "source": "/index", "destination": "/", "statusCode": 301 }
-    ],
-    "headers": [
-        {
-            "source": "/assets/(.*)",
-            "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+          "type": "host",
+          "value": "calisthenicslabindia.club"
         }
-    ]
+      ],
+      "destination": "https://www.calisthenicslabindia.club/:path",
+      "statusCode": 301
+    },
+    {
+      "source": "/calisthenics-lab",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/pay/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/pay/:token",
+      "destination": "/pay-page.html"
+    }
+  ]
 }
